@@ -3,6 +3,9 @@ package com.homework.backend.config;
 import java.io.IOException;
 
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -19,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	
 	private final JwtService jwtService;
+	private final UserDetailsService userDetailsService;
 
 	@Override
 	protected void doFilterInternal(
@@ -42,6 +46,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		
 		// 2. Now we check the user email
 		userEmail = jwtService.extractUsername(jwt);
+		
+		// Use SecurityContextHolder to check whether the user has been authenticated or not
+		if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+			// If user hasn't yet authenticate (also email isn't null)
+			// Then we can check if the user exist in the database
+			UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+		}
 	}
 
 }
