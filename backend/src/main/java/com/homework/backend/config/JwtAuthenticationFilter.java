@@ -3,9 +3,11 @@ package com.homework.backend.config;
 import java.io.IOException;
 
 import org.springframework.lang.NonNull;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -52,7 +54,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			// If user hasn't yet authenticate (also email isn't null)
 			// Then we can check if the user exist in the database
 			UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+			if (jwtService.isTokenValid(jwt,  userDetails)) {
+				// Now if the token is valid, we need to update the security context and send the request to the dispatcher
+				UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+					userDetails,
+					null,
+					userDetails.getAuthorities()
+				);
+				authToken.setDetails(
+					new WebAuthenticationDetailsSource().buildDetails(request)
+				);
+				
+				// Finally, we update the security context holder
+				SecurityContextHolder.getContext().setAuthentication(authToken);
+			}
 		}
+		filterChain.doFilter(request, response);
 	}
 
 }
