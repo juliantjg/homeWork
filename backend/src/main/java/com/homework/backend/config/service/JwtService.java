@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +18,6 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
-	
-	@Autowired
-	private Environment env;
 	
 	// Generate key: https://allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx
 	// Tick Hex, minimum security 256-bit
@@ -48,10 +44,24 @@ public class JwtService {
 				.builder()
 				.setClaims(extraClaims)
 				.setSubject(userDetails.getUsername())
-				.setIssueAt(new Date(System.currentTimeMillis()))
+				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + 1000*60*24))
 				.signWith(getSignInKey(), SignatureAlgorithm.HS256)
 				.compact();
+	}
+	
+	public boolean isTokenValid(String token, UserDetails userDetails) {
+		final String username = extractUsername(token);
+		// We wanna make sure that the token's username is equal to the given username, also the token isn't expired
+		return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+	}
+	
+	private boolean isTokenExpired(String token) {
+		return extractExpiration(token).before(new Date());
+	}
+	
+	private Date extractExpiration(String token) {
+		return extractClaim(token, Claims::getExpiration);
 	}
 	
 	/**
