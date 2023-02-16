@@ -50,13 +50,14 @@ public class AuthenticationService {
 				passwordEncoder.encode(request.getPassword()),
 				Role.USER
 				);
-				
+		
 		repository.save(user);
 		var jwtToken = jwtService.generateToken(user);
 //		return AuthenticationResponse.builder()
 //				.token(jwtToken)
 //				.build();
-		
+//		System.out.println(new AuthenticationResponse(jwtToken));
+//		System.exit(0);
 		return new AuthenticationResponse(jwtToken);
 	}
 	
