@@ -2,6 +2,7 @@ package com.homework.backend.auth.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,14 +63,22 @@ public class AuthenticationService {
 	}
 	
 	public AuthenticationResponse authenticate(AuthenticationRequest request) {
-		authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(
-						request.getEmail(),
-						request.getPassword()
-						)
-				);
+		
+		try {
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(
+							request.getEmail(),
+							request.getPassword()
+							)
+					);
+		} catch (AuthenticationException $e) {
+			System.out.println($e.getMessage());
+		}
+		
 		var user = repository.findByEmail(request.getEmail())
 				.orElseThrow();
+		
+		
 		var jwtToken = jwtService.generateToken(user);
 //		return AuthenticationResponse.builder()
 //				.token(jwtToken)

@@ -40,11 +40,9 @@ public class User implements UserDetails {
 	private Role role;
 	
 	public User() {
-		super();
 	}
 
 	public User(String firstname, String lastname, String email, String password, Role role) {
-		super();
 		this.setFirstname(firstname);
 		this.setLastname(lastname);
 		this.email = email;

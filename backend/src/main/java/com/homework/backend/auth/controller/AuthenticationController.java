@@ -31,7 +31,7 @@ public class AuthenticationController {
 	public ResponseEntity<AuthenticationResponse> register(
 		@RequestBody RegisterRequest request
 	) {
-		AuthenticationResponse response = service.register(request);
+//		AuthenticationResponse response = service.register(request);
 		return ResponseEntity.ok(service.register(request));
 //		System.out.println("asda");
 //		return ResponseEntity.ok(null);
@@ -42,6 +42,7 @@ public class AuthenticationController {
 		@RequestBody AuthenticationRequest request
 	) {
 		return ResponseEntity.ok(service.authenticate(request));
+//		return ResponseEntity.ok(null);
 	}
 	
 }

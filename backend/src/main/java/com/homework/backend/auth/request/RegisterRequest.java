@@ -19,7 +19,6 @@ public class RegisterRequest {
 	private String email;
 	private String password;
 	public RegisterRequest(String firstname, String lastname, String email, String password) {
-		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
