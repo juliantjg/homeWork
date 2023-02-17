@@ -18,9 +18,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthenticationController {
 	
-	private AuthenticationService service;
+	private final AuthenticationService service;
 	
 	
+	
+	public AuthenticationController(AuthenticationService service) {
+		super();
+		this.service = service;
+	}
+
 	@PostMapping("/register")
 	public ResponseEntity<AuthenticationResponse> register(
 		@RequestBody RegisterRequest request
@@ -29,7 +35,7 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping("/authenticate")
-	public ResponseEntity<AuthenticationResponse> register(
+	public ResponseEntity<AuthenticationResponse> authenticate(
 		@RequestBody AuthenticationRequest request
 	) {
 		return ResponseEntity.ok(service.authenticate(request));
