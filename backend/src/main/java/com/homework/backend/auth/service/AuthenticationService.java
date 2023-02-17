@@ -51,16 +51,12 @@ public class AuthenticationService {
 	
 	public AuthenticationResponse authenticate(AuthenticationRequest request) {
 		
-//		try {
-			authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(
-							request.getEmail(),
-							request.getPassword()
-							)
-					);
-//		} catch (AuthenticationException $e) {
-//			System.out.println($e.getMessage());
-//		}
+		authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(
+						request.getEmail(),
+						request.getPassword()
+						)
+				);
 		
 		var user = repository.findByEmail(request.getEmail())
 				.orElseThrow();
