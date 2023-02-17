@@ -36,14 +36,6 @@ public class AuthenticationService {
 	}
 
 	public AuthenticationResponse register(RegisterRequest request) {
-//		var user = User(request.getFirstname())
-//				.setFirstname(request.getFirstname())
-//				.lastname(request.getLastname())
-//				.email(request.getEmail())
-//				.password(PasswordEncoder.encode(request.getPassword()))
-//				.role(Role.USER)
-//				.build();
-		
 		var user = new User(
 				request.getFirstname(),
 				request.getLastname(),
@@ -54,35 +46,26 @@ public class AuthenticationService {
 		
 		repository.save(user);
 		var jwtToken = jwtService.generateToken(user);
-//		return AuthenticationResponse.builder()
-//				.token(jwtToken)
-//				.build();
-//		System.out.println(new AuthenticationResponse(jwtToken));
-//		System.exit(0);
 		return new AuthenticationResponse(jwtToken);
 	}
 	
 	public AuthenticationResponse authenticate(AuthenticationRequest request) {
 		
-		try {
+//		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
 							request.getEmail(),
 							request.getPassword()
 							)
 					);
-		} catch (AuthenticationException $e) {
-			System.out.println($e.getMessage());
-		}
+//		} catch (AuthenticationException $e) {
+//			System.out.println($e.getMessage());
+//		}
 		
 		var user = repository.findByEmail(request.getEmail())
 				.orElseThrow();
 		
-		
 		var jwtToken = jwtService.generateToken(user);
-//		return AuthenticationResponse.builder()
-//				.token(jwtToken)
-//				.build();
 		
 		return new AuthenticationResponse(jwtToken);
 	}
