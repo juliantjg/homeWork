@@ -35,7 +35,11 @@ public class AuthenticationService {
 		this.authenticationManager = authenticationManager;
 	}
 
-	public AuthenticationResponse register(RegisterRequest request) {
+	public AuthenticationResponse register(RegisterRequest request) throws Exception {
+		if (repository.existsByEmail(request.getEmail())) {
+			throw new Exception("Email taken");
+		}
+		
 		var user = new User(
 				request.getFirstname(),
 				request.getLastname(),
@@ -46,7 +50,7 @@ public class AuthenticationService {
 		
 		repository.save(user);
 		var jwtToken = jwtService.generateToken(user);
-		return new AuthenticationResponse(jwtToken);
+		return new AuthenticationResponse(jwtToken, "Register successful");
 	}
 	
 	public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -63,6 +67,6 @@ public class AuthenticationService {
 		
 		var jwtToken = jwtService.generateToken(user);
 		
-		return new AuthenticationResponse(jwtToken);
+		return new AuthenticationResponse(jwtToken, "Login successful");
 	}
 }
