@@ -1,5 +1,7 @@
 package com.homework.backend.auth.response;
 
+import java.util.HashMap;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,19 +12,29 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationResponse {
-	private String token;
+	private String message;
+	private HashMap<String, Object> data;
 
-	public AuthenticationResponse(String token) {
+	public AuthenticationResponse(HashMap<String, Object> data, String message) {
 		super();
-		this.token = token;
+		this.message = message;
+		this.data = data;
 	}
 
-	public String getToken() {
-		return token;
+	public HashMap<String, Object> getData() {
+		return data;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setData(HashMap<String, Object> data) {
+		this.data = data;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 	

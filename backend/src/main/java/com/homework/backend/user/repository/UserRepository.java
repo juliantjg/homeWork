@@ -12,4 +12,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	//	The JpaRepository type here is the model itself, and the model's primary key type
 	
 	Optional<User> findByEmail(String email);
+	
+	boolean existsByEmail(String email); 
 }

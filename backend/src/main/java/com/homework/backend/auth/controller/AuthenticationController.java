@@ -1,5 +1,6 @@
-package com.homework.backend.auth.controller;
+	package com.homework.backend.auth.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,17 +29,26 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<AuthenticationResponse> register(
+	public ResponseEntity<?> register(
 		@RequestBody RegisterRequest request
 	) {
-		return ResponseEntity.ok(service.register(request));
+		try {
+			return ResponseEntity.ok(service.register(request));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new AuthenticationResponse(null, "Email taken"));
+		}
 	}
 	
 	@PostMapping("/authenticate")
 	public ResponseEntity<AuthenticationResponse> authenticate(
 		@RequestBody AuthenticationRequest request
 	) {
-		return ResponseEntity.ok(service.authenticate(request));
+		try {
+			return ResponseEntity.ok(service.authenticate(request));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new AuthenticationResponse(null, e.getMessage()));
+		}
+		
 	}
 	
 }
