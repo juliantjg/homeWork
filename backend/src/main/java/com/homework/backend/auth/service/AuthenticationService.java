@@ -1,8 +1,9 @@
 package com.homework.backend.auth.service;
 
+import java.util.HashMap;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,23 +51,33 @@ public class AuthenticationService {
 		
 		repository.save(user);
 		var jwtToken = jwtService.generateToken(user);
-		return new AuthenticationResponse(jwtToken, "Register successful");
+		
+		HashMap<String, Object> tokenObject = new HashMap<String, Object>();
+		tokenObject.put("token", jwtToken);
+		
+		return new AuthenticationResponse(tokenObject, "Register successful");
 	}
 	
-	public AuthenticationResponse authenticate(AuthenticationRequest request) {
-		
-		authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(
-						request.getEmail(),
-						request.getPassword()
-						)
-				);
+	public AuthenticationResponse authenticate(AuthenticationRequest request) throws Exception {
+		try {
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(
+							request.getEmail(),
+							request.getPassword()
+							)
+					);
+		} catch (Exception e) {
+			throw new Exception("Bad credentials");
+		}
 		
 		var user = repository.findByEmail(request.getEmail())
 				.orElseThrow();
 		
 		var jwtToken = jwtService.generateToken(user);
 		
-		return new AuthenticationResponse(jwtToken, "Login successful");
+		HashMap<String, Object> tokenObject = new HashMap<String, Object>();
+		tokenObject.put("token", jwtToken);
+		
+		return new AuthenticationResponse(tokenObject, "Login successful");
 	}
 }
