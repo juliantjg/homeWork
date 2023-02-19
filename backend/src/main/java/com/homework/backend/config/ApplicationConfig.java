@@ -16,7 +16,6 @@ import com.homework.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
-@RequiredArgsConstructor
 public class ApplicationConfig {
 	
 	private final UserRepository repository;

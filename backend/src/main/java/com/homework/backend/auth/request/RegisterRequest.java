@@ -9,10 +9,6 @@ import lombok.Setter;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class RegisterRequest {
 	private String firstname;
 	private String lastname;

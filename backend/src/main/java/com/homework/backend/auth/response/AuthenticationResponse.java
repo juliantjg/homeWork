@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class AuthenticationResponse {
 	private String message;
 	private HashMap<String, Object> data;

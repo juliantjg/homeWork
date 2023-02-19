@@ -18,7 +18,6 @@ import com.homework.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class AuthenticationService {
 	private final UserRepository repository;
 	private final PasswordEncoder passwordEncoder;
