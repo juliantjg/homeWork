@@ -26,8 +26,8 @@ export const login = (email, password) => async (dispatch) => {
 
         // this is the regular axios call, but we're now passing in username, password and the config above
         const { data } = await axios.post(
-            backendUrl + 'api/auth/login/',
-            { 'username': email, 'password': password },
+            backendUrl + 'api/auth/login',
+            { 'email': email, 'password': password },
             config
         )
 
