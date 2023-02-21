@@ -8,7 +8,7 @@ import {
     USER_LOGIN_FAIL,
 
     USER_LOGOUT,
-} from '../actions/types';
+} from './types';
 
 
 export const login = (email, password) => async (dispatch) => {
@@ -39,14 +39,15 @@ export const login = (email, password) => async (dispatch) => {
         })
 
         // now finally store the userInfo into local storage
-        localStorage.setItem('userInfo', JSON.stringify(data))
+        localStorage.setItem('tokenHomework', data.data.token)
+        localStorage.setItem('emailHomework', email)
 
     } catch (error) {
-        console.log(error.response.data.detail)
+        console.log(error.response.data)
         dispatch({
             type: USER_LOGIN_FAIL,
             payload: error.response && error.response.data.message
-                ? error.response.data.detail
+                ? error.response.data.message
                 : 'Invalid credentials',
         })
     }

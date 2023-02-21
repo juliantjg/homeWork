@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link, useNavigate } from 'react-router-dom';
-import { login } from '../../actions/authActions';
+import { login } from '../../actions/securityActions';
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 
@@ -16,8 +17,13 @@ function Login() {
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
 
+    console.log(error);
+
     function notifyError() {
-        toast(error);
+        // toast(error);
+        toast.error(error, {
+            position: toast.POSITION.TOP_CENTER
+        });
     }
 
     useEffect(() => {
