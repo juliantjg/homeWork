@@ -4,6 +4,7 @@ import { login } from '../../actions/authActions';
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import Footer from '../Footer/Footer';
+import { Form } from 'react-bootstrap';
 
 function Login() {
     const navigate = useNavigate();
@@ -58,20 +59,28 @@ function Login() {
                         <center>
                             homeWork
                         </center>
+                        <ToastContainer />
                     </div>
-                    <div class="row pt-5">
+                    <div class="row pt-4">
                         <div class="col-md-4 offset-4">
                             <div class="card p-4">
                                 <h1>Login</h1>
                                 <br />
-                                <label for="exampleFormControlInput1">Email</label>
-                                <input type="email" class="form-control input-lg" placeholder="name@example.com"></input>
-                                <br />
-                                <label for="exampleFormControlInput1">Password</label>
-                                <input type="password" class="form-control input-lg"></input>
-                                <br />
-                                <div>
-                                    No account yet? <a href="#">Create one</a>
+                                <Form
+                                    onSubmit={submitHandler}
+                                >
+                                    <label for="exampleFormControlInput1">Email</label>
+                                    <input type="email" class="form-control input-lg" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}></input>
+                                    <br />
+                                    <label for="exampleFormControlInput1">Password</label>
+                                    <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
+                                    <br />
+                                    <button type="submit" class="btn btn-secondary btn-lg btn-block">Login</button>
+                                </Form>
+                                <div align="left">
+                                    <small>
+                                        No account yet? <a href="#">Create one</a>
+                                    </small>
                                 </div>
                             </div>
                         </div>
