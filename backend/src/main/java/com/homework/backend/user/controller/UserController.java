@@ -12,8 +12,8 @@ import com.homework.backend.user.model.User;
 import com.homework.backend.user.service.UserService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/user")
-@CrossOrigin
 public class UserController {
 	
 	@Autowired
