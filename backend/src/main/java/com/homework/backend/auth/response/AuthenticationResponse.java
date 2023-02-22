@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 public class AuthenticationResponse {
 	private String message;
 	private HashMap<String, Object> data;

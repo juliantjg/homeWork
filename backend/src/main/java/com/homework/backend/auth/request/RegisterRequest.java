@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Builder
 public class RegisterRequest {
 	private String firstname;
 	private String lastname;
