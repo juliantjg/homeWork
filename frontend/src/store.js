@@ -7,7 +7,13 @@ const reducer = combineReducers({
     userLogin: userLoginReducers,
 })
 
-const initialState = {};
+const userInfoFromStorage = localStorage.getItem('tokenHomework') ?
+    localStorage.getItem('tokenHomework') : null
+
+const initialState = {
+    userLogin: { userInfo: userInfoFromStorage }
+};
+
 const middleware = [thunk];
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
