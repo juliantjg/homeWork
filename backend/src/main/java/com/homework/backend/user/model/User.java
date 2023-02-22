@@ -36,6 +36,9 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
+	public User() {
+		
+	}
 
 	public User(String firstname, String lastname, String email, String password, Role role) {
 		this.setFirstname(firstname);
