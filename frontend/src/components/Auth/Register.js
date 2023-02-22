@@ -6,9 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
-import { USER_LOGOUT } from '../../actions/types';
 
-function Login() {
+function Register() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [username, setUsername] = useState({});
@@ -30,7 +29,6 @@ function Login() {
     useEffect(() => {
         if (error) {
             notifyError()
-            dispatch({ type: USER_LOGOUT })
         }
         if (userInfo) {
 
@@ -69,33 +67,46 @@ function Login() {
                         </center>
                         <ToastContainer />
                     </div>
-                    <br />
                     <div class="row pt-5">
                         <div class="col-md-4 offset-4">
                             <div class="card p-4">
-                                <h1>Login</h1>
+                                <h1>Register</h1>
                                 <br />
                                 <Form
                                     onSubmit={submitHandler}
                                 >
                                     <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="exampleFormControlInput1">Firstname</label>
+                                            <input type="text" class="form-control input-lg" placeholder="John" onChange={(e) => setUsername(e.target.value)}></input>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="exampleFormControlInput1">Lastname</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Doe" onChange={(e) => setUsername(e.target.value)}></input>
+                                        </div>
+                                    </div>
+                                    <div class="row pt-3">
                                         <div>
                                             <label for="exampleFormControlInput1">Email</label>
                                             <input type="email" class="form-control input-lg" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}></input>
                                         </div>
                                     </div>
                                     <div class="row pt-3">
-                                        <div>
+                                        <div class="col-sm-6">
                                             <label for="exampleFormControlInput1">Password</label>
+                                            <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="exampleFormControlInput1">Confirm Password</label>
                                             <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
                                         </div>
                                     </div>
                                     <br />
-                                    <button type="submit" class="btn btn-secondary btn-lg btn-block">Login</button>
+                                    <button type="submit" class="btn btn-secondary btn-lg btn-block">Register</button>
                                 </Form>
                                 <div align="left">
                                     <small>
-                                        No account yet? <Link to="/register">Create one</Link>
+                                        Back to <Link to="/login">Login</Link>
                                     </small>
                                 </div>
                             </div>
@@ -110,4 +121,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;

@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import store from "./store";
 import Home from "./components/Home/Home";
+import Register from "./components/Auth/Register";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
         </Routes>
       </Router>
