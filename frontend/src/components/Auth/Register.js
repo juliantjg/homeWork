@@ -67,57 +67,55 @@ function Register() {
                         </center>
                         <ToastContainer />
                     </div>
-                    <div class="row pt-5">
-                        <div class="col-md-4 offset-4">
-                            <div class="card p-4">
-                                <h1>Register</h1>
-                                <br />
-                                <Form
-                                    onSubmit={submitHandler}
-                                >
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label for="exampleFormControlInput1">Firstname</label>
-                                            <input type="text" class="form-control input-lg" placeholder="John" onChange={(e) => setUsername(e.target.value)}></input>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="exampleFormControlInput1">Lastname</label>
-                                            <input type="text" class="form-control input-lg" placeholder="Doe" onChange={(e) => setUsername(e.target.value)}></input>
-                                        </div>
+                    <div class="row pt-4 justify-content-center">
+                        <div class="card p-4" style={{ width: "30rem" }}>
+                            <h1>Register</h1>
+                            <br />
+                            <Form
+                                onSubmit={submitHandler}
+                            >
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleFormControlInput1">Firstname</label>
+                                        <input type="text" class="form-control input-lg" placeholder="John" onChange={(e) => setUsername(e.target.value)}></input>
                                     </div>
-                                    <div class="row pt-3">
-                                        <div>
-                                            <label for="exampleFormControlInput1">Email</label>
-                                            <input type="email" class="form-control input-lg" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}></input>
-                                        </div>
+                                    <div class="col-sm-6">
+                                        <label for="exampleFormControlInput1">Lastname</label>
+                                        <input type="text" class="form-control input-lg" placeholder="Doe" onChange={(e) => setUsername(e.target.value)}></input>
                                     </div>
-                                    <div class="row pt-3">
-                                        <div class="col-sm-6">
-                                            <label for="exampleFormControlInput1">Password</label>
-                                            <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="exampleFormControlInput1">Confirm Password</label>
-                                            <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <button type="submit" class="btn btn-secondary btn-lg btn-block">Register</button>
-                                </Form>
-                                <div align="left">
-                                    <small>
-                                        Back to <Link to="/login">Login</Link>
-                                    </small>
                                 </div>
+                                <div class="row pt-3">
+                                    <div>
+                                        <label for="exampleFormControlInput1">Email</label>
+                                        <input type="email" class="form-control input-lg" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}></input>
+                                    </div>
+                                </div>
+                                <div class="row pt-3">
+                                    <div class="col-sm-6">
+                                        <label for="exampleFormControlInput1">Password</label>
+                                        <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="exampleFormControlInput1">Confirm Password</label>
+                                        <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
+                                    </div>
+                                </div>
+                                <br />
+                                <button type="submit" class="btn btn-secondary btn-lg btn-block">Register</button>
+                            </Form>
+                            <div align="left">
+                                <small>
+                                    Back to <Link to="/login">Login</Link>
+                                </small>
                             </div>
                         </div>
 
                     </div>
-
+                    <br />
                 </div>
             </div>
             <Footer />
-        </div>
+        </div >
     );
 }
 

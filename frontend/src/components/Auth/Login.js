@@ -70,43 +70,42 @@ function Login() {
                         <ToastContainer />
                     </div>
                     <br />
-                    <div class="row pt-5">
-                        <div class="col-md-4 offset-4">
-                            <div class="card p-4">
-                                <h1>Login</h1>
-                                <br />
-                                <Form
-                                    onSubmit={submitHandler}
-                                >
-                                    <div class="row">
-                                        <div>
-                                            <label for="exampleFormControlInput1">Email</label>
-                                            <input type="email" class="form-control input-lg" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}></input>
-                                        </div>
+                    <div class="row pt-4 justify-content-center">
+                        <div class="card p-4" style={{ width: "30rem" }}>
+                            <h1>Login</h1>
+                            <br />
+                            <Form
+                                onSubmit={submitHandler}
+                            >
+                                <div class="row">
+                                    <div>
+                                        <label for="exampleFormControlInput1">Email</label>
+                                        <input type="email" class="form-control input-lg" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}></input>
                                     </div>
-                                    <div class="row pt-3">
-                                        <div>
-                                            <label for="exampleFormControlInput1">Password</label>
-                                            <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <button type="submit" class="btn btn-secondary btn-lg btn-block">Login</button>
-                                </Form>
-                                <div align="left">
-                                    <small>
-                                        No account yet? <Link to="/register">Create one</Link>
-                                    </small>
                                 </div>
+                                <div class="row pt-3">
+                                    <div>
+                                        <label for="exampleFormControlInput1">Password</label>
+                                        <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
+                                    </div>
+                                </div>
+                                <br />
+                                <button type="submit" class="btn btn-secondary btn-lg btn-block">Login</button>
+                            </Form>
+                            <div align="left">
+                                <small>
+                                    No account yet? <Link to="/register">Create one</Link>
+                                </small>
                             </div>
                         </div>
 
                     </div>
+                    <br />
 
                 </div>
             </div>
             <Footer />
-        </div>
+        </div >
     );
 }
 
