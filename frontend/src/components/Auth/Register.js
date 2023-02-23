@@ -6,12 +6,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
+import { register } from '../../actions/securityActions';
 
 function Register() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [username, setUsername] = useState({});
+    const [firstname, setFirstname] = useState({});
+    const [lastname, setLastname] = useState({});
+    const [email, setEmail] = useState({});
     const [password, setPassword] = useState({});
+    const [confirmPassword, setConfirmPassword] = useState({});
 
     // userLogin is from store.js
     const userLogin = useSelector(state => state.userLogin)
@@ -51,7 +55,14 @@ function Register() {
     const submitHandler = (e) => {
         e.preventDefault()
         // calling the action
-        dispatch(login(username, password))
+        if (password !== confirmPassword) {
+            toast.error('Confirm password does not match', {
+                position: toast.POSITION.TOP_CENTER
+            });
+        }
+        else {
+            dispatch(register(firstname, lastname, email, password))
+        }
     }
 
 
@@ -77,27 +88,27 @@ function Register() {
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="exampleFormControlInput1">Firstname</label>
-                                        <input type="text" class="form-control input-lg" placeholder="John" onChange={(e) => setUsername(e.target.value)}></input>
+                                        <input type="text" class="form-control input-lg" required placeholder="John" onChange={(e) => setFirstname(e.target.value)}></input>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="exampleFormControlInput1">Lastname</label>
-                                        <input type="text" class="form-control input-lg" placeholder="Doe" onChange={(e) => setUsername(e.target.value)}></input>
+                                        <input type="text" class="form-control input-lg" required placeholder="Doe" onChange={(e) => setLastname(e.target.value)}></input>
                                     </div>
                                 </div>
                                 <div class="row pt-3">
                                     <div>
                                         <label for="exampleFormControlInput1">Email</label>
-                                        <input type="email" class="form-control input-lg" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}></input>
+                                        <input type="email" class="form-control input-lg" required placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}></input>
                                     </div>
                                 </div>
                                 <div class="row pt-3">
                                     <div class="col-sm-6">
                                         <label for="exampleFormControlInput1">Password</label>
-                                        <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
+                                        <input type="password" class="form-control input-lg" required onChange={(e) => setPassword(e.target.value)}></input>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="exampleFormControlInput1">Confirm Password</label>
-                                        <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
+                                        <input type="password" class="form-control input-lg" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
                                     </div>
                                 </div>
                                 <br />
