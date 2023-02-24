@@ -15,6 +15,13 @@ function Home() {
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
 
+    function logout() {
+        localStorage.clear("emailHomework")
+        localStorage.clear("tokenHomework")
+
+        navigate('/login')
+    }
+
     useEffect(() => {
         // if userInfo exists then show the home page, this is so that logged in user can't acces /login
         if (!userInfo) {
@@ -29,6 +36,8 @@ function Home() {
                     <div class="row pt-5">
                         <center>
                             Home Page
+                            <br />
+                            <a href="" onClick={logout()}><i class="fas fa-power-off"></i> Logout</a>
                         </center>
                     </div>
                 </div>
