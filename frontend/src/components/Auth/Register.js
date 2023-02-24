@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import { register } from '../../actions/securityActions';
+import { USER_LOGOUT } from '../../actions/types';
 
 function Register() {
     const navigate = useNavigate();
@@ -21,28 +22,34 @@ function Register() {
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
 
-    console.log(error);
+    const userRegister = useSelector(state => state.userRegister)
+    const { error: errorRegister, loading: loadingRegister, userRegister: userRegisterMessage } = userRegister
 
     function notifyError() {
         // toast(error);
-        toast.error(error, {
+        toast.error(errorRegister, {
             position: toast.POSITION.TOP_CENTER
         });
+        dispatch({ type: USER_LOGOUT })
     }
 
     useEffect(() => {
-        if (error) {
+        if (errorRegister) {
             notifyError()
-        }
-        if (userInfo) {
 
+        }
+        if (userRegisterMessage) {
+            toast.success("Register successful. You can now login with your credentials.", {
+                position: toast.POSITION.TOP_CENTER
+            });
+            dispatch({ type: USER_LOGOUT })
             setTimeout(() => {
-                navigate('/home')
-            }, 2000);
+                navigate('/login')
+            }, 3000);
 
         }
 
-    }, [error, userInfo])
+    }, [error, userRegisterMessage, errorRegister])
 
     useEffect(() => {
         // if userInfo exists then show the home page, this is so that logged in user can't acces /login
@@ -64,9 +71,6 @@ function Register() {
             dispatch(register(firstname, lastname, email, password))
         }
     }
-
-
-
 
     return (
         <div class="container-fluid px-0">

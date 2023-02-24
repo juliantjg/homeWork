@@ -18,6 +18,9 @@ function Login() {
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
 
+    const userRegister = useSelector(state => state.userRegister)
+    const { error: errorRegister, loading: loadingRegister, userRegister: userRegisterMessage } = userRegister
+
     console.log(error);
 
     function notifyError() {
@@ -55,9 +58,6 @@ function Login() {
         // calling the action
         dispatch(login(username, password))
     }
-
-
-
 
     return (
         <div class="container-fluid px-0">
