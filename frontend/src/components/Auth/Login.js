@@ -7,10 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import { USER_LOGOUT } from '../../actions/types';
+import Loader from '../Utils/Loader';
 
 function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [load, setLoad] = useState(false);
     const [username, setUsername] = useState({});
     const [password, setPassword] = useState({});
 
@@ -32,30 +34,21 @@ function Login() {
 
     useEffect(() => {
         if (error) {
+            setLoad(false);
             notifyError()
             dispatch({ type: USER_LOGOUT })
         }
         if (userInfo) {
-
-            setTimeout(() => {
-                navigate('/home')
-            }, 2000);
-
+            setLoad(false);
+            navigate('/home')
         }
 
     }, [error, userInfo])
 
-    useEffect(() => {
-        // if userInfo exists then show the home page, this is so that logged in user can't acces /login
-        if (userInfo) {
-            navigate('/home')
-        }
-    }, [userInfo])
-
-
     const submitHandler = (e) => {
         e.preventDefault()
         // calling the action
+        setLoad(true);
         dispatch(login(username, password))
     }
 
@@ -90,12 +83,33 @@ function Login() {
                                     </div>
                                 </div>
                                 <br />
-                                <button type="submit" class="btn btn-secondary btn-lg btn-block">Login</button>
+                                {
+                                    load ?
+                                        (
+                                            <button type="submit" class="btn btn-secondary btn-lg btn-block" disabled><Loader /></button>
+                                        )
+                                        :
+                                        (
+                                            <button type="submit" class="btn btn-secondary btn-lg btn-block">Login</button>
+                                        )
+                                }
+
                             </Form>
                             <div align="left">
-                                <small>
-                                    No account yet? <Link to="/register">Create one</Link>
-                                </small>
+                                {
+                                    load ?
+                                        (
+                                            <small>
+                                                No account yet? <span style={{ color: "grey" }}>Create one</span>
+                                            </small>
+                                        )
+                                        :
+                                        (
+                                            <small>
+                                                No account yet? <Link to="/register">Create one</Link>
+                                            </small>
+                                        )
+                                }
                             </div>
                         </div>
 

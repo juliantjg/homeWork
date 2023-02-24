@@ -8,10 +8,12 @@ import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import { register } from '../../actions/securityActions';
 import { USER_LOGOUT } from '../../actions/types';
+import Loader from '../Utils/Loader';
 
 function Register() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [load, setLoad] = useState(false);
     const [firstname, setFirstname] = useState({});
     const [lastname, setLastname] = useState({});
     const [email, setEmail] = useState({});
@@ -35,8 +37,8 @@ function Register() {
 
     useEffect(() => {
         if (errorRegister) {
+            setLoad(false);
             notifyError()
-
         }
         if (userRegisterMessage) {
             toast.success("Register successful. You can now login with your credentials.", {
@@ -44,6 +46,7 @@ function Register() {
             });
             dispatch({ type: USER_LOGOUT })
             setTimeout(() => {
+                setLoad(false);
                 navigate('/login')
             }, 3000);
 
@@ -68,6 +71,7 @@ function Register() {
             });
         }
         else {
+            setLoad(true);
             dispatch(register(firstname, lastname, email, password))
         }
     }
@@ -116,12 +120,32 @@ function Register() {
                                     </div>
                                 </div>
                                 <br />
-                                <button type="submit" class="btn btn-secondary btn-lg btn-block">Register</button>
+                                {
+                                    load ?
+                                        (
+                                            <button type="submit" class="btn btn-secondary btn-lg btn-block" disabled><Loader /></button>
+                                        )
+                                        :
+                                        (
+                                            <button type="submit" class="btn btn-secondary btn-lg btn-block">Register</button>
+                                        )
+                                }
                             </Form>
                             <div align="left">
-                                <small>
-                                    Back to <Link to="/login">Login</Link>
-                                </small>
+                                {
+                                    load ?
+                                        (
+                                            <small>
+                                                Back to <span style={{ color: "grey" }}>Login</span>
+                                            </small>
+                                        )
+                                        :
+                                        (
+                                            <small>
+                                                Back to <Link to="/login">Login</Link>
+                                            </small>
+                                        )
+                                }
                             </div>
                         </div>
 
