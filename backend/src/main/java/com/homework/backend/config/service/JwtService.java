@@ -4,11 +4,15 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import com.homework.backend.user.model.User;
+import com.homework.backend.user.repository.UserRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -19,12 +23,24 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 	
+	@Autowired
+	private UserRepository userRepository;
+	
+	public JwtService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+	
 	// Generate key: https://allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx
 	// Tick Hex, minimum security 256-bit
 	private static final String SECRET_KEY = "77217A25432A462D4A614E635266556A586E3272357538782F413F4428472B4B6250655367566B5970337336763979244226452948404D635166546A576D5A71";
 	
 	public String extractUsername(String token) {
 		return extractClaim(token, Claims::getSubject);
+	}
+	
+	public Optional<User> extractUser(String token) {
+		String email = this.extractUsername(token);
+		return userRepository.findByEmail(email);
 	}
 	
 	public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
