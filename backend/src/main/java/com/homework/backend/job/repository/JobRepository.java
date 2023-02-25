@@ -12,4 +12,6 @@ public interface JobRepository extends JpaRepository<Job, Integer> {
 	//	The JpaRepository type here is the model itself, and the model's primary key type
 	
 	Optional<Job> findByTitle(String title);
+
+	Job findById(int id);
 }

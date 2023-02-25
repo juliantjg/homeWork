@@ -3,11 +3,13 @@ package com.homework.backend.job.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import com.homework.backend.auth.response.AuthenticationResponse;
 import com.homework.backend.job.response.GetAllJobsResponse;
 import com.homework.backend.job.response.JobResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import com.homework.backend.config.service.JwtService;
@@ -59,14 +61,14 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public String readJob(HttpServletRequest request, int id) throws Exception { // read job by ID
+	public JobResponse readJob(HttpServletRequest request, int id) throws Exception { // read job by ID
 		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String updateJob(HttpServletRequest request, int id, JobRequest jobRequest) throws Exception {
+	public JobResponse updateJob(HttpServletRequest request, int id, JobRequest jobRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 
 		jobRepository.save(jobs);
@@ -74,10 +76,20 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public String deleteJob(HttpServletRequest request, int id) throws Exception {
+	public JobResponse deleteJob(HttpServletRequest request, int id) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		Job job;
+
+		job = jobRepository.findById(id);
+
+		if(job == null){
+			throw new Exception("Cannot find the job ID");
+		}
+		if (currUser.getId() != job.getUser_id()){
+			throw new Exception("User ID does not match");
+		}
 		jobRepository.deleteById(id);
-		return null;
+		return new JobResponse(null, "Job deleted successfully.");
 	}
 
 	/**

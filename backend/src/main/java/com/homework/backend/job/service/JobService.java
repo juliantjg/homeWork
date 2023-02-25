@@ -31,7 +31,7 @@ public interface JobService {
 	 * @param id
 	 * @return
 	 */
-	public String readJob(HttpServletRequest request, int id) throws Exception;
+	public JobResponse readJob(HttpServletRequest request, int id) throws Exception;
 	
 	/**
 	 * Update details of a job listen in Job model. Only accessible to job creator
@@ -40,7 +40,7 @@ public interface JobService {
 	 * @param jobRequest
 	 * @return
 	 */
-	public String updateJob(HttpServletRequest request, int id, JobRequest jobRequest) throws Exception;
+	public JobResponse updateJob(HttpServletRequest request, int id, JobRequest jobRequest) throws Exception;
 	
 	/**
 	 * Delete a job given ID. Can only be deleted by job creator
@@ -48,5 +48,5 @@ public interface JobService {
 	 * @param id
 	 * @return
 	 */
-	public String deleteJob(HttpServletRequest request, int id) throws Exception;
+	public JobResponse deleteJob(HttpServletRequest request, int id) throws Exception;
 }
