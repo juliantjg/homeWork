@@ -16,6 +16,8 @@ import com.homework.backend.job.request.JobRequest;
 import com.homework.backend.job.response.JobResponse;
 import com.homework.backend.job.service.JobService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/job")
@@ -29,9 +31,11 @@ public class JobController {
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<?> all() {
+	public ResponseEntity<?> all(
+		HttpServletRequest request
+	) {
 		try {
-			return ResponseEntity.ok(service.getAllJobs());
+			return ResponseEntity.ok(service.getAllJobs(request));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
 		}
@@ -39,10 +43,11 @@ public class JobController {
 	
 	@PostMapping("/create")
 	public ResponseEntity<?> create(
-		@RequestBody JobRequest request
+		HttpServletRequest request, 
+		@RequestBody JobRequest jobRequest
 	) {
 		try {
-			return ResponseEntity.ok(service.createJob(request));
+			return ResponseEntity.ok(service.createJob(request, jobRequest));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
 		}
@@ -50,10 +55,11 @@ public class JobController {
 	
 	@GetMapping("/read/{id}")
 	public ResponseEntity<?> read(
+		HttpServletRequest request,
 		@PathVariable("id") int id
 	) {
 		try {
-			return ResponseEntity.ok(service.readJob(id));
+			return ResponseEntity.ok(service.readJob(request, id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
 		}
@@ -61,11 +67,12 @@ public class JobController {
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?> update(
+		HttpServletRequest request,
 		@PathVariable("id") int id,
-		@RequestBody JobRequest request
+		@RequestBody JobRequest jobRequest
 	) {
 		try {
-			return ResponseEntity.ok(service.updateJob(id, request));
+			return ResponseEntity.ok(service.updateJob(request, id, jobRequest));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
 		}
@@ -73,10 +80,11 @@ public class JobController {
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(
+		HttpServletRequest request,
 		@PathVariable("id") int id
 	) {
 		try {
-			return ResponseEntity.ok(service.deleteJob(id));
+			return ResponseEntity.ok(service.deleteJob(request, id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
 		}

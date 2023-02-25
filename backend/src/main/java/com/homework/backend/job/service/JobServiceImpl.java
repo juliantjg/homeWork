@@ -9,6 +9,9 @@ import com.homework.backend.config.service.JwtService;
 import com.homework.backend.job.model.Job;
 import com.homework.backend.job.repository.JobRepository;
 import com.homework.backend.job.request.JobRequest;
+import com.homework.backend.user.model.User;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -23,33 +26,49 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public List<Job> getAllJobs() {
+	public List<Job> getAllJobs(HttpServletRequest request) {
+		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String createJob(JobRequest jobRequest) {
+	public String createJob(HttpServletRequest request, JobRequest jobRequest) {
+		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String readJob(int id) {
+	public String readJob(HttpServletRequest request, int id) {
+		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String updateJob(int id, JobRequest jobRequest) {
+	public String updateJob(HttpServletRequest request, int id, JobRequest jobRequest) {
+		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String deleteJob(int id) {
+	public String deleteJob(HttpServletRequest request, int id) {
+		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Helper function to get user from request
+	 * @param request
+	 * @return
+	 */
+	private User extractUserFromRequest(HttpServletRequest request) {
+		final String authHeader = request.getHeader("Authorization");
+		final String jwt;
+		jwt = authHeader.substring(7);
+		return jwtService.extractUser(jwt);
+	}
 }

@@ -38,9 +38,9 @@ public class JwtService {
 		return extractClaim(token, Claims::getSubject);
 	}
 	
-	public Optional<User> extractUser(String token) {
+	public User extractUser(String token) {
 		String email = this.extractUsername(token);
-		return userRepository.findByEmail(email);
+		return userRepository.getUserByEmail(email);
 	}
 	
 	public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
