@@ -33,14 +33,14 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public GetAllJobsResponse getAllJobs(HttpServletRequest request) {
+	public GetAllJobsResponse getAllJobs(HttpServletRequest request) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 		List<Job> jobs = jobRepository.findAll();
 		return new GetAllJobsResponse(jobs, "Register successful");
 	}
 
 	@Override
-	public JobResponse createJob(HttpServletRequest request, JobRequest jobRequest) {
+	public JobResponse createJob(HttpServletRequest request, JobRequest jobRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 //		System.out.println(currUser.getId());
 		var job = new Job(
@@ -59,14 +59,14 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public String readJob(HttpServletRequest request, int id) { //Get job byID??
+	public String readJob(HttpServletRequest request, int id) throws Exception { // read job by ID
 		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String updateJob(HttpServletRequest request, int id, JobRequest jobRequest) {
+	public String updateJob(HttpServletRequest request, int id, JobRequest jobRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 
 		jobRepository.save(jobs);
@@ -74,7 +74,7 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public String deleteJob(HttpServletRequest request, int id) {
+	public String deleteJob(HttpServletRequest request, int id) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 		jobRepository.deleteById(id);
 		return null;
