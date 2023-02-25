@@ -1,7 +1,12 @@
 package com.homework.backend.job.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import com.homework.backend.auth.response.AuthenticationResponse;
+import com.homework.backend.job.response.GetAllJobsResponse;
+import com.homework.backend.job.response.JobResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,28 +24,31 @@ public class JobServiceImpl implements JobService {
 	@Autowired
 	private JobRepository jobRepository;
 	private JwtService jwtService;
-	
+
+	private Job jobs;
+
 	public JobServiceImpl(JobRepository jobRepository, JwtService jwtService) {
 		this.jobRepository = jobRepository;
 		this.jwtService = jwtService;
 	}
 
 	@Override
-	public List<Job> getAllJobs(HttpServletRequest request) {
+	public GetAllJobsResponse getAllJobs(HttpServletRequest request) {
 		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
-		return null;
+		List<Job> jobs = jobRepository.findAll();
+		return new GetAllJobsResponse(jobs, "Register successful");
 	}
 
 	@Override
 	public String createJob(HttpServletRequest request, JobRequest jobRequest) {
 		User currUser = this.extractUserFromRequest(request);
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
-	public String readJob(HttpServletRequest request, int id) {
+	public String readJob(HttpServletRequest request, int id) { //Get job byID??
 		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
 		return null;
@@ -49,14 +57,15 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public String updateJob(HttpServletRequest request, int id, JobRequest jobRequest) {
 		User currUser = this.extractUserFromRequest(request);
-		// TODO Auto-generated method stub
+
+		jobRepository.save(jobs);
 		return null;
 	}
 
 	@Override
 	public String deleteJob(HttpServletRequest request, int id) {
 		User currUser = this.extractUserFromRequest(request);
-		// TODO Auto-generated method stub
+		jobRepository.deleteById(id);
 		return null;
 	}
 

@@ -5,6 +5,7 @@ import java.util.List;
 import com.homework.backend.job.model.Job;
 import com.homework.backend.job.request.JobRequest;
 
+import com.homework.backend.job.response.GetAllJobsResponse;
 import jakarta.servlet.http.HttpServletRequest;
 
 public interface JobService {
@@ -13,7 +14,7 @@ public interface JobService {
 	 * @param request
 	 * @return
 	 */
-	public List<Job> getAllJobs(HttpServletRequest request);
+	public GetAllJobsResponse getAllJobs(HttpServletRequest request);
 	
 	/**
 	 * Create a job based on parameters given in jobRequest

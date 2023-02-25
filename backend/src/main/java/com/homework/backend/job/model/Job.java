@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Table
 public class Job {
 	
 	@Id
