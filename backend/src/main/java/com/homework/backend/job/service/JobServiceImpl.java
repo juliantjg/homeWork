@@ -35,16 +35,27 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public GetAllJobsResponse getAllJobs(HttpServletRequest request) {
 		User currUser = this.extractUserFromRequest(request);
-		// TODO Auto-generated method stub
 		List<Job> jobs = jobRepository.findAll();
 		return new GetAllJobsResponse(jobs, "Register successful");
 	}
 
 	@Override
-	public String createJob(HttpServletRequest request, JobRequest jobRequest) {
+	public JobResponse createJob(HttpServletRequest request, JobRequest jobRequest) {
 		User currUser = this.extractUserFromRequest(request);
-
-		return null;
+//		System.out.println(currUser.getId());
+		var job = new Job(
+				jobRequest.getTitle(),
+				jobRequest.getDescription(),
+				jobRequest.getSalary(),
+				jobRequest.getLocation(),
+				jobRequest.getPostcode(),
+				currUser.getId()
+		);
+		System.out.println(job.getTitle());
+		jobRepository.save(job);
+		HashMap<String, Object> jobObject = new HashMap<String, Object>();
+		jobObject.put("job", job);
+		return new JobResponse(jobObject, "Job created successfully.");
 	}
 
 	@Override

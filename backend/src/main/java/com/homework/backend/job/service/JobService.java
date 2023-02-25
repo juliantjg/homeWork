@@ -6,6 +6,7 @@ import com.homework.backend.job.model.Job;
 import com.homework.backend.job.request.JobRequest;
 
 import com.homework.backend.job.response.GetAllJobsResponse;
+import com.homework.backend.job.response.JobResponse;
 import jakarta.servlet.http.HttpServletRequest;
 
 public interface JobService {
@@ -22,7 +23,7 @@ public interface JobService {
 	 * @param jobRequest
 	 * @return
 	 */
-	public String createJob(HttpServletRequest request, JobRequest jobRequest);
+	public JobResponse createJob(HttpServletRequest request, JobRequest jobRequest);
 	
 	/**
 	 * Get details of a job listed in Job model

@@ -41,9 +41,15 @@ public class Job {
 	}
 
 	public Job(
-			int id, String title, String description, float salary, 
+			String title, String description, float salary,
 			String location, String postcode, int user_id
 			) {
+			this.title = title;
+			this.description = description;
+			this.salary = salary;
+			this.location = location;
+			this.postcode = postcode;
+			this.user_id = user_id;
 	}
 
 	public int getId() {
