@@ -70,9 +70,27 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public JobResponse updateJob(HttpServletRequest request, int id, JobRequest jobRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		Job job = jobRepository.findById(id);
 
-		jobRepository.save(jobs);
-		return null;
+		if(job == null){
+			throw new Exception("Cannot find the job ID");
+		}
+		if (currUser.getId() != job.getUser_id()){
+			throw new Exception("User ID does not match");
+		}
+
+		job.setTitle(jobRequest.getTitle());
+		job.setDescription(jobRequest.getDescription());
+		job.setSalary(jobRequest.getSalary());
+		job.setLocation(jobRequest.getLocation());
+		job.setPostcode(jobRequest.getPostcode());
+		currUser.getId();
+
+		jobRepository.save(job);
+		HashMap<String, Object> jobObject = new HashMap<String, Object>();
+		jobObject.put("job", job);
+		return new JobResponse(jobObject, "Job updated successfully.");
+//		return null;
 	}
 
 	@Override
