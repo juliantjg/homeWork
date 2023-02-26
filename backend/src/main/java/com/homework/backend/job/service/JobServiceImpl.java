@@ -64,7 +64,18 @@ public class JobServiceImpl implements JobService {
 	public JobResponse readJob(HttpServletRequest request, int id) throws Exception { // read job by ID
 		User currUser = this.extractUserFromRequest(request);
 		// TODO Auto-generated method stub
-		return null;
+		Job job = jobRepository.findById(id);
+
+		if(job == null){
+			throw new Exception("Cannot find the job ID");
+		}
+		if (currUser.getId() != job.getUser_id()){
+			throw new Exception("User ID does not match");
+		}
+		jobRepository.findById(id);
+		HashMap<String, Object> jobObject = new HashMap<String, Object>();
+		jobObject.put("job", job);
+		return new JobResponse(jobObject, "Job found");
 	}
 
 	@Override
