@@ -69,9 +69,7 @@ public class JobServiceImpl implements JobService {
 		if(job == null){
 			throw new Exception("Cannot find the job ID");
 		}
-		if (currUser.getId() != job.getUser_id()){
-			throw new Exception("User ID does not match");
-		}
+
 		jobRepository.findById(id);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("job", job);
