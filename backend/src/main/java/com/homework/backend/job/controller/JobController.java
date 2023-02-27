@@ -37,7 +37,7 @@ public class JobController {
 		try {
 			return ResponseEntity.ok(service.getAllJobs(request));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage(), false));
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class JobController {
 		try {
 			return ResponseEntity.ok(service.createJob(request, jobRequest));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage(), false));
 		}
 	}
 	
@@ -61,7 +61,7 @@ public class JobController {
 		try {
 			return ResponseEntity.ok(service.readJob(request, id));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage(), false));
 		}
 	}
 	
@@ -74,7 +74,7 @@ public class JobController {
 		try {
 			return ResponseEntity.ok(service.updateJob(request, id, jobRequest));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage(), false));
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class JobController {
 		try {
 			return ResponseEntity.ok(service.deleteJob(request, id));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage()));
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage(), false));
 		}
 	}
 }

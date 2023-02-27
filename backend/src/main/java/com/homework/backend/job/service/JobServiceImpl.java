@@ -40,7 +40,7 @@ public class JobServiceImpl implements JobService {
 	public GetAllJobsResponse getAllJobs(HttpServletRequest request) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 		List<Job> jobs = jobRepository.findAll();
-		return new GetAllJobsResponse(jobs, "Register successful");
+		return new GetAllJobsResponse(jobs, "Register successful", true);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class JobServiceImpl implements JobService {
 		jobRepository.save(job);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("job", job);
-		return new JobResponse(jobObject, "Job created successfully.");
+		return new JobResponse(jobObject, "Job created successfully.", true);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class JobServiceImpl implements JobService {
 		jobRepository.findById(id);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("job", job);
-		return new JobResponse(jobObject, "Job found");
+		return new JobResponse(jobObject, "Job found", true);
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class JobServiceImpl implements JobService {
 		jobRepository.save(job);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("job", job);
-		return new JobResponse(jobObject, "Job updated successfully.");
+		return new JobResponse(jobObject, "Job updated successfully.", true);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class JobServiceImpl implements JobService {
 			throw new Exception("User ID does not match");
 		}
 		jobRepository.deleteById(id);
-		return new JobResponse(null, "Job deleted successfully.");
+		return new JobResponse(null, "Job deleted successfully.", true);
 	}
 
 	/**

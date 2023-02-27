@@ -1,14 +1,15 @@
 package com.homework.backend.auth.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class AuthenticationRequest {
-	
+	@NotBlank
+	@Email
 	private String email;
+	@NotBlank
 	String password;
 	
 	public AuthenticationRequest(String email, String password) {
