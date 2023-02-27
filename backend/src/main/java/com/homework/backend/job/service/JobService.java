@@ -1,12 +1,9 @@
 package com.homework.backend.job.service;
 
-import java.util.List;
-
-import com.homework.backend.job.model.Job;
 import com.homework.backend.job.request.JobRequest;
-
 import com.homework.backend.job.response.GetAllJobsResponse;
 import com.homework.backend.job.response.JobResponse;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 public interface JobService {
