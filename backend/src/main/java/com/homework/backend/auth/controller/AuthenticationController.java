@@ -34,7 +34,7 @@ public class AuthenticationController {
 		try {
 			return ResponseEntity.ok(service.register(request));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new AuthenticationResponse(null, e.getMessage()));
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new AuthenticationResponse(null, e.getMessage(), false));
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class AuthenticationController {
 		try {
 			return ResponseEntity.ok(service.authenticate(request));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new AuthenticationResponse(null, e.getMessage()));
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new AuthenticationResponse(null, e.getMessage(), false));
 		}
 		
 	}

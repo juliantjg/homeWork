@@ -66,7 +66,7 @@ public class AuthenticationService {
 		HashMap<String, Object> tokenObject = new HashMap<String, Object>();
 		tokenObject.put("token", jwtToken);
 		
-		return new AuthenticationResponse(tokenObject, "Register successful");
+		return new AuthenticationResponse(tokenObject, "Register successful", true);
 	}
 	
 	public AuthenticationResponse authenticate(AuthenticationRequest request) throws Exception {
@@ -95,6 +95,6 @@ public class AuthenticationService {
 		HashMap<String, Object> tokenObject = new HashMap<String, Object>();
 		tokenObject.put("token", jwtToken);
 		
-		return new AuthenticationResponse(tokenObject, "Login successful");
+		return new AuthenticationResponse(tokenObject, "Login successful", true);
 	}
 }

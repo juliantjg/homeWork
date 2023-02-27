@@ -8,11 +8,13 @@ import java.util.List;
 
 @Data
 public class GetAllJobsResponse {
+	private boolean success;
     private String message;
     private List<Job> data;
 
-    public GetAllJobsResponse(List<Job> data, String message) {
+    public GetAllJobsResponse(List<Job> data, String message, boolean success) {
         super();
+        this.success = success;
         this.message = message;
         this.data = data;
     }
@@ -33,5 +35,11 @@ public class GetAllJobsResponse {
         this.message = message;
     }
 
+	public boolean isSuccess() {
+		return success;
+	}
 
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
 }

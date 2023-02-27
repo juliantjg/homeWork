@@ -9,11 +9,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 public class AuthenticationResponse {
+	private boolean success;
 	private String message;
 	private HashMap<String, Object> data;
 
-	public AuthenticationResponse(HashMap<String, Object> data, String message) {
+	public AuthenticationResponse(HashMap<String, Object> data, String message, boolean success) {
 		super();
+		this.success = success;
 		this.message = message;
 		this.data = data;
 	}
@@ -33,6 +35,12 @@ public class AuthenticationResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-	
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
 }
