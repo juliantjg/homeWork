@@ -52,7 +52,6 @@ public class JobServiceImpl implements JobService {
 		  throw new ConstraintViolationException(violations);
 		}
 		
-//		System.out.println(currUser.getId());
 		var job = new Job(
 				jobRequest.getTitle(),
 				jobRequest.getDescription(),
@@ -61,7 +60,7 @@ public class JobServiceImpl implements JobService {
 				jobRequest.getPostcode(),
 				currUser.getId()
 		);
-		System.out.println(job.getTitle());
+
 		jobRepository.save(job);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("job", job);
@@ -71,7 +70,6 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public JobResponse readJob(HttpServletRequest request, int id) throws Exception { // read job by ID
 		User currUser = this.extractUserFromRequest(request);
-		// TODO Auto-generated method stub
 		Job job = jobRepository.findById(id);
 
 		if(job == null){
@@ -101,13 +99,11 @@ public class JobServiceImpl implements JobService {
 		job.setSalary(jobRequest.getSalary());
 		job.setLocation(jobRequest.getLocation());
 		job.setPostcode(jobRequest.getPostcode());
-		currUser.getId();
 
 		jobRepository.save(job);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("job", job);
 		return new JobResponse(jobObject, "Job updated successfully.");
-//		return null;
 	}
 
 	@Override

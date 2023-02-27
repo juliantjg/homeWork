@@ -7,13 +7,16 @@ import lombok.Data;
 
 @Data
 public class JobRequest {
+	@NotBlank
 	private String title;
 	@NotBlank
 	private String description;
 	@NotNull
 	@Min(1)
 	private float salary;
+	@NotBlank
 	private String location;
+	@NotBlank
 	private String postcode;
 	
 	public JobRequest(String title, String description, float salary, String location, String postcode) {
