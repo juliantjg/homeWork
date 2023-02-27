@@ -1,11 +1,17 @@
 package com.homework.backend.job.request;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class JobRequest {
 	private String title;
+	@NotBlank
 	private String description;
+	@NotNull
+	@Min(1)
 	private float salary;
 	private String location;
 	private String postcode;

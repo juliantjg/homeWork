@@ -1,24 +1,24 @@
 package com.homework.backend.job.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
-import com.homework.backend.auth.response.AuthenticationResponse;
-import com.homework.backend.job.response.GetAllJobsResponse;
-import com.homework.backend.job.response.JobResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import com.homework.backend.config.service.JwtService;
 import com.homework.backend.job.model.Job;
 import com.homework.backend.job.repository.JobRepository;
 import com.homework.backend.job.request.JobRequest;
+import com.homework.backend.job.response.GetAllJobsResponse;
+import com.homework.backend.job.response.JobResponse;
 import com.homework.backend.user.model.User;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Validator;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -26,12 +26,14 @@ public class JobServiceImpl implements JobService {
 	@Autowired
 	private JobRepository jobRepository;
 	private JwtService jwtService;
+	private Validator validator;
 
 	private Job jobs;
 
-	public JobServiceImpl(JobRepository jobRepository, JwtService jwtService) {
+	public JobServiceImpl(JobRepository jobRepository, JwtService jwtService, Validator validator) {
 		this.jobRepository = jobRepository;
 		this.jwtService = jwtService;
+		this.validator = validator;
 	}
 
 	@Override
@@ -44,6 +46,12 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public JobResponse createJob(HttpServletRequest request, JobRequest jobRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		
+		Set<ConstraintViolation<JobRequest>> violations = validator.validate(jobRequest);
+		if (!violations.isEmpty()) {
+		  throw new ConstraintViolationException(violations);
+		}
+		
 //		System.out.println(currUser.getId());
 		var job = new Job(
 				jobRequest.getTitle(),
