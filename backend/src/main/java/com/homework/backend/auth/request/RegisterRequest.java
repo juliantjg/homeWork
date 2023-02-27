@@ -1,17 +1,21 @@
 package com.homework.backend.auth.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 public class RegisterRequest {
+	@NotBlank
 	private String firstname;
+	@NotBlank
 	private String lastname;
+	@NotBlank
+	@Email(message= "Invalid email format", regexp= "^[A-Za-z0-9+_.-]+@(.+)$")
 	private String email;
+	@NotBlank
+	@Size(min=6, message="Password must be at least 6 characters")
 	private String password;
 	
 	public RegisterRequest(String firstname, String lastname, String email, String password) {

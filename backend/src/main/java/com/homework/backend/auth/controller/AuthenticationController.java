@@ -13,9 +13,6 @@ import com.homework.backend.auth.request.RegisterRequest;
 import com.homework.backend.auth.response.AuthenticationResponse;
 import com.homework.backend.auth.service.AuthenticationService;
 
-import lombok.RequiredArgsConstructor;
-
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/auth")
@@ -37,7 +34,7 @@ public class AuthenticationController {
 		try {
 			return ResponseEntity.ok(service.register(request));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new AuthenticationResponse(null, "Email taken"));
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new AuthenticationResponse(null, e.getMessage()));
 		}
 	}
 	
