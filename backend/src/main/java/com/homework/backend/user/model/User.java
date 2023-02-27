@@ -53,6 +53,10 @@ public class User implements UserDetails {
 		return List.of(new SimpleGrantedAuthority(role.name()));
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
 	@Override
 	public String getPassword() {
 		return password;
