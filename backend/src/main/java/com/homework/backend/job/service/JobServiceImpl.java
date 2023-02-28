@@ -28,8 +28,6 @@ public class JobServiceImpl implements JobService {
 	private JwtService jwtService;
 	private Validator validator;
 
-	private Job jobs;
-
 	public JobServiceImpl(JobRepository jobRepository, JwtService jwtService, Validator validator) {
 		this.jobRepository = jobRepository;
 		this.jwtService = jwtService;
