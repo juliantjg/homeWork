@@ -17,4 +17,16 @@ public interface JobApplicationService {
 			HttpServletRequest request, 
 			JobApplicationRequest jobApplicationRequest
 	) throws Exception;
+	
+	/**
+	 * Updating status of a job application. Either accept the application or deny it
+	 * @param request
+	 * @param jobApplicationRequest
+	 * @return
+	 * @throws Exception
+	 */
+	public JobApplicationResponse updateJobApplicationStatus(
+			HttpServletRequest request, 
+			JobApplicationRequest jobApplicationRequest
+	) throws Exception;
 }
