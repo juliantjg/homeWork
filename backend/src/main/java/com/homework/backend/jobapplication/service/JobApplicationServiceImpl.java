@@ -66,7 +66,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 	}
 	
 	@Override
-	public JobApplicationResponse getAllJobApplications(HttpServletRequest request) throws Exception {
+	public JobApplicationResponse getAllJobApplications(HttpServletRequest request, int jobId) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 		
 		// TODO

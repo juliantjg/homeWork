@@ -37,6 +37,7 @@ public interface JobApplicationService {
 	 * @throws Exception
 	 */
 	public JobApplicationResponse getAllJobApplications(
-			HttpServletRequest request
+			HttpServletRequest request,
+			int jobId
 	) throws Exception;
 }
