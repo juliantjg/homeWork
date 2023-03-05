@@ -65,6 +65,15 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		return null;
 	}
 	
+	@Override
+	public JobApplicationResponse getAllJobApplications(HttpServletRequest request) throws Exception {
+		User currUser = this.extractUserFromRequest(request);
+		
+		// TODO
+		
+		return null;
+	}
+	
 	/**
 	 * Helper function to get user from request
 	 * @param request

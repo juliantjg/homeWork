@@ -29,4 +29,14 @@ public interface JobApplicationService {
 			HttpServletRequest request, 
 			JobApplicationRequest jobApplicationRequest
 	) throws Exception;
+	
+	/**
+	 * Show all job applications for a job creator
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	public JobApplicationResponse getAllJobApplications(
+			HttpServletRequest request
+	) throws Exception;
 }
