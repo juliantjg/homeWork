@@ -1,5 +1,6 @@
 package com.homework.backend.jobapplication.model;
 
+import com.homework.backend.enums.JobApplicationStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,16 +15,18 @@ public class JobApplication {
 	private int id;
 	private int applicant_id;
 	private int job_id;
+
+	private JobApplicationStatus status;
 	
 	public JobApplication() {
 		
 	}
 	
-	public JobApplication(int id, int applicant_id, int job_id) {
+	public JobApplication(int applicant_id, int job_id, JobApplicationStatus status) {
 		super();
-		this.id = id;
 		this.applicant_id = applicant_id;
 		this.job_id = job_id;
+		this.status = status;
 	}
 	
 	public int getId() {
@@ -49,4 +52,8 @@ public class JobApplication {
 	public void setJob_id(int job_id) {
 		this.job_id = job_id;
 	}
+
+	public JobApplicationStatus getStatus() {return status; }
+
+	public void setStatus(JobApplicationStatus status) {this.status = status; }
 }
