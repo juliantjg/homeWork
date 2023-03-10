@@ -7,7 +7,10 @@ import java.util.Set;
 import com.homework.backend.enums.JobApplicationStatus;
 import com.homework.backend.job.model.Job;
 import com.homework.backend.job.repository.JobRepository;
+import com.homework.backend.job.response.GetAllJobsResponse;
+import com.homework.backend.job.response.JobResponse;
 import com.homework.backend.jobapplication.model.JobApplication;
+import com.homework.backend.jobapplication.response.GetAllJobApplicationsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -107,10 +110,49 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 	@Override
 	public JobApplicationResponse getAllJobApplications(HttpServletRequest request, int jobId) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+
+//		JobApplication jobApplication = jobApplicationRepository.findById(jobId);
+
+
+
+		Job job = jobRepository.findById(jobId);
+
+		if(currUser.getId() != job.getUser_id()){
+			throw new Exception("Cannot find applicants for you");
+		}
 		
+		System.out.println(job.getId());
+		System.out.println(job.getUser_id());
+
+		List<JobApplication> jobApplication = jobApplicationRepository.findAllByJobID(jobId);
+
+		if(jobApplication == null){
+			throw new Exception("Cannot find the job id");
+		}
+
+//		int jobOwner = job.getId();
+//		jobOwner = jobId;
+		System.out.println(job.getId());
+		System.out.println(job.getUser_id());
+		System.out.println(jobId);
+		jobApplicationRepository.findById(jobId);
+//		jobApplicationRepository.find
+		HashMap<String, Object> jobObject = new HashMap<String, Object>();
+		jobObject.put("Current Applications", jobApplication);
+		return new JobApplicationResponse(jobObject, "Job found", true);
+
+
+//		Job job = new Job();
+//
+//		if(currUser.getId() != job.getUser_id()){
+//			throw new Exception("You do not have any jobs");
+//		}
+//
+//		List<JobApplication> jobApplications = jobApplicationRepository.findAll();
+//		return new GetAllJobApplicationsResponse(jobApplications, "Register successful", true);
 		// TODO
 		
-		return null;
+//		return null;
 	}
 	
 	/**

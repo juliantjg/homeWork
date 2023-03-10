@@ -13,8 +13,10 @@ import java.util.List;
 @Repository
 public interface JobApplicationRepository  extends JpaRepository<JobApplication, Integer> {
 
-    JobApplication findById(int id);
+    JobApplication findById(int applicant_id);
 
+    @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.job_id = :job_id")
+    List<JobApplication> findAllByJobID(@Param("job_id") int job_id);
 
     @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.applicant_id = :applicant_id AND jobapplication.job_id = :job_id")
     List<JobApplication> filterByApplicantIdAndJobId(@Param("applicant_id") int applicant_id, @Param("job_id") int job_id);

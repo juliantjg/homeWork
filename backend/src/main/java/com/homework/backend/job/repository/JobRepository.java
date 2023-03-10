@@ -2,7 +2,10 @@ package com.homework.backend.job.repository;
 
 import java.util.Optional;
 
+import com.homework.backend.jobapplication.model.JobApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.homework.backend.job.model.Job;
@@ -14,4 +17,7 @@ public interface JobRepository extends JpaRepository<Job, Integer> {
 	Optional<Job> findByTitle(String title);
 
 	Job findById(int id);
+
+//	@Query("SELECT job FROM Job job WHERE jobapplication.applicant_id = :applicant_id AND jobapplication.job_id = :job_id")
+//	JobApplication findByApplicantIdAndJobId(@Param("applicant_id") int applicant_id, @Param("job_id") int job_id);
 }

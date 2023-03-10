@@ -2,13 +2,7 @@ package com.homework.backend.jobapplication.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.homework.backend.jobapplication.request.JobApplicationRequest;
 import com.homework.backend.jobapplication.response.JobApplicationResponse;
@@ -51,13 +45,13 @@ public class JobApplicationController {
 		}
 	}
 	
-	@PutMapping("/all")
+	@GetMapping("/all/{job_id}")
 	public ResponseEntity<?> all(
 		HttpServletRequest request,
-		@PathVariable("id") int id
+		@PathVariable("job_id") int jobID
 	) {
 		try {
-			return ResponseEntity.ok(service.getAllJobApplications(request, id));
+			return ResponseEntity.ok(service.getAllJobApplications(request, jobID));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobApplicationResponse(null, e.getMessage(), false));
 		}

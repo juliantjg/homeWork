@@ -1,6 +1,7 @@
 package com.homework.backend.jobapplication.service;
 
 import com.homework.backend.jobapplication.request.JobApplicationRequest;
+import com.homework.backend.jobapplication.response.GetAllJobApplicationsResponse;
 import com.homework.backend.jobapplication.response.JobApplicationResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
