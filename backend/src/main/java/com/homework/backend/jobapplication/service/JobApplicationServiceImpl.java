@@ -57,8 +57,6 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		if (!violations.isEmpty()) {
 		  throw new ConstraintViolationException(violations);
 		}
-		
-		// TODO
 
 		if (jobRepository.findById(jobApplicationRequest.getJob_id()) == null) {
 			throw new Exception("Job does not exists");
@@ -69,15 +67,10 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		}
 
 		JobApplication jobApplications = jobApplicationRepository.findByApplicantIdAndJobId(jobApplicationRequest.getApplicant_id(), jobApplicationRequest.getJob_id());
-//		jobApplicationRepository.save(jobApplications);
-		System.out.println(jobApplications);
 
 		if(jobApplications != null){
 			throw new Exception("You have already applied!" + " " + "Job application status is: " + jobApplications.getStatus());
 		}
-//		if(jobApplications.size() > 0){
-//			throw new Exception("You have already applied");
-//		}
 
 		var jobApplication = new JobApplication(
 				jobApplicationRequest.getApplicant_id(),
@@ -111,48 +104,22 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 	public JobApplicationResponse getAllJobApplications(HttpServletRequest request, int jobId) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 
-//		JobApplication jobApplication = jobApplicationRepository.findById(jobId);
-
-
-
 		Job job = jobRepository.findById(jobId);
+		List<JobApplication> jobApplication = jobApplicationRepository.findAllByJobID(jobId);
 
 		if(currUser.getId() != job.getUser_id()){
 			throw new Exception("Cannot find applicants for you");
 		}
-		
-		System.out.println(job.getId());
-		System.out.println(job.getUser_id());
-
-		List<JobApplication> jobApplication = jobApplicationRepository.findAllByJobID(jobId);
 
 		if(jobApplication == null){
 			throw new Exception("Cannot find the job id");
 		}
 
-//		int jobOwner = job.getId();
-//		jobOwner = jobId;
-		System.out.println(job.getId());
-		System.out.println(job.getUser_id());
-		System.out.println(jobId);
 		jobApplicationRepository.findById(jobId);
-//		jobApplicationRepository.find
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("Current Applications", jobApplication);
 		return new JobApplicationResponse(jobObject, "Job found", true);
 
-
-//		Job job = new Job();
-//
-//		if(currUser.getId() != job.getUser_id()){
-//			throw new Exception("You do not have any jobs");
-//		}
-//
-//		List<JobApplication> jobApplications = jobApplicationRepository.findAll();
-//		return new GetAllJobApplicationsResponse(jobApplications, "Register successful", true);
-		// TODO
-		
-//		return null;
 	}
 	
 	/**
