@@ -82,8 +82,8 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		jobApplicationRepository.save(jobApplication);
 		HashMap<String, Object> jobApplicationObject = new HashMap<>();
 		jobApplicationObject.put("jobApplicationObject", jobApplication);
-		return new JobApplicationResponse(jobApplicationObject, "Job Applied", true);
 
+		return new JobApplicationResponse(jobApplicationObject, "Job Applied", true);
 	}
 	
 	@Override
@@ -96,10 +96,6 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		  throw new ConstraintViolationException(violations);
 		}
 
-		// check the application id
-		//
-
-//		Job job = jobRepository.findById(jobApplicationRequest.getJob_id());
 		JobApplication jobApplication = jobApplicationRepository.findById(id);
 
 		if(jobApplication == null){
@@ -115,16 +111,14 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		if(jobApplication.getStatus() == JobApplicationStatus.ACCEPTED || jobApplication.getStatus() == JobApplicationStatus.REJECTED){
 			throw new Exception("Cannot change application status. Application is " + jobApplication.getStatus());
 		}
-//
-//		jobApplication.setId(jobApplication.getId());
-//		jobApplication.setApplicant_id(jobApplicationRequest.getApplicant_id());
-//		jobApplication.setJob_id(jobApplication.getJob_id());
+
 		jobApplication.setStatus(updateJobApplicationRequest.getStatus());
 		jobApplicationRepository.save(jobApplication);
+
 		HashMap<String, Object> jobApplicationObject = new HashMap<String, Object>();
 		jobApplicationObject.put("jobApplication", jobApplication);
+
 		return new JobApplicationResponse(jobApplicationObject, "Job application updated successfully.", true);
-//		return null;
 	}
 	
 	@Override
@@ -146,6 +140,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		jobApplicationRepository.findById(jobId);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("Current Applications", jobApplication);
+
 		return new JobApplicationResponse(jobObject, "Job found", true);
 	}
 	
