@@ -1,5 +1,6 @@
 package com.homework.backend.jobapplication.controller;
 
+import com.homework.backend.jobapplication.request.UpdateJobApplicationRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,13 +34,14 @@ public class JobApplicationController {
 		}
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<?> update(
-		HttpServletRequest request, 
-		@RequestBody JobApplicationRequest jobApplicationRequest
+		HttpServletRequest request,
+		@PathVariable("id") int id,
+		@RequestBody UpdateJobApplicationRequest jobApplicationRequest
 	) {
 		try {
-			return ResponseEntity.ok(service.updateJobApplicationStatus(request, jobApplicationRequest));
+			return ResponseEntity.ok(service.updateJobApplicationStatus(request, id, jobApplicationRequest));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobApplicationResponse(null, e.getMessage(), false));
 		}

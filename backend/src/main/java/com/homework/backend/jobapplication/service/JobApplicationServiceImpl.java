@@ -10,6 +10,7 @@ import com.homework.backend.job.repository.JobRepository;
 import com.homework.backend.job.response.GetAllJobsResponse;
 import com.homework.backend.job.response.JobResponse;
 import com.homework.backend.jobapplication.model.JobApplication;
+import com.homework.backend.jobapplication.request.UpdateJobApplicationRequest;
 import com.homework.backend.jobapplication.response.GetAllJobApplicationsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,17 +88,43 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 	
 	@Override
 	public JobApplicationResponse updateJobApplicationStatus(HttpServletRequest request,
-			JobApplicationRequest jobApplicationRequest) throws Exception {
+			int id, UpdateJobApplicationRequest updateJobApplicationRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 		
-		Set<ConstraintViolation<JobApplicationRequest>> violations = validator.validate(jobApplicationRequest);
+		Set<ConstraintViolation<UpdateJobApplicationRequest>> violations = validator.validate(updateJobApplicationRequest);
 		if (!violations.isEmpty()) {
 		  throw new ConstraintViolationException(violations);
 		}
-		
-		// TODO
-		
-		return null;
+
+		// check the application id
+		//
+
+//		Job job = jobRepository.findById(jobApplicationRequest.getJob_id());
+		JobApplication jobApplication = jobApplicationRepository.findById(id);
+
+		if(jobApplication == null){
+			throw new Exception("Application does not exist");
+		}
+
+		Job job = jobRepository.findById(jobApplication.getJob_id());
+
+		if(currUser.getId() != job.getUser_id()){
+			throw new Exception("Unauthorized! Access denied");
+		}
+
+		if(jobApplication.getStatus() == JobApplicationStatus.ACCEPTED || jobApplication.getStatus() == JobApplicationStatus.REJECTED){
+			throw new Exception("Cannot change application status. Application is " + jobApplication.getStatus());
+		}
+//
+//		jobApplication.setId(jobApplication.getId());
+//		jobApplication.setApplicant_id(jobApplicationRequest.getApplicant_id());
+//		jobApplication.setJob_id(jobApplication.getJob_id());
+		jobApplication.setStatus(updateJobApplicationRequest.getStatus());
+		jobApplicationRepository.save(jobApplication);
+		HashMap<String, Object> jobApplicationObject = new HashMap<String, Object>();
+		jobApplicationObject.put("jobApplication", jobApplication);
+		return new JobApplicationResponse(jobApplicationObject, "Job application updated successfully.", true);
+//		return null;
 	}
 	
 	@Override
@@ -105,21 +132,21 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		User currUser = this.extractUserFromRequest(request);
 
 		Job job = jobRepository.findById(jobId);
+
+		if(job == null){
+			throw new Exception("Cannot find the job ID");
+		}
+
 		List<JobApplication> jobApplication = jobApplicationRepository.findAllByJobID(jobId);
 
 		if(currUser.getId() != job.getUser_id()){
-			throw new Exception("Cannot find applicants for you");
-		}
-
-		if(jobApplication == null){
-			throw new Exception("Cannot find the job id");
+			throw new Exception("You do not have permission");
 		}
 
 		jobApplicationRepository.findById(jobId);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("Current Applications", jobApplication);
 		return new JobApplicationResponse(jobObject, "Job found", true);
-
 	}
 	
 	/**

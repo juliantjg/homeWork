@@ -1,6 +1,7 @@
 package com.homework.backend.jobapplication.service;
 
 import com.homework.backend.jobapplication.request.JobApplicationRequest;
+import com.homework.backend.jobapplication.request.UpdateJobApplicationRequest;
 import com.homework.backend.jobapplication.response.GetAllJobApplicationsResponse;
 import com.homework.backend.jobapplication.response.JobApplicationResponse;
 
@@ -27,8 +28,9 @@ public interface JobApplicationService {
 	 * @throws Exception
 	 */
 	public JobApplicationResponse updateJobApplicationStatus(
-			HttpServletRequest request, 
-			JobApplicationRequest jobApplicationRequest
+			HttpServletRequest request,
+			int id,
+			UpdateJobApplicationRequest jobApplicationRequest
 	) throws Exception;
 	
 	/**
