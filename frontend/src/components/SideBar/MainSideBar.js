@@ -23,14 +23,14 @@ function MainSideBar() {
                         <center>homeWork</center>
                         <hr />
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
+                            <Link to="/home" class="nav-link px-0 align-middle">
                                 &nbsp;<i class="fas fa-home"></i> &nbsp; <small>Home</small>&nbsp;&nbsp;
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
+                            <Link to="/hunt-jobs" class="nav-link px-0 align-middle">
                                 &nbsp;<i class="fas fa-briefcase"></i> &nbsp; <small>Hunt Jobs</small>&nbsp;&nbsp;
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">

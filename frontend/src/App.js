@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import store from "./store";
 import Home from "./components/Home/Home";
 import Register from "./components/Auth/Register";
+import HuntJobsDashboard from "./components/HuntJobs/HuntJobsDashboard";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/hunt-jobs" element={<HuntJobsDashboard />} />
         </Routes>
       </Router>
     </Provider>
