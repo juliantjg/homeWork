@@ -20,29 +20,31 @@ function MainSideBar() {
                 </a>
                 <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-left align-items-left">
                     <li>
+                        <center>homeWork</center>
+                        <hr />
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fas fa-home"></i> &nbsp; <small>Home</small>
+                                &nbsp;<i class="fas fa-home"></i> &nbsp; <small>Home</small>&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fas fa-briefcase"></i> &nbsp; <small>Jobs</small>
+                                &nbsp;<i class="fas fa-briefcase"></i> &nbsp; <small>Hunt Jobs</small>&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fas fa-envelope"></i> &nbsp; <small>Applications</small>
+                                &nbsp;<i class="fas fa-envelope"></i> &nbsp; <small>Applications</small>&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fas fa-user"></i> &nbsp; <small>Profile</small>
+                                &nbsp;<i class="fas fa-user"></i> &nbsp; <small>Profile</small>&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
                             <a href="" class="nav-link px-0 align-middle" onClick={logout()}>
-                                <i class="fas fa-power-off"></i> &nbsp; <small>Logout</small>
+                                &nbsp;<i class="fas fa-power-off"></i> &nbsp; <small>Logout</small>&nbsp;&nbsp;
                             </a>
                         </li>
                     </li>
