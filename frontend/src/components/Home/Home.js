@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
+import MainSideBar from '../SideBar/MainSideBar';
 
 function Home() {
     const navigate = useNavigate();
@@ -31,18 +32,23 @@ function Home() {
 
     return (
         <div class="container-fluid px-0">
-            <div id="page-size">
-                <div class="col-md-12">
-                    <div class="row pt-5">
-                        <center>
-                            Home Page
-                            <br />
-                            <a href="" onClick={logout()}><i class="fas fa-power-off"></i> Logout</a>
-                        </center>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <MainSideBar />
+
+                    <div class="col-sm p-3 min-vh-100">
+                        <div id="page-size">
+                            <center>
+                                Home Page
+                                <br />
+                                <a href="" onClick={logout()}><i class="fas fa-power-off"></i> Logout</a>
+                            </center>
+                        </div>
+                        <Footer />
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

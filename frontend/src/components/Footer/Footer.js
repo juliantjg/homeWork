@@ -20,7 +20,7 @@ function Footer() {
 
                             <p>
                                 <small className="d-flex justify-content-center">
-                                    <b>homeWork &copy; {year}</b>
+                                    <b>homeWork @ {year}</b>
                                 </small>
                             </p>
                         </div>
@@ -28,6 +28,7 @@ function Footer() {
                     <Row xs="auto" className="d-flex justify-content-center">
                         Project by <a href="https://www.linkedin.com/in/juliantj/" target="_blank" id="footerLinks">Julian</a> & <a href="https://www.linkedin.com/in/muhammad-umer-tariq-bbaa91182/" target="_blank" id="footerLinks">Umer</a>
                     </Row>
+                    <br />
                 </Container>
             </footer>
         </div>

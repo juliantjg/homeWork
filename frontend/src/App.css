@@ -1,9 +1,13 @@
 body {
   background-color: lightblue !important;
   background-attachment: fixed;
-  font-size: 22px !important;
+  font-size: 27px !important;
 }
 
 #page-size {
-  min-height: 80vh !important;
+  min-height: 100vh !important;
+}
+
+#logoutButton {
+  margin-top: auto;
 }
