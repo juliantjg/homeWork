@@ -42,7 +42,7 @@ function Home() {
                             <center>
                                 Home Page
                                 <br />
-                                <a href="" onClick={logout()}><i class="fas fa-power-off"></i> Logout</a>
+
                             </center>
                         </div>
                         <Footer />

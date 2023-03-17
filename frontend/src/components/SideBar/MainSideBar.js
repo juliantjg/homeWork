@@ -1,7 +1,17 @@
 import React from "react";
+import { useHistory, Link, useNavigate } from 'react-router-dom';
 import { Row, Col, Container } from "react-bootstrap";
 
 function MainSideBar() {
+    const navigate = useNavigate();
+
+    function logout() {
+        localStorage.clear("emailHomework")
+        localStorage.clear("tokenHomework")
+
+        navigate('/login')
+    }
+
     return (
         <div class="col-sm-auto bg-light sticky-top">
             <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-left sticky-top">
@@ -31,7 +41,7 @@ function MainSideBar() {
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
+                            <a href="" class="nav-link px-0 align-middle" onClick={logout()}>
                                 <i class="fas fa-power-off"></i> &nbsp; <small>Logout</small>
                             </a>
                         </li>

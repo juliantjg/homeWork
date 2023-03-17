@@ -115,7 +115,7 @@ function Register() {
                                         <input type="password" class="form-control input-lg" required onChange={(e) => setPassword(e.target.value)}></input>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="exampleFormControlInput1">Confirm Password</label>
+                                        <label for="exampleFormControlInput1">Confirm</label>
                                         <input type="password" class="form-control input-lg" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
                                     </div>
                                 </div>
