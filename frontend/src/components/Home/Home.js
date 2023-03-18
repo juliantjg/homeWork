@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
+import NavBar from '../SideBar/NavBar';
 
 function Home() {
     const navigate = useNavigate();
@@ -30,14 +31,17 @@ function Home() {
                 <div class="row">
                     <MainSideBar />
 
-                    <div class="col-sm p-3 min-vh-100">
+                    <div class="col-sm min-vh-100">
                         <div id="page-size">
+
                             <center>
                                 Home Page
                                 <br />
 
                             </center>
+
                         </div>
+                        <NavBar />
                         <Footer />
                     </div>
                 </div>

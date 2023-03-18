@@ -23,27 +23,27 @@ function MainSideBar() {
                         <center>homeWork</center>
                         <hr />
                         <li>
-                            <Link to="/home" class="nav-link px-0 align-middle">
+                            <Link to="/home" class="nav-link px-0 align-middle" id="sideBarButtons">
                                 &nbsp;<i class="fas fa-home"></i> &nbsp; <small>Home</small>&nbsp;&nbsp;
                             </Link>
                         </li>
                         <li>
-                            <Link to="/hunt-jobs" class="nav-link px-0 align-middle">
+                            <Link to="/hunt-jobs" class="nav-link px-0 align-middle" id="sideBarButtons">
                                 &nbsp;<i class="fas fa-briefcase"></i> &nbsp; <small>Hunt Jobs</small>&nbsp;&nbsp;
                             </Link>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
+                            <a href="#" class="nav-link px-0 align-middle" id="sideBarButtons">
                                 &nbsp;<i class="fas fa-envelope"></i> &nbsp; <small>Applications</small>&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
+                            <a href="#" class="nav-link px-0 align-middle" id="sideBarButtons">
                                 &nbsp;<i class="fas fa-user"></i> &nbsp; <small>Profile</small>&nbsp;&nbsp;
                             </a>
                         </li>
                         <li>
-                            <a href="" class="nav-link px-0 align-middle" onClick={logout()}>
+                            <a href="" class="nav-link px-0 align-middle" onClick={logout()} id="sideBarButtons">
                                 &nbsp;<i class="fas fa-power-off"></i> &nbsp; <small>Logout</small>&nbsp;&nbsp;
                             </a>
                         </li>

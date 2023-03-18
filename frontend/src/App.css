@@ -11,3 +11,11 @@ body {
 #logoutButton {
   margin-top: auto;
 }
+
+#sideBarButtons {
+  color: black;
+}
+
+#navbar {
+  background-color: transparent;
+}
