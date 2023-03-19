@@ -38,7 +38,7 @@ public class JobServiceImpl implements JobService {
 	public GetAllJobsResponse getAllJobs(HttpServletRequest request) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 		List<Job> jobs = jobRepository.findAll();
-		return new GetAllJobsResponse(jobs, "Register successful", true);
+		return new GetAllJobsResponse(jobs, "All jobs retrieved", true);
 	}
 
 	@Override
