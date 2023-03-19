@@ -23,8 +23,6 @@ function Login() {
     const userRegister = useSelector(state => state.userRegister)
     const { error: errorRegister, loading: loadingRegister, userRegister: userRegisterMessage } = userRegister
 
-    console.log(error);
-
     function notifyError() {
         // toast(error);
         toast.error(error, {

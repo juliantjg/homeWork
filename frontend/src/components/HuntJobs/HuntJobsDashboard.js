@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
+import NavBar from '../SideBar/NavBar';
+import HuntJobsList from './HuntJobsList';
 
 function HuntJobsDashboard() {
     const navigate = useNavigate();
@@ -33,11 +35,13 @@ function HuntJobsDashboard() {
                     <div class="col-sm p-3 min-vh-100">
                         <div id="page-size">
                             <center>
-                                Hunt Jobs
-                                <br />
-
+                                <h2>Hunt Jobs</h2>
+                                <hr />
                             </center>
+
+                            <HuntJobsList />
                         </div>
+                        <NavBar />
                         <Footer />
                     </div>
                 </div>

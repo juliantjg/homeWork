@@ -43,7 +43,7 @@ function MainSideBar() {
                             </a>
                         </li>
                         <li>
-                            <a href="" class="nav-link px-0 align-middle" onClick={logout()} id="sideBarButtons">
+                            <a href="" class="nav-link px-0 align-middle" onClick={() => logout()} id="sideBarButtons">
                                 &nbsp;<i class="fas fa-power-off"></i> &nbsp; <small>Logout</small>&nbsp;&nbsp;
                             </a>
                         </li>

@@ -35,6 +35,7 @@ export const login = (email, password) => async (dispatch) => {
             config
         )
 
+
         // the regular success dispatch, with payload data from the axios call above
         dispatch({
             type: USER_LOGIN_SUCCESS,
@@ -47,7 +48,6 @@ export const login = (email, password) => async (dispatch) => {
         localStorage.setItem('emailHomework', email)
 
     } catch (error) {
-        console.log(error.response.data)
         dispatch({
             type: USER_LOGIN_FAIL,
             payload: error.response && error.response.data.message

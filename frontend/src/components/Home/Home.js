@@ -31,12 +31,12 @@ function Home() {
                 <div class="row">
                     <MainSideBar />
 
-                    <div class="col-sm min-vh-100">
+                    <div class="col-sm p-3 min-vh-100">
                         <div id="page-size">
 
                             <center>
-                                Home Page
-                                <br />
+                                <h2>Home</h2>
+                                <hr />
 
                             </center>
 
