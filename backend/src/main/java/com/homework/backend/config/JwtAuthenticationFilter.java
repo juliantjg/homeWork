@@ -41,44 +41,59 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		@NonNull HttpServletResponse response, 
 		@NonNull FilterChain filterChain
 	) throws ServletException, IOException {
+//		response.setHeader("Access-Control-Allow-Origin", "*");
+//		response.setHeader("Access-Control-Allow-Headers", "*");
+		
+		response.setHeader("Access-Control-Allow-Origin", "*");
+	    response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+	    response.setHeader("Access-Control-Max-Age", "3600");
+	    response.setHeader("Access-Control-Allow-Headers", "Authorization, content-type, xsrf-token");
+	    response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
+
 		// Fetch auth token from request
 		final String authHeader = request.getHeader("Authorization");
 		final String jwt;
 		final String userEmail;
 		
-		// 1. Start with extracting the JSON token
-		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-			// Check whether the token is valid (e.g. starts with Bearer. Otherwise just return
-			filterChain.doFilter(request, response);
-			return;
+		if (request.getMethod().equals("OPTIONS")) {
+			SecurityContextHolder.getContext().setAuthentication(null);
+//			filterChain.doFilter(request, response);
 		}
-		// Substring 7 since after "Bearer " the token string starting index is 7
-		jwt = authHeader.substring(7);
-		
-		// 2. Now we check the user email
-		userEmail = jwtService.extractUsername(jwt);
-		
-		// Use SecurityContextHolder to check whether the user has been authenticated or not
-		if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			// If user hasn't yet authenticate (also email isn't null)
-			// Then we can check if the user exist in the database
-			UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-			if (jwtService.isTokenValid(jwt,  userDetails)) {
-				// Now if the token is valid, we need to update the security context and send the request to the dispatcher
-				UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-					userDetails,
-					null,
-					userDetails.getAuthorities()
-				);
-				authToken.setDetails(
-					new WebAuthenticationDetailsSource().buildDetails(request)
-				);
-				
-				// Finally, we update the security context holder
-				SecurityContextHolder.getContext().setAuthentication(authToken);
+		else {
+			// 1. Start with extracting the JSON token
+			if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+				// Check whether the token is valid (e.g. starts with Bearer. Otherwise just return
+				filterChain.doFilter(request, response);
+				return;
 			}
+			// Substring 7 since after "Bearer " the token string starting index is 7
+			jwt = authHeader.substring(7);
+			
+			// 2. Now we check the user email
+			userEmail = jwtService.extractUsername(jwt);
+	
+			// Use SecurityContextHolder to check whether the user has been authenticated or not
+			if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+				// If user hasn't yet authenticate (also email isn't null)
+				// Then we can check if the user exist in the database
+				UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+				if (jwtService.isTokenValid(jwt,  userDetails)) {
+					// Now if the token is valid, we need to update the security context and send the request to the dispatcher
+					UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+						userDetails,
+						null,
+						userDetails.getAuthorities()
+					);
+					authToken.setDetails(
+						new WebAuthenticationDetailsSource().buildDetails(request)
+					);
+					
+					// Finally, we update the security context holder
+					SecurityContextHolder.getContext().setAuthentication(authToken);
+				}
+			}
+			filterChain.doFilter(request, response);
 		}
-		filterChain.doFilter(request, response);
 	}
 
 }
