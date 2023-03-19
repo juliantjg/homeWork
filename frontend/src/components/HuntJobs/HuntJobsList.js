@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import { getAllJobsAction } from '../../actions/jobActions';
+import HuntJobsItem from './HuntJobsItem';
 
 function HuntJobsList() {
     const navigate = useNavigate();
@@ -21,28 +22,30 @@ function HuntJobsList() {
     }, [])
 
     return (
-        <div class="row">
-            <div class="col-3">
-                {
-                    jobs ?
-                        (
-                            <div>
+        <div>
+            {
+                jobs ?
+                    (
+                        <div>
+                            <div class="row">
                                 {jobs.map(job => (
-                                    <Row>
-                                        {job.title}
-                                    </Row>
+
+                                    <div class="col-md-4">
+                                        <HuntJobsItem job={job} />
+                                        <br />
+                                    </div>
                                 ))}
                             </div>
-                        )
-                        :
-                        (
-                            <div>
-                                {error}
-                            </div>
-                        )
-                }
-            </div>
-        </div>
+                        </div>
+                    )
+                    :
+                    (
+                        <div>
+                            {error}
+                        </div>
+                    )
+            }
+        </div >
     );
 }
 

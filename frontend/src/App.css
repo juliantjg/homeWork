@@ -19,3 +19,11 @@ body {
 #navbar {
   background-color: transparent;
 }
+
+#jobCard { 
+  transition: all .2s ease-in-out; 
+  }
+  
+#jobCard:hover { 
+  transform: scale(1.06); 
+}

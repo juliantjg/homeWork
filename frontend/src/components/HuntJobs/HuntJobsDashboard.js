@@ -38,8 +38,9 @@ function HuntJobsDashboard() {
                                 <h2>Hunt Jobs</h2>
                                 <hr />
                             </center>
-
-                            <HuntJobsList />
+                            <div class="p-5">
+                                <HuntJobsList />
+                            </div>
                         </div>
                         <NavBar />
                         <Footer />
