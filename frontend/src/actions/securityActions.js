@@ -46,6 +46,8 @@ export const login = (email, password) => async (dispatch) => {
         // now finally store the userInfo into local storage
         localStorage.setItem('tokenHomework', data.data.token)
         localStorage.setItem('emailHomework', email)
+        localStorage.setItem('userIdHomework', data.data.user_id)
+        localStorage.setItem('firstnameHomework', data.data.first_name)
 
     } catch (error) {
         dispatch({

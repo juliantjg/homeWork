@@ -36,6 +36,7 @@ function HuntJobsDashboard() {
                         <div id="page-size">
                             <center>
                                 <h2>Jobs Marketplace</h2>
+                                <small>Seek out various jobs posted by employers</small>
                                 <hr />
                             </center>
                             <div class="p-5">

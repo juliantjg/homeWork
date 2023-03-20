@@ -17,6 +17,8 @@ function JobDetails(id) {
     const { loading, error, job } = jobDetails
     // console.log(job)
 
+    const authUserId = parseInt(localStorage.getItem("userIdHomework"))
+
     useEffect(() => {
         dispatch(getJobDetailsAction(id.id));
     }, [id.id])
@@ -34,14 +36,20 @@ function JobDetails(id) {
                                         <div>
                                             <div class="card-body">
                                                 <h1>{job.job.title}</h1>
+                                                <small>${job.job.salary}/hr</small>
+                                                <div align="right">
+                                                    {
+                                                        (authUserId === job.job.user_id) ?
+                                                            (
+                                                                <small>Posted by you</small>
+                                                            )
+                                                            :
+                                                            (
+                                                                <small>Posted by:</small>
+                                                            )
+                                                    }
 
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <small>${job.job.salary}/hr</small>
-                                                    </div>
-                                                    <div class="col-md-8" align="right">
-                                                        <small>Posted by:</small>
-                                                    </div>
+
                                                 </div>
                                                 <hr />
                                                 <b>Location:</b> {job.job.location}
@@ -51,9 +59,29 @@ function JobDetails(id) {
                                                 <b>Description:</b> {job.job.description}
                                             </div>
                                             <div class="card-footer">
-                                                <button type="button" class="btn btn-block btn-secondary">
-                                                    Apply now
-                                                </button>
+                                                {
+                                                    (authUserId === job.job.user_id) ?
+                                                        (
+                                                            <div class="row">
+                                                                <div class="col-md-6 p-1">
+                                                                    <button type="button" class="btn btn-block btn-secondary">
+                                                                        Update details
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-md-6 p-1">
+                                                                    <button type="button" class="btn btn-block btn-danger">
+                                                                        Delete job
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                        :
+                                                        (
+                                                            <button type="button" class="btn btn-block btn-secondary">
+                                                                Apply now
+                                                            </button>
+                                                        )
+                                                }
                                             </div>
                                         </div>
                                     ) : null
