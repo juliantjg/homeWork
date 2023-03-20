@@ -1,7 +1,7 @@
 body {
   background-color: lightblue !important;
   background-attachment: fixed;
-  font-size: 27px !important;
+  font-size: 22px !important;
 }
 
 #page-size {
@@ -20,10 +20,10 @@ body {
   background-color: transparent;
 }
 
-#jobCard { 
-  transition: all .2s ease-in-out; 
-  }
-  
-#jobCard:hover { 
-  transform: scale(1.06); 
+#jobCard {
+  transition: all .2s ease-in-out;
+}
+
+#jobCard:hover {
+  transform: scale(1.06);
 }

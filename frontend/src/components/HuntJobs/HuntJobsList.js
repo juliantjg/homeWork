@@ -17,6 +17,8 @@ function HuntJobsList() {
     const getAllJobs = useSelector(state => state.getAllJobs)
     const { error, loading, jobs } = getAllJobs
 
+    console.log(loading)
+
     useEffect(() => {
         dispatch(getAllJobsAction());
     }, [])
@@ -24,24 +26,36 @@ function HuntJobsList() {
     return (
         <div>
             {
-                jobs ?
+                !loading ?
                     (
                         <div>
-                            <div class="row">
-                                {jobs.map(job => (
+                            {
+                                jobs ?
+                                    (
+                                        <div class="row">
+                                            {jobs.map(job => (
 
-                                    <div class="col-md-4">
-                                        <HuntJobsItem job={job} />
-                                        <br />
-                                    </div>
-                                ))}
-                            </div>
+                                                <div class="col-md-4">
+                                                    <HuntJobsItem job={job} />
+                                                    <br />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        <div>
+                                            {error}
+                                        </div>
+                                    )
+                            }
+
                         </div>
                     )
                     :
                     (
                         <div>
-                            {error}
+                            Loading
                         </div>
                     )
             }
