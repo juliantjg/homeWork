@@ -27,3 +27,8 @@ body {
 #jobCard:hover {
   transform: scale(1.06);
 }
+
+#huntJobItemContent {
+  color: black;
+  text-decoration: none;
+}

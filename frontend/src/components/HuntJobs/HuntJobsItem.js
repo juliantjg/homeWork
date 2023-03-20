@@ -12,19 +12,24 @@ import { getAllJobsAction } from '../../actions/jobActions';
 function HuntJobsItem(job) {
     console.log(job)
     return (
-        <Link to={`/job-details/${job.job.id}`}>
-            <div class="card p-2" id="jobCard">
-                <img class="card-img-top" src="https://i.imgur.com/041jkF8.png" alt="Card image cap" />
+
+        <div class="card" id="jobCard">
+            <Link to={`/job-details/${job.job.id}`} id="huntJobItemContent">
                 <div class="p-2">
-                    <b>{job.job.title}</b> <br />
-                    <small>
-                        {job.job.location}
-                        <br />
-                        ${job.job.salary}/hr
-                    </small>
+                    <img class="card-img-top" src="https://i.imgur.com/041jkF8.png" alt="Card image cap" />
+                    <div class="p-2">
+                        <b>{job.job.title}</b> <br />
+                        <small>
+                            ${job.job.salary}/hr
+                        </small>
+                    </div>
                 </div>
-            </div>
-        </Link>
+                <div class="card-footer">
+                    <small>{job.job.location}</small>
+                </div>
+            </Link>
+        </div>
+
     );
 }
 
