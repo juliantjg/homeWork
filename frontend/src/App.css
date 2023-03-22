@@ -17,7 +17,13 @@ body {
 }
 
 #navbar {
-  background-color: transparent;
+  background-color: white;
+}
+
+#notificationBell {
+  bottom: 15px;
+  right: 15px;
+  position: fixed;
 }
 
 #jobCard {

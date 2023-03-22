@@ -12,15 +12,11 @@ import Loader from '../Utils/Loader';
 function NavBar() {
 
     return (
-        <nav class="navbar navbar-secondary fixed-bottom pr-4" id="navbar">
-            <ul class="nav navbar-nav">
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <button class="btn btn-light">
-                    <i class="fas fa-bell fa-3x"></i>
-                </button>
-            </ul>
-        </nav>
+        <div id="notificationBell">
+            <button class="btn btn-light">
+                <i class="fas fa-bell fa-3x"></i>
+            </button>
+        </div>
     );
 }
 
