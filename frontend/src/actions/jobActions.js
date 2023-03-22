@@ -7,6 +7,10 @@ import {
     JOB_DETAILS_REQUEST,
     JOB_DETAILS_SUCCESS,
     JOB_DETAILS_FAIL,
+
+    UPDATE_JOB_DETAILS_REQUEST,
+    UPDATE_JOB_DETAILS_SUCCESS,
+    UPDATE_JOB_DETAILS_FAIL,
 } from "../actions/types";
 import { useNavigate, withRouter } from "react-router-dom";
 import { backendUrl } from "../securityUtils/vars";
@@ -115,3 +119,60 @@ export const getJobDetailsAction = (id) => async (dispatch, getState) => {
         })
     }
 };
+
+export const updateJobDetailsAction = (jobDetails, jobId) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: UPDATE_JOB_DETAILS_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        var config = null
+        var token = null
+
+        if (typeof userInfo === 'object') {
+            token = userInfo.data.token
+        }
+        else if (typeof userInfo === 'string') {
+            token = userInfo
+        }
+
+        if (userInfo == null) {
+            config = null
+        }
+        else {
+            // we're passing header into our post request
+            config = {
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        }
+
+        // this is the regular axios call, but we're now passing in username, password and the config above
+        const { data } = await axios.put(
+            backendUrl + `api/job/update/${jobId}`,
+            jobDetails,
+            config
+        )
+
+        // the regular success dispatch, with payload data from the axios call above
+        dispatch({
+            type: UPDATE_JOB_DETAILS_SUCCESS,
+            payload: data.message
+        })
+
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_JOB_DETAILS_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+}

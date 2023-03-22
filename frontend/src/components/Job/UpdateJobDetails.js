@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
-import { getJobDetailsAction } from '../../actions/jobActions';
+import { updateJobDetailsAction } from '../../actions/jobActions';
 
 function UpdateJobDetails(job) {
     const navigate = useNavigate();
@@ -19,7 +19,18 @@ function UpdateJobDetails(job) {
     const [postcode, setPostcode] = useState(job.job.postcode);
     const [description, setDescription] = useState(job.job.description);
 
-    const authUserId = parseInt(localStorage.getItem("userIdHomework"))
+    const submitHandler = (e) => {
+        e.preventDefault()
+
+        var jobDetails = {
+            title: title,
+            salary: salary,
+            location: location,
+            postcode: postcode,
+            description: description
+        }
+        dispatch(updateJobDetailsAction(jobDetails, job.job.id))
+    }
 
     return (
 
@@ -29,8 +40,18 @@ function UpdateJobDetails(job) {
                     job.job ?
                         (
                             <div class="card-body">
-                                <div class="form">
+                                <div class="form" onSubmit={submitHandler}>
                                     <div class="form-group row">
+                                        <Form.Group className="mb-3" controlId="title">
+                                            <Form.Control
+                                                required
+                                                type="text"
+                                                onChange={(e) => setTitle(e.target.value)}
+                                                class="form-control form-control-lg"
+                                                id="updateJobTitleText"
+                                                value={title}
+                                            />
+                                        </Form.Group>
                                         <div class="col-md-8">
                                             <label for="updateJobTitleText"><small>Title</small></label><br />
                                             <input
@@ -96,7 +117,7 @@ function UpdateJobDetails(job) {
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-block btn-dark">Submit</button>
+                                    <button type="submit" onClick={submitHandler} class="btn btn-block btn-dark">Submit</button>
                                 </div>
                             </div>
                         ) : null
