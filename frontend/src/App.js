@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import store from "./store";
 import Home from "./components/Home/Home";
 import Register from "./components/Auth/Register";
+import HuntJobsDashboard from "./components/HuntJobs/HuntJobsDashboard";
+import JobDetails from "./components/Job/JobDetails";
+import JobDetailsPage from "./components/Job/JobDetailsPage";
 
 function App() {
   return (
@@ -17,6 +20,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/hunt-jobs" element={<HuntJobsDashboard />} />
+          <Route path="/job-details/:id" element={<JobDetailsPage />} />
         </Routes>
       </Router>
     </Provider>

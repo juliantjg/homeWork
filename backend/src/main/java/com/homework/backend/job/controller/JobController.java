@@ -18,8 +18,8 @@ import com.homework.backend.job.service.JobService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/job")
 public class JobController {
 	

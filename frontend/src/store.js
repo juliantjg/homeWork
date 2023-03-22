@@ -2,10 +2,15 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 // import rootReducer from "./reducers";
 import { userLoginReducers, userRegisterReducers } from "./reducers/securityReducers";
+import { getAllJobsReducer, jobDetailsReducer, updateJobDetailsReducers } from "./reducers/jobReducers";
 
 const reducer = combineReducers({
     userLogin: userLoginReducers,
     userRegister: userRegisterReducers,
+
+    getAllJobs: getAllJobsReducer,
+    jobDetails: jobDetailsReducer,
+    updateJobDetails: updateJobDetailsReducers,
 })
 
 const userInfoFromStorage = localStorage.getItem('tokenHomework') ?

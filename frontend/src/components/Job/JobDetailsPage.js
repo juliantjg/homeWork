@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link, useNavigate } from 'react-router-dom';
+import { useHistory, Link, useNavigate, useParams } from 'react-router-dom';
 import { login } from '../../actions/securityActions';
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,10 +8,12 @@ import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import NavBar from '../SideBar/NavBar';
+import JobDetails from './JobDetails';
 
-function Home() {
+function JobDetailsPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const match = useParams()
 
     // userLogin is from store.js
     const userLogin = useSelector(state => state.userLogin)
@@ -33,13 +35,15 @@ function Home() {
 
                     <div class="col-sm p-3 min-vh-100">
                         <div id="page-size">
-
                             <center>
-                                <h2>Home</h2>
+                                <h2>Jobs Details</h2>
                                 <hr />
-
                             </center>
-
+                            <div class="p-5">
+                                <div class="col-md-6 offset-md-3">
+                                    <JobDetails id={match.id} />
+                                </div>
+                            </div>
                         </div>
                         <NavBar />
                         <Footer />
@@ -50,4 +54,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default JobDetailsPage;

@@ -8,8 +8,9 @@ import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import NavBar from '../SideBar/NavBar';
+import HuntJobsList from './HuntJobsList';
 
-function Home() {
+function HuntJobsDashboard() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -33,13 +34,14 @@ function Home() {
 
                     <div class="col-sm p-3 min-vh-100">
                         <div id="page-size">
-
                             <center>
-                                <h2>Home</h2>
+                                <h2>Jobs Marketplace</h2>
+                                <small>Seek out various jobs posted by employers</small>
                                 <hr />
-
                             </center>
-
+                            <div class="p-5">
+                                <HuntJobsList />
+                            </div>
                         </div>
                         <NavBar />
                         <Footer />
@@ -50,4 +52,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default HuntJobsDashboard;

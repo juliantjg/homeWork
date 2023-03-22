@@ -96,27 +96,27 @@ function Register() {
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="exampleFormControlInput1">Firstname</label>
-                                        <input type="text" class="form-control input-lg" required placeholder="John" onChange={(e) => setFirstname(e.target.value)}></input>
+                                        <input type="text" class="form-control input-lg form-control-lg" required placeholder="John" onChange={(e) => setFirstname(e.target.value)}></input>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="exampleFormControlInput1">Lastname</label>
-                                        <input type="text" class="form-control input-lg" required placeholder="Doe" onChange={(e) => setLastname(e.target.value)}></input>
+                                        <input type="text" class="form-control input-lg form-control-lg" required placeholder="Doe" onChange={(e) => setLastname(e.target.value)}></input>
                                     </div>
                                 </div>
                                 <div class="row pt-3">
                                     <div>
                                         <label for="exampleFormControlInput1">Email</label>
-                                        <input type="email" class="form-control input-lg" required placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}></input>
+                                        <input type="email" class="form-control input-lg form-control-lg" required placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}></input>
                                     </div>
                                 </div>
                                 <div class="row pt-3">
                                     <div class="col-sm-6">
                                         <label for="exampleFormControlInput1">Password</label>
-                                        <input type="password" class="form-control input-lg" required onChange={(e) => setPassword(e.target.value)}></input>
+                                        <input type="password" class="form-control input-lg form-control-lg" required onChange={(e) => setPassword(e.target.value)}></input>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="exampleFormControlInput1">Confirm Password</label>
-                                        <input type="password" class="form-control input-lg" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
+                                        <label for="exampleFormControlInput1">Confirm</label>
+                                        <input type="password" class="form-control input-lg form-control-lg" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
                                     </div>
                                 </div>
                                 <br />

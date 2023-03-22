@@ -5,5 +5,36 @@ body {
 }
 
 #page-size {
-  min-height: 80vh !important;
+  min-height: 100vh !important;
+}
+
+#logoutButton {
+  margin-top: auto;
+}
+
+#sideBarButtons {
+  color: black;
+}
+
+#navbar {
+  background-color: white;
+}
+
+#notificationBell {
+  bottom: 15px;
+  right: 15px;
+  position: fixed;
+}
+
+#jobCard {
+  transition: all .2s ease-in-out;
+}
+
+#jobCard:hover {
+  transform: scale(1.06);
+}
+
+#huntJobItemContent {
+  color: black;
+  text-decoration: none;
 }

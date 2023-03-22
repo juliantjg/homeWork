@@ -23,8 +23,6 @@ function Login() {
     const userRegister = useSelector(state => state.userRegister)
     const { error: errorRegister, loading: loadingRegister, userRegister: userRegisterMessage } = userRegister
 
-    console.log(error);
-
     function notifyError() {
         // toast(error);
         toast.error(error, {
@@ -73,13 +71,13 @@ function Login() {
                                 <div class="row">
                                     <div>
                                         <label for="exampleFormControlInput1">Email</label>
-                                        <input type="email" class="form-control input-lg" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}></input>
+                                        <input type="email" class="form-control input-lg form-control-lg" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}></input>
                                     </div>
                                 </div>
                                 <div class="row pt-3">
                                     <div>
                                         <label for="exampleFormControlInput1">Password</label>
-                                        <input type="password" class="form-control input-lg" onChange={(e) => setPassword(e.target.value)}></input>
+                                        <input type="password" class="form-control input-lg form-control-lg" onChange={(e) => setPassword(e.target.value)}></input>
                                     </div>
                                 </div>
                                 <br />
