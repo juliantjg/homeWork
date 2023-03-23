@@ -71,7 +71,7 @@ function UpdateJobDetails(job) {
             dispatch({ type: UPDATE_JOB_DETAILS_RESET })
             setTimeout(() => {
                 setLoad(false);
-            }, 3000);
+            }, 2000);
         }
     }, [error, message])
 

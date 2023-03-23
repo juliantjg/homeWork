@@ -43,7 +43,7 @@ function JobDetails(id) {
             setTimeout(() => {
                 updateJobDetailsSwitch()
                 setLoadUpdateJob(false)
-            }, 3000);
+            }, 2000);
         }
     }, [messageUpdateJob])
 
