@@ -96,7 +96,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		tokenObject.put("token", jwtToken);
 		tokenObject.put("user_id", user.getId());
 		tokenObject.put("first_name", user.getFirstname());
-		
+
 		return new AuthenticationResponse(tokenObject, "Login successful", true);
 	}
 }

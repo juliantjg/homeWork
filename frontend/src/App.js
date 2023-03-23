@@ -10,6 +10,7 @@ import Register from "./components/Auth/Register";
 import HuntJobsDashboard from "./components/HuntJobs/HuntJobsDashboard";
 import JobDetails from "./components/Job/JobDetails";
 import JobDetailsPage from "./components/Job/JobDetailsPage";
+import CreateJobPage from "./components/Job/CreateJobPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/hunt-jobs" element={<HuntJobsDashboard />} />
           <Route path="/job-details/:id" element={<JobDetailsPage />} />
+          <Route path="/create-job" element={<CreateJobPage />} />
         </Routes>
       </Router>
     </Provider>
