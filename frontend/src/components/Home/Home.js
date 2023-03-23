@@ -9,6 +9,7 @@ import { Form } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import NavBar from '../SideBar/NavBar';
 import { DELETE_JOB_RESET } from '../../actions/types';
+import HomeContent from './HomeContent';
 
 function Home() {
     const navigate = useNavigate();
@@ -56,12 +57,10 @@ function Home() {
                         <div id="page-size">
 
                             <center>
-                                <h2>Home</h2>
                                 <ToastContainer />
-                                <hr />
-
                             </center>
-                            <Link to="/create-job">Create Job</Link>
+
+                            <HomeContent />
                         </div>
                         <NavBar />
                         <Footer />
