@@ -15,6 +15,10 @@ import {
     CREATE_JOB_REQUEST,
     CREATE_JOB_SUCCESS,
     CREATE_JOB_FAIL,
+
+    DELETE_JOB_REQUEST,
+    DELETE_JOB_SUCCESS,
+    DELETE_JOB_FAIL,
 } from "../actions/types";
 import { useNavigate, withRouter } from "react-router-dom";
 import { backendUrl } from "../securityUtils/vars";
@@ -233,6 +237,61 @@ export const createJobAction = (jobDetails) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: CREATE_JOB_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+}
+
+export const deleteJobAction = (jobId) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: DELETE_JOB_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        var config = null
+        var token = null
+
+        if (typeof userInfo === 'object') {
+            token = userInfo.data.token
+        }
+        else if (typeof userInfo === 'string') {
+            token = userInfo
+        }
+
+        if (userInfo == null) {
+            config = null
+        }
+        else {
+            // we're passing header into our post request
+            config = {
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        }
+
+        const { data } = await axios.delete(
+            backendUrl + `api/job/delete/${jobId}`,
+            config
+        )
+
+        // the regular success dispatch, with payload data from the axios call above
+        dispatch({
+            type: DELETE_JOB_SUCCESS,
+            payload: data.message
+        })
+
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_JOB_FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,

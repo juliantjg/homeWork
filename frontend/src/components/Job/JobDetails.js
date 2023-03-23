@@ -7,9 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
-import { getJobDetailsAction } from '../../actions/jobActions';
+import { deleteJobAction, getJobDetailsAction } from '../../actions/jobActions';
 import UpdateJobDetails from './UpdateJobDetails';
-import { UPDATE_JOB_DETAILS_RESET } from '../../actions/types';
+import { DELETE_JOB_RESET, UPDATE_JOB_DETAILS_RESET } from '../../actions/types';
 import Loader from '../Utils/Loader';
 
 function JobDetails(id) {
@@ -25,7 +25,17 @@ function JobDetails(id) {
     const updateJobDetails = useSelector(state => state.updateJobDetails)
     const { loading: loadingUpdateJob, message: messageUpdateJob } = updateJobDetails
 
+    const deleteJob = useSelector(state => state.deleteJob)
+    const { loading: loadingDeleteJob, message: messageDeleteJob, error: errorDeleteJob } = deleteJob
+
     const authUserId = parseInt(localStorage.getItem("userIdHomework"))
+
+    function notifyError(errorMessage) {
+        // toast(error);
+        toast.error(errorMessage, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    }
 
     function updateJobDetailsSwitch() {
         if (updateDetails) setUpdateDetails(false);
@@ -37,6 +47,16 @@ function JobDetails(id) {
     }, [id.id, messageUpdateJob])
 
     useEffect(() => {
+        if (errorDeleteJob) {
+            dispatch({ type: DELETE_JOB_RESET })
+            notifyError(errorDeleteJob)
+        }
+        if (messageDeleteJob) {
+            navigate('/home')
+        }
+    }, [errorDeleteJob, messageDeleteJob])
+
+    useEffect(() => {
         if (messageUpdateJob) {
             setLoadUpdateJob(true)
             dispatch({ type: UPDATE_JOB_DETAILS_RESET })
@@ -46,6 +66,10 @@ function JobDetails(id) {
             }, 2000);
         }
     }, [messageUpdateJob])
+
+    const submitDeleteJob = (e) => {
+        dispatch(deleteJobAction(job.job.id))
+    }
 
     return (
 
@@ -131,9 +155,22 @@ function JobDetails(id) {
                                                                             )
                                                                             :
                                                                             (
-                                                                                <button type="button" class="btn btn-block btn-danger">
-                                                                                    Delete job
-                                                                                </button>
+                                                                                <div>
+                                                                                    {
+                                                                                        loadingDeleteJob ?
+                                                                                            (
+                                                                                                <button type="button" disabled onClick={() => submitDeleteJob()} class="btn btn-block btn-danger">
+                                                                                                    <Loader />
+                                                                                                </button>
+                                                                                            )
+                                                                                            :
+                                                                                            (
+                                                                                                <button type="button" onClick={() => submitDeleteJob()} class="btn btn-block btn-danger">
+                                                                                                    Delete job
+                                                                                                </button>
+                                                                                            )
+                                                                                    }
+                                                                                </div>
                                                                             )
                                                                     }
                                                                 </div>

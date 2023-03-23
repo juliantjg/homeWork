@@ -8,14 +8,36 @@ import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import NavBar from '../SideBar/NavBar';
+import { DELETE_JOB_RESET } from '../../actions/types';
 
 function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // userLogin is from store.js
+    const [deleteJobMessageShown, setDeleteJobMessageShown] = useState(false);
+
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
+
+    const deleteJob = useSelector(state => state.deleteJob)
+    const { loading: loadingDeleteJob, message: messageDeleteJob, error: errorDeleteJob } = deleteJob
+
+    function notifyMessage(messageToast) {
+        // toast(error);
+        setDeleteJobMessageShown(true)
+        toast.success(messageToast, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    }
+
+    useEffect(() => {
+        if (messageDeleteJob) {
+            if (deleteJobMessageShown === false) {
+                dispatch({ type: DELETE_JOB_RESET })
+                notifyMessage('Job deleted')
+            }
+        }
+    }, [messageDeleteJob])
 
     useEffect(() => {
         // if userInfo exists then show the home page, this is so that logged in user can't acces /login
@@ -30,12 +52,12 @@ function Home() {
             <div class="container-fluid">
                 <div class="row">
                     <MainSideBar />
-
                     <div class="col-sm p-3 min-vh-100">
                         <div id="page-size">
 
                             <center>
                                 <h2>Home</h2>
+                                <ToastContainer />
                                 <hr />
 
                             </center>
