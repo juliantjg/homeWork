@@ -17,8 +17,6 @@ function HuntJobsList() {
     const getAllJobs = useSelector(state => state.getAllJobs)
     const { error, loading, jobs } = getAllJobs
 
-    console.log(loading)
-
     useEffect(() => {
         dispatch(getAllJobsAction());
     }, [])

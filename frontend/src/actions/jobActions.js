@@ -53,7 +53,7 @@ export const getAllJobsAction = () => async (dispatch, getState) => {
                 }
             }
         }
-        console.log(config)
+
         var url = backendUrl + `api/job/all`;
 
         const { data } = await axios.get(

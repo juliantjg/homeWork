@@ -10,7 +10,6 @@ import MainSideBar from '../SideBar/MainSideBar';
 import { getAllJobsAction } from '../../actions/jobActions';
 
 function HuntJobsItem(job) {
-    console.log(job)
     return (
 
         <div class="card" id="jobCard">

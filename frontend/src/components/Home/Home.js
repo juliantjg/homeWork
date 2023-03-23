@@ -14,7 +14,7 @@ function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [deleteJobMessageShown, setDeleteJobMessageShown] = useState(false);
+    var deleteJobMessageShown = false;
 
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
@@ -23,20 +23,20 @@ function Home() {
     const { loading: loadingDeleteJob, message: messageDeleteJob, error: errorDeleteJob } = deleteJob
 
     function notifyMessage(messageToast) {
-        // toast(error);
-        setDeleteJobMessageShown(true)
-        toast.success(messageToast, {
-            position: toast.POSITION.TOP_CENTER
-        });
+        if (deleteJobMessageShown === false) {
+            deleteJobMessageShown = true
+            toast.success(messageToast, {
+                position: toast.POSITION.TOP_CENTER
+            });
+        }
     }
 
     useEffect(() => {
         if (messageDeleteJob) {
-            if (deleteJobMessageShown === false) {
-                dispatch({ type: DELETE_JOB_RESET })
-                notifyMessage('Job deleted')
-            }
+            dispatch({ type: DELETE_JOB_RESET })
+            notifyMessage('Job deleted')
         }
+
     }, [messageDeleteJob])
 
     useEffect(() => {

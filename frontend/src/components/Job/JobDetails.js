@@ -68,6 +68,7 @@ function JobDetails(id) {
     }, [messageUpdateJob])
 
     const submitDeleteJob = (e) => {
+        e.preventDefault()
         dispatch(deleteJobAction(job.job.id))
     }
 
@@ -159,13 +160,13 @@ function JobDetails(id) {
                                                                                     {
                                                                                         loadingDeleteJob ?
                                                                                             (
-                                                                                                <button type="button" disabled onClick={() => submitDeleteJob()} class="btn btn-block btn-danger">
+                                                                                                <button type="button" disabled class="btn btn-block btn-danger">
                                                                                                     <Loader />
                                                                                                 </button>
                                                                                             )
                                                                                             :
                                                                                             (
-                                                                                                <button type="button" onClick={() => submitDeleteJob()} class="btn btn-block btn-danger">
+                                                                                                <button type="button" onClick={submitDeleteJob} class="btn btn-block btn-danger">
                                                                                                     Delete job
                                                                                                 </button>
                                                                                             )
