@@ -18,52 +18,53 @@ function HomeContent() {
     return (
         <div>
             <div class="row p-5">
-                <div align="left" class="ml-5">
+                <div class="col-md-10 offset-md-1">
                     <span id="welcomeHome"> Welcome, </span>
                     <span id="welcomeHomeName">{authUserFirstname}</span>
-                </div>
-                <br />
-                <div align="right" class="pr-5">
+                    <br />
                     <span id="welcomeHomeRole">This is your <b>Employer</b> Dashboard</span>
                     <br />
                     <Link to="/create-job">Create Job</Link>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-4">
-                    <div class="card" id="welcomeHomeCard">
-                        <div class="card-body">
-                            <b>3</b> pending applications
+            <br />
+            <div class="row pl-5">
+                <div class="col-md-10 offset-md-1">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="card" id="welcomeHomeCard">
+                                <div class="card-body">
+                                    <b>3</b> pending applications
+                                </div>
+                                <div class="card-footer">
+                                    <small>View all</small>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            View all
+                        <div class="col-4">
+                            <div class="card" id="welcomeHomeCard">
+                                <div class="card-body">
+                                    <b>5</b> posted jobs
+                                </div>
+                                <div class="card-footer">
+                                    <small>View all</small>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" id="welcomeHomeCard">
-                        <div class="card-body">
-                            <b>5</b> posted jobs
-                        </div>
-                        <div class="card-footer">
-                            View all
+                        <div class="col-4">
+                            <div class="card" id="welcomeHomeCard">
+                                <div class="card-body">
+                                    <b>3</b> successful applications
+                                </div>
+                                <div class="card-footer">
+                                    <small>View all</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row p-4 justify-content-center">
-                <div class="col-4">
-                    <div class="card" id="welcomeHomeCard">
-                        <div class="card-body">
-                            <b>3</b> successful applications
-                        </div>
-                        <div class="card-footer">
-                            View all
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div >
+        </div>
     );
 }
 
