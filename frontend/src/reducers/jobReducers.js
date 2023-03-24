@@ -11,6 +11,16 @@ import {
     UPDATE_JOB_DETAILS_SUCCESS,
     UPDATE_JOB_DETAILS_FAIL,
     UPDATE_JOB_DETAILS_RESET,
+
+    CREATE_JOB_REQUEST,
+    CREATE_JOB_SUCCESS,
+    CREATE_JOB_FAIL,
+    CREATE_JOB_RESET,
+
+    DELETE_JOB_REQUEST,
+    DELETE_JOB_SUCCESS,
+    DELETE_JOB_FAIL,
+    DELETE_JOB_RESET,
 } from '../actions/types';
 
 export const getAllJobsReducer = (state = { jobs: [] }, action) => {
@@ -87,6 +97,63 @@ export const updateJobDetailsReducers = (state = {}, action) => {
 
         case UPDATE_JOB_DETAILS_RESET:
             return {}
+
+        default:
+            return state
+    }
+}
+
+export const createJobReducers = (state = {}, action) => {
+    switch (action.type) {
+
+        case CREATE_JOB_REQUEST:
+            return {
+                loading: true
+            }
+
+        case CREATE_JOB_SUCCESS:
+            return {
+                loading: false,
+                job: action.payload
+            }
+
+        case CREATE_JOB_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CREATE_JOB_RESET:
+            return {}
+
+        default:
+            return state
+    }
+}
+
+export const deleteJobReducers = (state = {}, action) => {
+    switch (action.type) {
+
+        case DELETE_JOB_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case DELETE_JOB_SUCCESS:
+            return {
+                loading: false,
+                message: action.payload
+            }
+
+        case DELETE_JOB_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case DELETE_JOB_RESET:
+            return {}
+
 
         default:
             return state

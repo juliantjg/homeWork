@@ -8,28 +8,90 @@ import Footer from '../Footer/Footer';
 import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import { updateJobDetailsAction } from '../../actions/jobActions';
+import { UPDATE_JOB_DETAILS_RESET } from '../../actions/types';
+import Loader from '../Utils/Loader';
 
 function UpdateJobDetails(job) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const [load, setLoad] = useState(false);
     const [title, setTitle] = useState(job.job.title);
     const [salary, setSalary] = useState(job.job.salary);
     const [location, setLocation] = useState(job.job.location);
     const [postcode, setPostcode] = useState(job.job.postcode);
     const [description, setDescription] = useState(job.job.description);
 
+    const updateJobDetails = useSelector(state => state.updateJobDetails)
+    const { error, loading, message } = updateJobDetails
+
+    function notifyError(errorMessage) {
+        // toast(error);
+        toast.error(errorMessage, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    }
+
+    function notifyMessage(messageToast) {
+        // toast(error);
+        toast.success(messageToast, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    }
+
+    function checkErrors() {
+        if (!title || !title.replace(/\s/g, '').length) {
+            return 'Title cannot be empty';
+        }
+        else if (!salary || !salary.toString().replace(/\s/g, '').length) {
+            return 'Salary cannot be empty';
+        }
+        else if (!location || !location.replace(/\s/g, '').length) {
+            return 'Location cannot be empty';
+        }
+        else if (!postcode || !postcode.replace(/\s/g, '').length) {
+            return 'Postcode cannot be empty';
+        }
+        else if (!description || !description.replace(/\s/g, '').length) {
+            return 'Description cannot be empty';
+        }
+        else {
+            return '';
+        }
+    }
+
+    useEffect(() => {
+        if (error) {
+            setLoad(false);
+            notifyError(error)
+            dispatch({ type: UPDATE_JOB_DETAILS_RESET })
+        }
+        if (message) {
+            notifyMessage(message)
+            dispatch({ type: UPDATE_JOB_DETAILS_RESET })
+            setTimeout(() => {
+                setLoad(false);
+            }, 2000);
+        }
+    }, [error, message])
+
     const submitHandler = (e) => {
         e.preventDefault()
 
-        var jobDetails = {
-            title: title,
-            salary: salary,
-            location: location,
-            postcode: postcode,
-            description: description
+        if (checkErrors() === '') {
+            setLoad(true)
+            var jobDetails = {
+                title: title,
+                salary: salary,
+                location: location,
+                postcode: postcode,
+                description: description
+            }
+            dispatch(updateJobDetailsAction(jobDetails, job.job.id))
         }
-        dispatch(updateJobDetailsAction(jobDetails, job.job.id))
+        else {
+            notifyError(checkErrors())
+        }
     }
 
     return (
@@ -40,23 +102,14 @@ function UpdateJobDetails(job) {
                     job.job ?
                         (
                             <div class="card-body">
-                                <div class="form" onSubmit={submitHandler}>
+                                <ToastContainer />
+                                <Form onSubmit={submitHandler}>
                                     <div class="form-group row">
-                                        <Form.Group className="mb-3" controlId="title">
-                                            <Form.Control
-                                                required
-                                                type="text"
-                                                onChange={(e) => setTitle(e.target.value)}
-                                                class="form-control form-control-lg"
-                                                id="updateJobTitleText"
-                                                value={title}
-                                            />
-                                        </Form.Group>
                                         <div class="col-md-8">
                                             <label for="updateJobTitleText"><small>Title</small></label><br />
                                             <input
+                                                type="email"
                                                 required
-                                                type="text"
                                                 onChange={(e) => setTitle(e.target.value)}
                                                 class="form-control form-control-lg"
                                                 id="updateJobTitleText"
@@ -116,9 +169,17 @@ function UpdateJobDetails(job) {
                                             </textarea>
                                         </div>
                                     </div>
-
-                                    <button type="submit" onClick={submitHandler} class="btn btn-block btn-dark">Submit</button>
-                                </div>
+                                    {
+                                        load ?
+                                            (
+                                                <button type="submit" disabled onClick={submitHandler} class="btn btn-block btn-dark"><Loader colour='white' /></button>
+                                            )
+                                            :
+                                            (
+                                                <button type="submit" onClick={submitHandler} class="btn btn-block btn-dark">Submit</button>
+                                            )
+                                    }
+                                </Form>
                             </div>
                         ) : null
                 }

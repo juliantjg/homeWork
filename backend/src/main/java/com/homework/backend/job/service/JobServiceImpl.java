@@ -83,6 +83,12 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public JobResponse updateJob(HttpServletRequest request, int id, JobRequest jobRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		
+		Set<ConstraintViolation<JobRequest>> violations = validator.validate(jobRequest);
+		if (!violations.isEmpty()) {
+		  throw new ConstraintViolationException(violations);
+		}
+		
 		Job job = jobRepository.findById(id);
 
 		if(job == null){

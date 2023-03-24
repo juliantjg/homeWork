@@ -7,19 +7,35 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
-import { getJobDetailsAction } from '../../actions/jobActions';
+import { deleteJobAction, getJobDetailsAction } from '../../actions/jobActions';
 import UpdateJobDetails from './UpdateJobDetails';
+import { DELETE_JOB_RESET, UPDATE_JOB_DETAILS_RESET } from '../../actions/types';
+import Loader from '../Utils/Loader';
 
 function JobDetails(id) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const [loadUpdateJob, setLoadUpdateJob] = useState(false);
     const [updateDetails, setUpdateDetails] = useState(false);
 
     const jobDetails = useSelector(state => state.jobDetails)
     const { loading, error, job } = jobDetails
 
+    const updateJobDetails = useSelector(state => state.updateJobDetails)
+    const { loading: loadingUpdateJob, message: messageUpdateJob } = updateJobDetails
+
+    const deleteJob = useSelector(state => state.deleteJob)
+    const { loading: loadingDeleteJob, message: messageDeleteJob, error: errorDeleteJob } = deleteJob
+
     const authUserId = parseInt(localStorage.getItem("userIdHomework"))
+
+    function notifyError(errorMessage) {
+        // toast(error);
+        toast.error(errorMessage, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    }
 
     function updateJobDetailsSwitch() {
         if (updateDetails) setUpdateDetails(false);
@@ -28,7 +44,33 @@ function JobDetails(id) {
 
     useEffect(() => {
         dispatch(getJobDetailsAction(id.id));
-    }, [id.id])
+    }, [id.id, messageUpdateJob])
+
+    useEffect(() => {
+        if (errorDeleteJob) {
+            dispatch({ type: DELETE_JOB_RESET })
+            notifyError(errorDeleteJob)
+        }
+        if (messageDeleteJob) {
+            navigate('/home')
+        }
+    }, [errorDeleteJob, messageDeleteJob])
+
+    useEffect(() => {
+        if (messageUpdateJob) {
+            setLoadUpdateJob(true)
+            dispatch({ type: UPDATE_JOB_DETAILS_RESET })
+            setTimeout(() => {
+                updateJobDetailsSwitch()
+                setLoadUpdateJob(false)
+            }, 2000);
+        }
+    }, [messageUpdateJob])
+
+    const submitDeleteJob = (e) => {
+        e.preventDefault()
+        dispatch(deleteJobAction(job.job.id))
+    }
 
     return (
 
@@ -84,7 +126,19 @@ function JobDetails(id) {
                                                                     {
                                                                         updateDetails ?
                                                                             (
-                                                                                <button type="button" onClick={() => updateJobDetailsSwitch()} class="btn btn-block btn-outline-dark">Cancel update</button>
+                                                                                <div>
+                                                                                    {
+                                                                                        loadUpdateJob ?
+                                                                                            (
+                                                                                                <button type="button" disabled onClick={() => updateJobDetailsSwitch()} class="btn btn-block btn-outline-dark"><Loader colour='black' /></button>
+                                                                                            )
+                                                                                            :
+                                                                                            (
+                                                                                                <button type="button" onClick={() => updateJobDetailsSwitch()} class="btn btn-block btn-outline-dark">Cancel update</button>
+                                                                                            )
+                                                                                    }
+                                                                                </div>
+
                                                                             )
                                                                             :
                                                                             (
@@ -93,9 +147,33 @@ function JobDetails(id) {
                                                                     }
                                                                 </div>
                                                                 <div class="col-md-6 p-1">
-                                                                    <button type="button" class="btn btn-block btn-danger">
-                                                                        Delete job
-                                                                    </button>
+                                                                    {
+                                                                        loadUpdateJob ?
+                                                                            (
+                                                                                <button type="button" disabled class="btn btn-block btn-danger">
+                                                                                    <Loader colour='white' />
+                                                                                </button>
+                                                                            )
+                                                                            :
+                                                                            (
+                                                                                <div>
+                                                                                    {
+                                                                                        loadingDeleteJob ?
+                                                                                            (
+                                                                                                <button type="button" disabled class="btn btn-block btn-danger">
+                                                                                                    <Loader />
+                                                                                                </button>
+                                                                                            )
+                                                                                            :
+                                                                                            (
+                                                                                                <button type="button" onClick={submitDeleteJob} class="btn btn-block btn-danger">
+                                                                                                    Delete job
+                                                                                                </button>
+                                                                                            )
+                                                                                    }
+                                                                                </div>
+                                                                            )
+                                                                    }
                                                                 </div>
                                                             </div>
                                                         )
