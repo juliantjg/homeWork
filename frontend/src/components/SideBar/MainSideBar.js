@@ -33,9 +33,14 @@ function MainSideBar() {
                             </Link>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle" id="sideBarButtons">
+                            <Link to="/posted-jobs" class="nav-link px-0 align-middle" id="sideBarButtons">
+                                &nbsp;<i class="fas fa-clipboard"></i> &nbsp; <small>Posted Jobs</small>&nbsp;&nbsp;
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/application-list" class="nav-link px-0 align-middle" id="sideBarButtons">
                                 &nbsp;<i class="fas fa-envelope"></i> &nbsp; <small>Applications</small>&nbsp;&nbsp;
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle" id="sideBarButtons">

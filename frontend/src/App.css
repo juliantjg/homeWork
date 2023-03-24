@@ -60,3 +60,8 @@ body {
 #welcomeHomeCard:hover {
   transform: scale(1.06);
 }
+
+#welcomeHomeCardLink {
+  text-decoration: none;
+  color: black;
+}

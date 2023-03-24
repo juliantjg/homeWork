@@ -36,9 +36,11 @@ function HomeContent() {
                                 <div class="card-body">
                                     <b>3</b> pending applications
                                 </div>
-                                <div class="card-footer">
-                                    <small>View all</small>
-                                </div>
+                                <Link to="/application-list" id="welcomeHomeCardLink">
+                                    <div class="card-footer">
+                                        <small>View all</small>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                         <div class="col-4">
@@ -46,9 +48,11 @@ function HomeContent() {
                                 <div class="card-body">
                                     <b>5</b> posted jobs
                                 </div>
-                                <div class="card-footer">
-                                    <small>View all</small>
-                                </div>
+                                <Link to="/posted-jobs" id="welcomeHomeCardLink">
+                                    <div class="card-footer">
+                                        <small>View all</small>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                         <div class="col-4">
@@ -56,9 +60,11 @@ function HomeContent() {
                                 <div class="card-body">
                                     <b>3</b> successful applications
                                 </div>
-                                <div class="card-footer">
-                                    <small>View all</small>
-                                </div>
+                                <Link to="/application-list" id="welcomeHomeCardLink">
+                                    <div class="card-footer">
+                                        <small>View all</small>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                     </div>

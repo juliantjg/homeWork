@@ -9,6 +9,7 @@ import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import { getAllJobsAction } from '../../actions/jobActions';
 import HuntJobsItem from './HuntJobsItem';
+import Loader from '../Utils/Loader';
 
 function HuntJobsList() {
     const navigate = useNavigate();
@@ -52,8 +53,8 @@ function HuntJobsList() {
                     )
                     :
                     (
-                        <div>
-                            Loading
+                        <div align="center">
+                            <Loader colour="black" />
                         </div>
                     )
             }
