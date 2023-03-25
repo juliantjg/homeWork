@@ -139,7 +139,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 
 		jobApplicationRepository.findById(jobId);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
-		jobObject.put("Current Applications", jobApplication);
+		jobObject.put("currentApplications", jobApplication);
 
 		return new JobApplicationResponse(jobObject, "Job found", true);
 	}
