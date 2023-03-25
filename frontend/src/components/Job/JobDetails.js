@@ -153,59 +153,81 @@ function JobDetails(id) {
                                                 {
                                                     (authUserId === job.job.user_id) ?
                                                         (
-                                                            <div class="row">
-                                                                <div class="col-md-6 p-1">
-                                                                    {
-                                                                        updateDetails ?
-                                                                            (
-                                                                                <div>
-                                                                                    {
-                                                                                        loadUpdateJob ?
-                                                                                            (
-                                                                                                <button type="button" disabled onClick={() => updateJobDetailsSwitch()} class="btn btn-block btn-outline-dark"><Loader colour='black' /></button>
-                                                                                            )
-                                                                                            :
-                                                                                            (
-                                                                                                <button type="button" onClick={() => updateJobDetailsSwitch()} class="btn btn-block btn-outline-dark">Cancel update</button>
-                                                                                            )
-                                                                                    }
-                                                                                </div>
+                                                            <div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6 p-1">
+                                                                        {
+                                                                            updateDetails ?
+                                                                                (
+                                                                                    <div>
+                                                                                        {
+                                                                                            loadUpdateJob ?
+                                                                                                (
+                                                                                                    <button type="button" disabled onClick={() => updateJobDetailsSwitch()} class="btn btn-block btn-outline-dark"><Loader colour='black' /></button>
+                                                                                                )
+                                                                                                :
+                                                                                                (
+                                                                                                    <button type="button" onClick={() => updateJobDetailsSwitch()} class="btn btn-block btn-outline-dark">Cancel update</button>
+                                                                                                )
+                                                                                        }
+                                                                                    </div>
 
-                                                                            )
-                                                                            :
-                                                                            (
-                                                                                <button type="button" onClick={() => updateJobDetailsSwitch()} class="btn btn-block btn-secondary">Update details</button>
-                                                                            )
-                                                                    }
+                                                                                )
+                                                                                :
+                                                                                (
+                                                                                    <button type="button" onClick={() => updateJobDetailsSwitch()} class="btn btn-block btn-secondary">Update details</button>
+                                                                                )
+                                                                        }
+                                                                    </div>
+                                                                    <div class="col-md-6 p-1">
+                                                                        {
+                                                                            loadUpdateJob ?
+                                                                                (
+                                                                                    <button type="button" disabled class="btn btn-block btn-danger">
+                                                                                        <Loader colour='white' />
+                                                                                    </button>
+                                                                                )
+                                                                                :
+                                                                                (
+                                                                                    <div>
+                                                                                        {
+                                                                                            loadingDeleteJob ?
+                                                                                                (
+                                                                                                    <button type="button" disabled class="btn btn-block btn-danger">
+                                                                                                        <Loader />
+                                                                                                    </button>
+                                                                                                )
+                                                                                                :
+                                                                                                (
+                                                                                                    <button type="button" onClick={submitDeleteJob} class="btn btn-block btn-danger">
+                                                                                                        Delete job
+                                                                                                    </button>
+                                                                                                )
+                                                                                        }
+                                                                                    </div>
+                                                                                )
+                                                                        }
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-md-6 p-1">
-                                                                    {
-                                                                        loadUpdateJob ?
-                                                                            (
-                                                                                <button type="button" disabled class="btn btn-block btn-danger">
-                                                                                    <Loader colour='white' />
-                                                                                </button>
-                                                                            )
-                                                                            :
-                                                                            (
-                                                                                <div>
-                                                                                    {
-                                                                                        loadingDeleteJob ?
-                                                                                            (
-                                                                                                <button type="button" disabled class="btn btn-block btn-danger">
-                                                                                                    <Loader />
-                                                                                                </button>
-                                                                                            )
-                                                                                            :
-                                                                                            (
-                                                                                                <button type="button" onClick={submitDeleteJob} class="btn btn-block btn-danger">
-                                                                                                    Delete job
-                                                                                                </button>
-                                                                                            )
-                                                                                    }
-                                                                                </div>
-                                                                            )
-                                                                    }
+                                                                <div class="row">
+                                                                    <div class="p-1">
+                                                                        {
+                                                                            loadUpdateJob ?
+                                                                                (
+                                                                                    <button type="button" disabled class="btn btn-block btn-warning">
+                                                                                        <Loader colour="white" />
+                                                                                    </button>
+                                                                                )
+                                                                                :
+                                                                                (
+                                                                                    <Link to={`/application-list-per-job/${job.job.id}`}>
+                                                                                        <button type="button" class="btn btn-block btn-warning">
+                                                                                            View applications
+                                                                                        </button>
+                                                                                    </Link>
+                                                                                )
+                                                                        }
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         )

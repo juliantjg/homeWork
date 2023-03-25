@@ -65,3 +65,11 @@ body {
   text-decoration: none;
   color: black;
 }
+
+#jobApplicationCard {
+  color: black;
+}
+
+#jobApplicationCard:hover {
+  border: 2px solid black;
+}
