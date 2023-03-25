@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 // import rootReducer from "./reducers";
 import { userLoginReducers, userRegisterReducers } from "./reducers/securityReducers";
 import { getAllJobsReducer, jobDetailsReducer, updateJobDetailsReducers, createJobReducers, deleteJobReducers } from "./reducers/jobReducers";
+import { createJobApplicationReducers } from "./reducers/jobApplicationReducers";
 
 const reducer = combineReducers({
     userLogin: userLoginReducers,
@@ -13,6 +14,8 @@ const reducer = combineReducers({
     updateJobDetails: updateJobDetailsReducers,
     createJob: createJobReducers,
     deleteJob: deleteJobReducers,
+
+    createJobApplication: createJobApplicationReducers,
 })
 
 const userInfoFromStorage = localStorage.getItem('tokenHomework') ?

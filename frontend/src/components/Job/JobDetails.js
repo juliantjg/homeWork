@@ -9,8 +9,9 @@ import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import { deleteJobAction, getJobDetailsAction } from '../../actions/jobActions';
 import UpdateJobDetails from './UpdateJobDetails';
-import { DELETE_JOB_RESET, UPDATE_JOB_DETAILS_RESET } from '../../actions/types';
+import { CREATE_JOB_APPLICATION_RESET, DELETE_JOB_RESET, UPDATE_JOB_DETAILS_RESET } from '../../actions/types';
 import Loader from '../Utils/Loader';
+import { createJobApplicationAction } from '../../actions/jobApplicationActions';
 
 function JobDetails(id) {
     const navigate = useNavigate();
@@ -25,14 +26,22 @@ function JobDetails(id) {
     const updateJobDetails = useSelector(state => state.updateJobDetails)
     const { loading: loadingUpdateJob, message: messageUpdateJob } = updateJobDetails
 
+    const createJobApplication = useSelector(state => state.createJobApplication)
+    const { loading: loadingCreateJobApplication, error: errorCreateJobApplication, message: messageCreateJobApplication } = createJobApplication
+
     const deleteJob = useSelector(state => state.deleteJob)
     const { loading: loadingDeleteJob, message: messageDeleteJob, error: errorDeleteJob } = deleteJob
 
     const authUserId = parseInt(localStorage.getItem("userIdHomework"))
 
     function notifyError(errorMessage) {
-        // toast(error);
         toast.error(errorMessage, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    }
+
+    function notifyMessage(messageToast) {
+        toast.success(messageToast, {
             position: toast.POSITION.TOP_CENTER
         });
     }
@@ -57,6 +66,17 @@ function JobDetails(id) {
     }, [errorDeleteJob, messageDeleteJob])
 
     useEffect(() => {
+        if (errorCreateJobApplication) {
+            dispatch({ type: CREATE_JOB_APPLICATION_RESET })
+            notifyError(errorCreateJobApplication)
+        }
+        if (messageCreateJobApplication) {
+            dispatch({ type: CREATE_JOB_APPLICATION_RESET })
+            notifyMessage(messageCreateJobApplication)
+        }
+    }, [errorCreateJobApplication, messageCreateJobApplication])
+
+    useEffect(() => {
         if (messageUpdateJob) {
             setLoadUpdateJob(true)
             dispatch({ type: UPDATE_JOB_DETAILS_RESET })
@@ -70,6 +90,17 @@ function JobDetails(id) {
     const submitDeleteJob = (e) => {
         e.preventDefault()
         dispatch(deleteJobAction(job.job.id))
+    }
+
+    const submitApplyJob = (e) => {
+        e.preventDefault()
+
+        var jobApplicationDetails = {
+            applicant_id: authUserId,
+            job_id: job.job.id
+        }
+
+        dispatch(createJobApplicationAction(jobApplicationDetails))
     }
 
     return (
@@ -87,6 +118,7 @@ function JobDetails(id) {
                                                 !updateDetails ?
                                                     (
                                                         <div class="card-body">
+                                                            <ToastContainer />
                                                             <h1>{job.job.title}</h1>
                                                             <small>${job.job.salary}/hr</small>
                                                             <div align="right">
@@ -179,7 +211,7 @@ function JobDetails(id) {
                                                         )
                                                         :
                                                         (
-                                                            <button type="button" class="btn btn-block btn-secondary">
+                                                            <button type="button" onClick={submitApplyJob} class="btn btn-block btn-secondary">
                                                                 Apply now
                                                             </button>
                                                         )
