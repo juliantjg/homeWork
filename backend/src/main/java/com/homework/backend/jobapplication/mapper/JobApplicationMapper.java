@@ -47,6 +47,7 @@ public class JobApplicationMapper {
         getApplicationListPerJobDTO.setId(jobApplication.getId());
         getApplicationListPerJobDTO.setApplicant_id(jobApplication.getApplicant_id());
         getApplicationListPerJobDTO.setJob_id(jobApplication.getJob_id());
+        getApplicationListPerJobDTO.setStatus(jobApplication.getStatus());
         
         Job job = jobRepository.findById(jobApplication.getJob_id());
         User user = userRepository.findById(jobApplication.getApplicant_id());

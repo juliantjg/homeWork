@@ -1,14 +1,12 @@
 package com.homework.backend.jobapplication.dto;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.homework.backend.job.model.Job;
-import com.homework.backend.job.repository.JobRepository;
+import com.homework.backend.enums.JobApplicationStatus;
 
 public class GetApplicationListPerJobDTO {
 	private int id;
 	private int applicant_id;
 	private int job_id;
+	private JobApplicationStatus status;
 	private String applicant_email;
 	private String job_title;
 	
@@ -54,6 +52,12 @@ public class GetApplicationListPerJobDTO {
 	public void setJob_title(String job_title) {
 		this.job_title = job_title;
 	}
-	
-	
+
+	public JobApplicationStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(JobApplicationStatus status) {
+		this.status = status;
+	}
 }
