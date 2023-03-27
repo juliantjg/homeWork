@@ -4,23 +4,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import com.homework.backend.enums.JobApplicationStatus;
-import com.homework.backend.job.model.Job;
-import com.homework.backend.job.repository.JobRepository;
-import com.homework.backend.job.response.GetAllJobsResponse;
-import com.homework.backend.job.response.JobResponse;
-import com.homework.backend.jobapplication.model.JobApplication;
-import com.homework.backend.jobapplication.request.UpdateJobApplicationRequest;
-import com.homework.backend.jobapplication.response.GetAllJobApplicationsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homework.backend.config.service.JwtService;
-import com.homework.backend.job.request.JobRequest;
+import com.homework.backend.enums.JobApplicationStatus;
+import com.homework.backend.job.model.Job;
+import com.homework.backend.job.repository.JobRepository;
+import com.homework.backend.jobapplication.dto.GetApplicationListPerJobDTO;
+import com.homework.backend.jobapplication.mapper.JobApplicationMapper;
+import com.homework.backend.jobapplication.model.JobApplication;
 import com.homework.backend.jobapplication.repository.JobApplicationRepository;
 import com.homework.backend.jobapplication.request.JobApplicationRequest;
+import com.homework.backend.jobapplication.request.UpdateJobApplicationRequest;
 import com.homework.backend.jobapplication.response.JobApplicationResponse;
 import com.homework.backend.user.model.User;
+import com.homework.backend.user.repository.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
@@ -37,15 +36,19 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 
 	@Autowired
 	private JobRepository jobRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	public JobApplicationServiceImpl(JobApplicationRepository jobApplicationRepository, JwtService jwtService,
-			Validator validator, JobRepository jobRepository) {
+			Validator validator, JobRepository jobRepository, UserRepository userRepository) {
 		super();
 		this.jobApplicationRepository = jobApplicationRepository;
 		this.jwtService = jwtService;
 		this.validator = validator;
 		this.jobRepository = jobRepository;
+		this.userRepository = userRepository;
 	}
+	
 	
 	@Override
 	public JobApplicationResponse createJobApplication(
@@ -137,9 +140,11 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 			throw new Exception("You do not have permission");
 		}
 
-		jobApplicationRepository.findById(jobId);
+		JobApplicationMapper mapper = new JobApplicationMapper(jobRepository, userRepository);
+		List<GetApplicationListPerJobDTO> mappedJobApplications = mapper.map(jobApplication);
+		
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
-		jobObject.put("currentApplications", jobApplication);
+		jobObject.put("currentApplications", mappedJobApplications);
 
 		return new JobApplicationResponse(jobObject, "Job found", true);
 	}
