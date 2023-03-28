@@ -51,9 +51,24 @@ function JobDetails(id) {
         else setUpdateDetails(true);
     }
 
+    function getJobApplicationStatusButtonColour() {
+        if (job.job) {
+            var application_status = job.job.application_status
+            if (application_status === "PENDING") {
+                return "btn btn-block btn-secondary"
+            }
+            else if (application_status === "ACCEPTED") {
+                return "btn btn-block btn-primary"
+            }
+            else if (application_status === "REJECTED") {
+                return "btn btn-block btn-danger"
+            }
+        }
+    }
+
     useEffect(() => {
         dispatch(getJobDetailsAction(id.id));
-    }, [id.id, messageUpdateJob])
+    }, [id.id, messageUpdateJob, messageCreateJobApplication])
 
     useEffect(() => {
         if (errorDeleteJob) {
@@ -251,7 +266,7 @@ function JobDetails(id) {
                                                                         )
                                                                         :
                                                                         (
-                                                                            <button type="button" disabled class="btn btn-block btn-secondary">
+                                                                            <button type="button" disabled class={getJobApplicationStatusButtonColour()}>
                                                                                 {job.job.application_status}
                                                                             </button>
                                                                         )
