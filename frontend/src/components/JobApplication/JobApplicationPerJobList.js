@@ -18,9 +18,12 @@ function JobApplicationPerJobList(id) {
     const getJobApplicationListPerJob = useSelector(state => state.getJobApplicationListPerJob)
     const { error, loading, jobApplications } = getJobApplicationListPerJob
 
+    const updateJobApplication = useSelector(state => state.updateJobApplication)
+    const { error: errorUpdateJobApplication, loading: loadingUpdateJobApplication, message: messageUpdateJobApplication } = updateJobApplication
+
     useEffect(() => {
         dispatch(getJobApplicationListPerJobAction(id.id));
-    }, [])
+    }, [messageUpdateJobApplication])
 
     return (
         <div>

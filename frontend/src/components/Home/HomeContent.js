@@ -34,7 +34,8 @@ function HomeContent() {
                         <div class="col-4">
                             <div class="card" id="welcomeHomeCard">
                                 <div class="card-body">
-                                    <b>3</b> pending applications
+                                    <b>3</b><br /> 
+                                    <small>pending applications</small>
                                 </div>
                                 <Link to="/application-list" id="welcomeHomeCardLink">
                                     <div class="card-footer">
@@ -46,7 +47,8 @@ function HomeContent() {
                         <div class="col-4">
                             <div class="card" id="welcomeHomeCard">
                                 <div class="card-body">
-                                    <b>5</b> posted jobs
+                                    <b>5</b><br /> 
+                                    <small>posted jobs</small>
                                 </div>
                                 <Link to="/posted-jobs" id="welcomeHomeCardLink">
                                     <div class="card-footer">
@@ -58,7 +60,8 @@ function HomeContent() {
                         <div class="col-4">
                             <div class="card" id="welcomeHomeCard">
                                 <div class="card-body">
-                                    <b>3</b> successful applications
+                                    <b>3</b><br /> 
+                                    <small>successful applications</small>
                                 </div>
                                 <Link to="/application-list" id="welcomeHomeCardLink">
                                     <div class="card-footer">

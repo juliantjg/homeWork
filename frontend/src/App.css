@@ -73,3 +73,12 @@ body {
 #jobApplicationCard:hover {
   border: 2px solid black;
 }
+
+#jobApplicationCardContent {
+  text-decoration: none;
+  color: black;
+}
+
+#jobApplicationCardContent:hover {
+  text-decoration: underline;
+}
