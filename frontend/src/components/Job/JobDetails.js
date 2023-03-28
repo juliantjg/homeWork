@@ -125,11 +125,19 @@ function JobDetails(id) {
                                                                 {
                                                                     (authUserId === job.job.user_id) ?
                                                                         (
-                                                                            <small>Posted by you</small>
+                                                                            <small>
+                                                                                <Link to="#" id="jobDetailsLinkToJobCreator">
+                                                                                    Posted by you
+                                                                                </Link>
+                                                                            </small>
                                                                         )
                                                                         :
                                                                         (
-                                                                            <small>Posted by:</small>
+                                                                            <small>
+                                                                                <Link to="#" id="jobDetailsLinkToJobCreator">
+                                                                                    Posted by: {job.job.creator_firstname}
+                                                                                </Link>
+                                                                            </small>
                                                                         )
                                                                 }
 
@@ -233,9 +241,23 @@ function JobDetails(id) {
                                                         )
                                                         :
                                                         (
-                                                            <button type="button" onClick={submitApplyJob} class="btn btn-block btn-secondary">
-                                                                Apply now
-                                                            </button>
+                                                            <div>
+                                                                {
+                                                                    (job.job.application_status === null) ?
+                                                                        (
+                                                                            <button type="button" onClick={submitApplyJob} class="btn btn-block btn-secondary">
+                                                                                Apply now
+                                                                            </button>
+                                                                        )
+                                                                        :
+                                                                        (
+                                                                            <button type="button" disabled class="btn btn-block btn-secondary">
+                                                                                {job.job.application_status}
+                                                                            </button>
+                                                                        )
+                                                                }
+
+                                                            </div>
                                                         )
                                                 }
                                             </div>
