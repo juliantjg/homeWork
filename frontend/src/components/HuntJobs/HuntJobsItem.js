@@ -10,13 +10,26 @@ import MainSideBar from '../SideBar/MainSideBar';
 import { getAllJobsAction } from '../../actions/jobActions';
 
 function HuntJobsItem(job) {
+    const authUserId = parseInt(localStorage.getItem("userIdHomework"))
     return (
 
         <div class="card" id="jobCard">
             <Link to={`/job-details/${job.job.id}`} id="huntJobItemContent">
                 <div class="p-2">
                     <img class="card-img-top" src="https://i.imgur.com/041jkF8.png" alt="Card image cap" />
+                    <div class="card-img-overlay" align="right">
+                        {
+                            (authUserId === job.job.user_id) ?
+                                (
+                                    <small>
+                                        <span class="badge badge-secondary">Owner</span>
+                                    </small>
+                                )
+                                : null
+                        }
+                    </div>
                     <div class="p-2">
+
                         <b>{job.job.title}</b> <br />
                         <small>
                             ${job.job.salary}/hr
