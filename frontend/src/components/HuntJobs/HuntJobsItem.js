@@ -11,6 +11,22 @@ import { getAllJobsAction } from '../../actions/jobActions';
 
 function HuntJobsItem(job) {
     const authUserId = parseInt(localStorage.getItem("userIdHomework"))
+
+    function getJobApplicationStatusBadgeColour() {
+        if (job.job) {
+            var application_status = job.job.application_status
+            if (application_status === "PENDING") {
+                return "badge badge-secondary"
+            }
+            else if (application_status === "ACCEPTED") {
+                return "badge badge-primary"
+            }
+            else if (application_status === "REJECTED") {
+                return "badge badge-danger"
+            }
+        }
+    }
+
     return (
 
         <div class="card" id="jobCard">
@@ -22,10 +38,18 @@ function HuntJobsItem(job) {
                             (authUserId === job.job.user_id) ?
                                 (
                                     <small>
-                                        <span class="badge badge-secondary">Owner</span>
+                                        <span class="badge badge-dark">Owner</span>
                                     </small>
                                 )
-                                : null
+                                : 
+                                (
+                                    (job.job.application_status !== null) ?
+                                    (
+                                        <small>
+                                            <span class={getJobApplicationStatusBadgeColour()}>{job.job.application_status}</span>
+                                        </small>
+                                    ):null
+                                )
                         }
                     </div>
                     <div class="p-2">

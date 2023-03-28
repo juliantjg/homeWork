@@ -66,6 +66,10 @@ body {
   color: black;
 }
 
+#welcomeHomeCardLink:hover {
+  text-decoration: underline;
+}
+
 #jobApplicationCard {
   color: black;
 }
