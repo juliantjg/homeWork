@@ -1,11 +1,13 @@
 package com.homework.backend.job.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.homework.backend.job.dto.JobDetailsDTO;
 import com.homework.backend.job.model.Job;
 import com.homework.backend.job.repository.JobRepository;
-import com.homework.backend.jobapplication.dto.GetApplicationListPerJobDTO;
 import com.homework.backend.jobapplication.model.JobApplication;
 import com.homework.backend.jobapplication.repository.JobApplicationRepository;
 import com.homework.backend.user.model.User;
@@ -57,5 +59,18 @@ public class JobMapper {
         }
         
         return jobDetailsDTO;
+    }
+	
+	public List<JobDetailsDTO> mapShowAllJobs(List<Job> jobs, int authUserId) {
+        if (jobs == null) {
+            return null;
+        }
+
+        List<JobDetailsDTO> list = new ArrayList<JobDetailsDTO>(jobs.size());
+        for (Job job : jobs) {
+            list.add(mapJobDetails(job, authUserId));
+        }
+
+        return list;
     }
 }

@@ -49,7 +49,11 @@ public class JobServiceImpl implements JobService {
 	public GetAllJobsResponse getAllJobs(HttpServletRequest request) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 		List<Job> jobs = jobRepository.findAll();
-		return new GetAllJobsResponse(jobs, "All jobs retrieved", true);
+		
+		JobMapper mapper = new JobMapper(jobApplicationRepository, jobRepository, userRepository);
+		List<JobDetailsDTO> jobList = mapper.mapShowAllJobs(jobs, currUser.getId());
+		
+		return new GetAllJobsResponse(jobList, "All jobs retrieved", true);
 	}
 
 	@Override
