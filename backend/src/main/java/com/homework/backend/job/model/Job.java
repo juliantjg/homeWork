@@ -1,25 +1,13 @@
 package com.homework.backend.job.model;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.homework.backend.enums.Role;
+import com.homework.backend.enums.JobType;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
@@ -34,6 +22,8 @@ public class Job {
 	private float salary;
 	private String location;
 	private String postcode;
+	private JobType jobType;
+	
 	private int user_id;
 	
 	public Job() {
@@ -42,7 +32,8 @@ public class Job {
 
 	public Job(
 			String title, String description, float salary,
-			String location, String postcode, int user_id
+			String location, String postcode, int user_id,
+			JobType jobType
 			) {
 			this.title = title;
 			this.description = description;
@@ -50,6 +41,7 @@ public class Job {
 			this.location = location;
 			this.postcode = postcode;
 			this.user_id = user_id;
+			this.jobType = jobType;
 	}
 
 	public int getId() {
@@ -107,5 +99,12 @@ public class Job {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	
+
+	public JobType getJobType() {
+		return jobType;
+	}
+
+	public void setJobType(JobType jobType) {
+		this.jobType = jobType;
+	}
 }

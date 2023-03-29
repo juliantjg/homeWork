@@ -44,6 +44,7 @@ public class JobMapper {
         jobDetailsDTO.setLocation(job.getLocation());
         jobDetailsDTO.setPostcode(job.getPostcode());
         jobDetailsDTO.setUser_id(job.getUser_id());
+        jobDetailsDTO.setJobType(job.getJobType());
         
         User jobCreator = userRepository.findById(job.getUser_id());
         

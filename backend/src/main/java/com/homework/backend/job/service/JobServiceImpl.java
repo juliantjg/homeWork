@@ -75,7 +75,8 @@ public class JobServiceImpl implements JobService {
 				jobRequest.getSalary(),
 				jobRequest.getLocation(),
 				jobRequest.getPostcode(),
-				currUser.getId()
+				currUser.getId(),
+				jobRequest.getJobType()
 		);
 
 		jobRepository.save(job);

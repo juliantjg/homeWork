@@ -1,5 +1,7 @@
 package com.homework.backend.job.request;
 
+import com.homework.backend.enums.JobType;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,13 +20,16 @@ public class JobRequest {
 	private String location;
 	@NotBlank
 	private String postcode;
+	@NotNull
+	private JobType jobType;
 	
-	public JobRequest(String title, String description, float salary, String location, String postcode) {
+	public JobRequest(String title, String description, float salary, String location, String postcode, JobType jobType) {
 		this.title = title;
 		this.description = description;
 		this.salary = salary;
 		this.location = location;
 		this.postcode = postcode;
+		this.jobType = jobType;
 	}
 	
 	public JobRequest() {
@@ -70,6 +75,12 @@ public class JobRequest {
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
-	
-	
+
+	public JobType getJobType() {
+		return jobType;
+	}
+
+	public void setJobType(JobType jobType) {
+		this.jobType = jobType;
+	}
 }
