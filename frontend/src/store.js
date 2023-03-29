@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 // import rootReducer from "./reducers";
 import { userLoginReducers, userRegisterReducers } from "./reducers/securityReducers";
 import { getAllJobsReducer, jobDetailsReducer, updateJobDetailsReducers, createJobReducers, deleteJobReducers } from "./reducers/jobReducers";
-import { createJobApplicationReducers, getJobApplicationListPerJobReducers, updateJobApplicationReducers } from "./reducers/jobApplicationReducers";
+import { createJobApplicationReducers, getJobApplicationListPerJobReducers, getAssociatedJobApplicationsReducers, updateJobApplicationReducers } from "./reducers/jobApplicationReducers";
 
 const reducer = combineReducers({
     userLogin: userLoginReducers,
@@ -17,6 +17,7 @@ const reducer = combineReducers({
 
     createJobApplication: createJobApplicationReducers,
     getJobApplicationListPerJob: getJobApplicationListPerJobReducers,
+    getAssociatedJobApplications: getAssociatedJobApplicationsReducers,
     updateJobApplication: updateJobApplicationReducers,
 })
 
