@@ -46,9 +46,15 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public GetAllJobsResponse getAllJobs(HttpServletRequest request) throws Exception {
+	public GetAllJobsResponse getAllJobs(HttpServletRequest request, String type) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		
 		List<Job> jobs = jobRepository.findAll();
+		System.out.println(type);
+		if (type.equals("my-posted")) {
+			System.out.println("asda");
+			jobs = jobRepository.findAllByUserId(currUser.getId());
+		}
 		
 		JobMapper mapper = new JobMapper(jobApplicationRepository, jobRepository, userRepository);
 		List<JobDetailsDTO> jobList = mapper.mapShowAllJobs(jobs, currUser.getId());

@@ -12,7 +12,7 @@ public interface JobService {
 	 * @param request
 	 * @return
 	 */
-	public GetAllJobsResponse getAllJobs(HttpServletRequest request) throws Exception;
+	public GetAllJobsResponse getAllJobs(HttpServletRequest request, String type) throws Exception;
 	
 	/**
 	 * Create a job based on parameters given in jobRequest
