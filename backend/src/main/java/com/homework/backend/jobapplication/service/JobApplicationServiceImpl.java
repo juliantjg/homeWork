@@ -75,10 +75,13 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		if(jobApplications != null){
 			throw new Exception("You have already applied!" + " " + "Job application status is: " + jobApplications.getStatus());
 		}
+		
+		Job job = jobRepository.findById(jobApplicationRequest.getJob_id());
 
 		var jobApplication = new JobApplication(
 				jobApplicationRequest.getApplicant_id(),
 				jobApplicationRequest.getJob_id(),
+				job.getUser_id(),
 				JobApplicationStatus.PENDING
 		);
 
@@ -154,7 +157,10 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		User currUser = this.extractUserFromRequest(request);
 		
 		List<JobApplication> jobApplication = jobApplicationRepository.filterByApplicantId(currUser.getId());
-
+		if (type.equals("creator-id")) {
+			jobApplication = jobApplicationRepository.filterByJobCreatorId(currUser.getId());
+		}
+		
 		JobApplicationMapper mapper = new JobApplicationMapper(jobRepository, userRepository);
 		List<GetApplicationListPerJobDTO> mappedJobApplications = mapper.map(jobApplication);
 		

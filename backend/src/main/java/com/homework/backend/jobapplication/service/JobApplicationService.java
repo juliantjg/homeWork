@@ -48,7 +48,7 @@ public interface JobApplicationService {
 	/**
 	 * Show all job applications associated with the current user
 	 * @param request
-	 * @param type
+	 * @param type (applicant-id/creator-id)
 	 * @return
 	 * @throws Exception
 	 */
