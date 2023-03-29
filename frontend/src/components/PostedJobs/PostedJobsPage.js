@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import NavBar from '../SideBar/NavBar';
+import PostedJobsList from './PostedJobsList';
 
 function PostedJobsPage() {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ function PostedJobsPage() {
                                 <hr />
                             </center>
                             <div class="p-5">
-
+                                <PostedJobsList />
                             </div>
                         </div>
                         <NavBar />

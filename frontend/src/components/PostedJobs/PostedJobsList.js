@@ -8,10 +8,10 @@ import Footer from '../Footer/Footer';
 import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import { getAllJobsAction } from '../../actions/jobActions';
-import HuntJobsItem from './HuntJobsItem';
+import HuntJobsItem from '../HuntJobs/HuntJobsItem';
 import Loader from '../Utils/Loader';
 
-function HuntJobsList() {
+function PostedJobsList() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ function HuntJobsList() {
     const { error, loading, jobs } = getAllJobs
 
     useEffect(() => {
-        dispatch(getAllJobsAction("all"));
+        dispatch(getAllJobsAction("my-posted"));
     }, [])
 
     return (
@@ -62,4 +62,4 @@ function HuntJobsList() {
     );
 }
 
-export default HuntJobsList;
+export default PostedJobsList;

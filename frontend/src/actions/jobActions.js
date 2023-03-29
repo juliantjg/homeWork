@@ -23,7 +23,7 @@ import {
 import { useNavigate, withRouter } from "react-router-dom";
 import { backendUrl } from "../securityUtils/vars";
 
-export const getAllJobsAction = () => async (dispatch, getState) => {
+export const getAllJobsAction = (type) => async (dispatch, getState) => {
     try {
         dispatch({ type: GET_ALL_JOBS_REQUEST })
 
@@ -54,7 +54,7 @@ export const getAllJobsAction = () => async (dispatch, getState) => {
             }
         }
 
-        var url = backendUrl + `api/job/all`;
+        var url = backendUrl + `api/job/all/${type}`;
 
         const { data } = await axios.get(
             url,

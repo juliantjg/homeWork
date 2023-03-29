@@ -30,12 +30,13 @@ public class JobController {
 		this.service = service;
 	}
 
-	@GetMapping("/all")
+	@GetMapping("/all/{type}")
 	public ResponseEntity<?> all(
-		HttpServletRequest request
+		HttpServletRequest request,
+		@PathVariable("type") String type
 	) {
 		try {
-			return ResponseEntity.ok(service.getAllJobs(request));
+			return ResponseEntity.ok(service.getAllJobs(request, type));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobResponse(null, e.getMessage(), false));
 		}
