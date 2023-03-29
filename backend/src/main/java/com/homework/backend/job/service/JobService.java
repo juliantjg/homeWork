@@ -10,6 +10,7 @@ public interface JobService {
 	/**
 	 * Get all jobs
 	 * @param request
+	 * @param type (all/my-posted)
 	 * @return
 	 */
 	public GetAllJobsResponse getAllJobs(HttpServletRequest request, String type) throws Exception;

@@ -50,9 +50,7 @@ public class JobServiceImpl implements JobService {
 		User currUser = this.extractUserFromRequest(request);
 		
 		List<Job> jobs = jobRepository.findAll();
-		System.out.println(type);
 		if (type.equals("my-posted")) {
-			System.out.println("asda");
 			jobs = jobRepository.findAllByUserId(currUser.getId());
 		}
 		

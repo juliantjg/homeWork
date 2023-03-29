@@ -10,6 +10,8 @@ public class GetApplicationListPerJobDTO {
 	private String applicant_email;
 	private String job_title;
 	
+	private int job_creator_id;
+	
 	public GetApplicationListPerJobDTO() {
 		super();
 	}
@@ -59,5 +61,13 @@ public class GetApplicationListPerJobDTO {
 
 	public void setStatus(JobApplicationStatus status) {
 		this.status = status;
+	}
+
+	public int getJob_creator_id() {
+		return job_creator_id;
+	}
+
+	public void setJob_creator_id(int job_creator_id) {
+		this.job_creator_id = job_creator_id;
 	}
 }

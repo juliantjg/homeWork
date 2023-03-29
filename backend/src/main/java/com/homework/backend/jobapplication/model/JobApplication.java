@@ -15,6 +15,7 @@ public class JobApplication {
 	private int id;
 	private int applicant_id;
 	private int job_id;
+	private int job_creator_id;
 
 	private JobApplicationStatus status;
 	
@@ -22,10 +23,11 @@ public class JobApplication {
 		
 	}
 	
-	public JobApplication(int applicant_id, int job_id, JobApplicationStatus status) {
+	public JobApplication(int applicant_id, int job_id, int job_creator_id, JobApplicationStatus status) {
 		super();
 		this.applicant_id = applicant_id;
 		this.job_id = job_id;
+		this.job_creator_id = job_creator_id;
 		this.status = status;
 	}
 	
@@ -51,6 +53,14 @@ public class JobApplication {
 	
 	public void setJob_id(int job_id) {
 		this.job_id = job_id;
+	}
+	
+	public int getJob_creator_id() {
+		return job_creator_id;
+	}
+
+	public void setJob_creator_id(int job_creator_id) {
+		this.job_creator_id = job_creator_id;
 	}
 
 	public JobApplicationStatus getStatus() {return status; }

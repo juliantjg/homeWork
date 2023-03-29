@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import NavBar from '../SideBar/NavBar';
+import JobApplicationListContent from './JobApplicationListContent';
 
 function JobApplicationListPage() {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ function JobApplicationListPage() {
                                 <hr />
                             </center>
                             <div class="p-5">
-
+                                <JobApplicationListContent />
                             </div>
                         </div>
                         <NavBar />

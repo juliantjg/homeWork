@@ -13,6 +13,7 @@ import UpdateJobApplicationStatusModal from './UpdateJobApplicationStatusModal';
 function JobApplicationItem(jobApplication) {
 
     const [modalShow, setModalShow] = useState(false);
+    const authUserId = parseInt(localStorage.getItem("userIdHomework"))
 
     function getStatusBadge() {
         var status = jobApplication.jobApplication.status
@@ -20,6 +21,8 @@ function JobApplicationItem(jobApplication) {
         else if (status === 'ACCEPTED') return 'badge badge-success'
         else if (status === 'REJECTED') return 'badge badge-danger'
     }
+
+    console.log(jobApplication.jobApplication)
 
     return (
         <div class="card" id="jobApplicationCard">
@@ -36,16 +39,23 @@ function JobApplicationItem(jobApplication) {
                     </div>
                     <div class="col-md-3" align="right">
                         {
-                            (jobApplication.jobApplication.status === 'PENDING') ?
+                            (jobApplication.jobApplication.job_creator_id === authUserId) ?
                                 (
                                     <div>
-                                        <button type="button" class="btn btn-outline-dark" onClick={() => setModalShow(true)}>Update status</button>
-                                        <UpdateJobApplicationStatusModal
-                                            show={modalShow}
-                                            onHide={() => setModalShow(false)}
-                                            application={jobApplication.jobApplication}
-                                        />
-                                        <br />
+                                        {
+                                            (jobApplication.jobApplication.status === 'PENDING') ?
+                                                (
+                                                    <div>
+                                                        <button type="button" class="btn btn-outline-dark" onClick={() => setModalShow(true)}>Update status</button>
+                                                        <UpdateJobApplicationStatusModal
+                                                            show={modalShow}
+                                                            onHide={() => setModalShow(false)}
+                                                            application={jobApplication.jobApplication}
+                                                        />
+                                                        <br />
+                                                    </div>
+                                                ) : null
+                                        }
                                     </div>
                                 ) : null
                         }

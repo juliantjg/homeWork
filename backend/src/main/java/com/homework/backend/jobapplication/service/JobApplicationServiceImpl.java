@@ -75,10 +75,13 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		if(jobApplications != null){
 			throw new Exception("You have already applied!" + " " + "Job application status is: " + jobApplications.getStatus());
 		}
+		
+		Job job = jobRepository.findById(jobApplicationRequest.getJob_id());
 
 		var jobApplication = new JobApplication(
 				jobApplicationRequest.getApplicant_id(),
 				jobApplicationRequest.getJob_id(),
+				job.getUser_id(),
 				JobApplicationStatus.PENDING
 		);
 
@@ -146,7 +149,25 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("currentApplications", mappedJobApplications);
 
-		return new JobApplicationResponse(jobObject, "Job found", true);
+		return new JobApplicationResponse(jobObject, "Job applications fetched", true);
+	}
+
+	@Override
+	public JobApplicationResponse getAssociatedJobApplications(HttpServletRequest request, String type) throws Exception {
+		User currUser = this.extractUserFromRequest(request);
+		
+		List<JobApplication> jobApplication = jobApplicationRepository.filterByApplicantId(currUser.getId());
+		if (type.equals("creator-id")) {
+			jobApplication = jobApplicationRepository.filterByJobCreatorId(currUser.getId());
+		}
+		
+		JobApplicationMapper mapper = new JobApplicationMapper(jobRepository, userRepository);
+		List<GetApplicationListPerJobDTO> mappedJobApplications = mapper.map(jobApplication);
+		
+		HashMap<String, Object> jobObject = new HashMap<String, Object>();
+		jobObject.put("currentApplications", mappedJobApplications);
+
+		return new JobApplicationResponse(jobObject, "Associated job applications fetched", true);
 	}
 	
 	/**

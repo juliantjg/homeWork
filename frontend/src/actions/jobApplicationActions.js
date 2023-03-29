@@ -8,6 +8,10 @@ import {
     GET_JOB_APPLICATION_LIST_PER_JOB_SUCCESS,
     GET_JOB_APPLICATION_LIST_PER_JOB_FAIL,
 
+    GET_ASSOCIATED_JOB_APPLICATIONS_REQUEST,
+    GET_ASSOCIATED_JOB_APPLICATIONS_SUCCESS,
+    GET_ASSOCIATED_JOB_APPLICATIONS_FAIL,
+
     UPDATE_JOB_APPLICATION_REQUEST,
     UPDATE_JOB_APPLICATION_SUCCESS,
     UPDATE_JOB_APPLICATION_FAIL,
@@ -117,6 +121,57 @@ export const getJobApplicationListPerJobAction = (jobId) => async (dispatch, get
     } catch (error) {
         dispatch({
             type: GET_JOB_APPLICATION_LIST_PER_JOB_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+};
+
+export const getAssociatedJobApplicationsAction = (type) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: GET_ASSOCIATED_JOB_APPLICATIONS_REQUEST })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        var config = null
+        var token = null
+
+        if (typeof userInfo === 'object') {
+            token = userInfo.data.token
+        }
+        else if (typeof userInfo === 'string') {
+            token = userInfo
+        }
+
+        if (userInfo == null) {
+            config = null
+        }
+        else {
+            // we're passing header into our post request
+            config = {
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        }
+
+        // remember to use backticks here instead of quotes to pass in the id
+        const { data } = await axios.get(
+            backendUrl + `api/jobapplication/my-all/${type}`,
+            config
+        )
+
+        dispatch({
+            type: GET_ASSOCIATED_JOB_APPLICATIONS_SUCCESS,
+            payload: data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_ASSOCIATED_JOB_APPLICATIONS_FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,

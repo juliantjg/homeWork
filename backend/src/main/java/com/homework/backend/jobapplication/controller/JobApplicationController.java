@@ -58,4 +58,16 @@ public class JobApplicationController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobApplicationResponse(null, e.getMessage(), false));
 		}
 	}
+	
+	@GetMapping("/my-all/{type}")
+	public ResponseEntity<?> myAll(
+		HttpServletRequest request,
+		@PathVariable("type") String type
+	) {
+		try {
+			return ResponseEntity.ok(service.getAssociatedJobApplications(request, type));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JobApplicationResponse(null, e.getMessage(), false));
+		}
+	}
 }

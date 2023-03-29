@@ -8,6 +8,10 @@ import {
     GET_JOB_APPLICATION_LIST_PER_JOB_SUCCESS,
     GET_JOB_APPLICATION_LIST_PER_JOB_FAIL,
 
+    GET_ASSOCIATED_JOB_APPLICATIONS_REQUEST,
+    GET_ASSOCIATED_JOB_APPLICATIONS_SUCCESS,
+    GET_ASSOCIATED_JOB_APPLICATIONS_FAIL,
+
     UPDATE_JOB_APPLICATION_REQUEST,
     UPDATE_JOB_APPLICATION_SUCCESS,
     UPDATE_JOB_APPLICATION_FAIL,
@@ -59,6 +63,32 @@ export const getJobApplicationListPerJobReducers = (state = { jobApplications: [
             }
 
         case GET_JOB_APPLICATION_LIST_PER_JOB_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const getAssociatedJobApplicationsReducers = (state = { jobApplications: [] }, action) => {
+    switch (action.type) {
+
+        case GET_ASSOCIATED_JOB_APPLICATIONS_REQUEST:
+            return {
+                loading: true,
+                jobApplications: []
+            }
+
+        case GET_ASSOCIATED_JOB_APPLICATIONS_SUCCESS:
+            return {
+                loading: false,
+                jobApplications: action.payload
+            }
+
+        case GET_ASSOCIATED_JOB_APPLICATIONS_FAIL:
             return {
                 loading: false,
                 error: action.payload
