@@ -36,11 +36,24 @@ public interface JobApplicationService {
 	/**
 	 * Show all job applications for a job creator
 	 * @param request
+	 * @param jobId
 	 * @return
 	 * @throws Exception
 	 */
 	public JobApplicationResponse getAllJobApplications(
 			HttpServletRequest request,
 			int jobId
+	) throws Exception;
+	
+	/**
+	 * Show all job applications associated with the current user
+	 * @param request
+	 * @param type
+	 * @return
+	 * @throws Exception
+	 */
+	public JobApplicationResponse getAssociatedJobApplications(
+			HttpServletRequest request,
+			String type
 	) throws Exception;
 }

@@ -23,4 +23,8 @@ public interface JobApplicationRepository  extends JpaRepository<JobApplication,
 
     @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.applicant_id = :applicant_id AND jobapplication.job_id = :job_id")
     JobApplication findByApplicantIdAndJobId(@Param("applicant_id") int applicant_id, @Param("job_id") int job_id);
+    
+    @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.applicant_id = :applicant_id")
+    List<JobApplication> filterByApplicantId(@Param("applicant_id") int applicant_id);
+
 }

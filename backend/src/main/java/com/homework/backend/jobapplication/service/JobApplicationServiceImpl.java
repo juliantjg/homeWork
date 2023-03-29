@@ -146,7 +146,22 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
 		jobObject.put("currentApplications", mappedJobApplications);
 
-		return new JobApplicationResponse(jobObject, "Job found", true);
+		return new JobApplicationResponse(jobObject, "Job applications fetched", true);
+	}
+
+	@Override
+	public JobApplicationResponse getAssociatedJobApplications(HttpServletRequest request, String type) throws Exception {
+		User currUser = this.extractUserFromRequest(request);
+		
+		List<JobApplication> jobApplication = jobApplicationRepository.filterByApplicantId(currUser.getId());
+
+		JobApplicationMapper mapper = new JobApplicationMapper(jobRepository, userRepository);
+		List<GetApplicationListPerJobDTO> mappedJobApplications = mapper.map(jobApplication);
+		
+		HashMap<String, Object> jobObject = new HashMap<String, Object>();
+		jobObject.put("currentApplications", mappedJobApplications);
+
+		return new JobApplicationResponse(jobObject, "Associated job applications fetched", true);
 	}
 	
 	/**
