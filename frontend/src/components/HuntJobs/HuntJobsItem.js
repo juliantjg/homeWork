@@ -32,7 +32,7 @@ function HuntJobsItem(job) {
         <div class="card" id="jobCard">
             <Link to={`/job-details/${job.job.id}`} id="huntJobItemContent">
                 <div class="p-2">
-                    <img class="card-img-top" src="https://i.imgur.com/041jkF8.png" alt="Card image cap" />
+                    <img class="card-img-top" src="https://i.imgur.com/041jkF8.png" alt="Card image cap" id="jobCardImage" />
                     <div class="card-img-overlay" align="right">
                         {
                             (authUserId === job.job.user_id) ?
@@ -41,14 +41,14 @@ function HuntJobsItem(job) {
                                         <span class="badge badge-dark">Owner</span>
                                     </small>
                                 )
-                                : 
+                                :
                                 (
                                     (job.job.application_status !== null) ?
-                                    (
-                                        <small>
-                                            <span class={getJobApplicationStatusBadgeColour()}>{job.job.application_status}</span>
-                                        </small>
-                                    ):null
+                                        (
+                                            <small>
+                                                <span class={getJobApplicationStatusBadgeColour()}>{job.job.application_status}</span>
+                                            </small>
+                                        ) : null
                                 )
                         }
                     </div>
