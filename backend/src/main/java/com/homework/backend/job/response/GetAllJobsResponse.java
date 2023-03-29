@@ -1,29 +1,29 @@
 package com.homework.backend.job.response;
 
-import com.homework.backend.job.model.Job;
-import lombok.Data;
-
-import java.util.HashMap;
 import java.util.List;
+
+import com.homework.backend.job.dto.JobDetailsDTO;
+
+import lombok.Data;
 
 @Data
 public class GetAllJobsResponse {
 	private boolean success;
     private String message;
-    private List<Job> data;
+    private List<JobDetailsDTO> data;
 
-    public GetAllJobsResponse(List<Job> data, String message, boolean success) {
+    public GetAllJobsResponse(List<JobDetailsDTO> data, String message, boolean success) {
         super();
         this.success = success;
         this.message = message;
         this.data = data;
     }
 
-    public List<Job> getData() {
+    public List<JobDetailsDTO> getData() {
         return data;
     }
 
-    public void setData(List<Job> data) {
+    public void setData(List<JobDetailsDTO> data) {
         this.data = data;
     }
 

@@ -63,7 +63,6 @@ export const getAllJobsAction = () => async (dispatch, getState) => {
 
         dispatch({
             type: GET_ALL_JOBS_SUCCESS,
-            // data.data because that is how i made it in the backend, the array of data is inside the data variable
             payload: data.data
         })
     } catch (error) {

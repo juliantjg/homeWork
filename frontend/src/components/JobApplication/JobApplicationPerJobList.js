@@ -7,36 +7,38 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer';
 import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
-import { getAllJobsAction } from '../../actions/jobActions';
-import HuntJobsItem from './HuntJobsItem';
 import Loader from '../Utils/Loader';
+import { getJobApplicationListPerJobAction } from '../../actions/jobApplicationActions';
+import JobApplicationItem from './JobApplicationItem';
 
-function HuntJobsList() {
+function JobApplicationPerJobList(id) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const getAllJobs = useSelector(state => state.getAllJobs)
-    const { error, loading, jobs } = getAllJobs
+    const getJobApplicationListPerJob = useSelector(state => state.getJobApplicationListPerJob)
+    const { error, loading, jobApplications } = getJobApplicationListPerJob
+
+    const updateJobApplication = useSelector(state => state.updateJobApplication)
+    const { error: errorUpdateJobApplication, loading: loadingUpdateJobApplication, message: messageUpdateJobApplication } = updateJobApplication
 
     useEffect(() => {
-        dispatch(getAllJobsAction());
-    }, [])
+        dispatch(getJobApplicationListPerJobAction(id.id));
+    }, [messageUpdateJobApplication])
 
     return (
         <div>
             {
                 !loading ?
                     (
-                        <div>
+                        <div class="p-3">
                             {
-                                jobs ?
+                                jobApplications.currentApplications ?
                                     (
-                                        <div class="row">
-                                            {jobs.map(job => (
+                                        <div>
+                                            {jobApplications.currentApplications.map(jobApplication => (
 
-                                                <div class="col-md-4">
-                                                    <HuntJobsItem job={job} />
-                                                    <br />
+                                                <div class="row">
+                                                    <JobApplicationItem jobApplication={jobApplication} />
                                                 </div>
                                             ))}
                                         </div>
@@ -62,4 +64,4 @@ function HuntJobsList() {
     );
 }
 
-export default HuntJobsList;
+export default JobApplicationPerJobList;

@@ -11,6 +11,9 @@ import HuntJobsDashboard from "./components/HuntJobs/HuntJobsDashboard";
 import JobDetails from "./components/Job/JobDetails";
 import JobDetailsPage from "./components/Job/JobDetailsPage";
 import CreateJobPage from "./components/Job/CreateJobPage";
+import JobApplicationListPage from "./components/JobApplication/JobApplicationListPage";
+import PostedJobsPage from "./components/PostedJobs/PostedJobsPage";
+import JobApplicationPerJobPage from "./components/JobApplication/JobApplicationPerJobPage";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
           <Route path="/hunt-jobs" element={<HuntJobsDashboard />} />
           <Route path="/job-details/:id" element={<JobDetailsPage />} />
           <Route path="/create-job" element={<CreateJobPage />} />
+          <Route path="/application-list" element={<JobApplicationListPage />} />
+          <Route path="/posted-jobs" element={<PostedJobsPage />} />
+          <Route path="/application-list-per-job/:id" element={<JobApplicationPerJobPage />} />
         </Routes>
       </Router>
     </Provider>

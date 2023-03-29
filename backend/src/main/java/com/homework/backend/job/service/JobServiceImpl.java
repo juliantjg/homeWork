@@ -8,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homework.backend.config.service.JwtService;
+import com.homework.backend.job.dto.JobDetailsDTO;
+import com.homework.backend.job.mapper.JobMapper;
 import com.homework.backend.job.model.Job;
 import com.homework.backend.job.repository.JobRepository;
 import com.homework.backend.job.request.JobRequest;
 import com.homework.backend.job.response.GetAllJobsResponse;
 import com.homework.backend.job.response.JobResponse;
+import com.homework.backend.jobapplication.repository.JobApplicationRepository;
 import com.homework.backend.user.model.User;
+import com.homework.backend.user.repository.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
@@ -25,11 +29,18 @@ public class JobServiceImpl implements JobService {
 	
 	@Autowired
 	private JobRepository jobRepository;
+	@Autowired
+	private JobApplicationRepository jobApplicationRepository;
+	@Autowired
+	private UserRepository userRepository;
 	private JwtService jwtService;
 	private Validator validator;
 
-	public JobServiceImpl(JobRepository jobRepository, JwtService jwtService, Validator validator) {
+	public JobServiceImpl(JobRepository jobRepository, JobApplicationRepository jobApplicationRepository,
+			UserRepository userRepository, JwtService jwtService, Validator validator) {
 		this.jobRepository = jobRepository;
+		this.jobApplicationRepository = jobApplicationRepository;
+		this.userRepository = userRepository;
 		this.jwtService = jwtService;
 		this.validator = validator;
 	}
@@ -38,7 +49,11 @@ public class JobServiceImpl implements JobService {
 	public GetAllJobsResponse getAllJobs(HttpServletRequest request) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 		List<Job> jobs = jobRepository.findAll();
-		return new GetAllJobsResponse(jobs, "All jobs retrieved", true);
+		
+		JobMapper mapper = new JobMapper(jobApplicationRepository, jobRepository, userRepository);
+		List<JobDetailsDTO> jobList = mapper.mapShowAllJobs(jobs, currUser.getId());
+		
+		return new GetAllJobsResponse(jobList, "All jobs retrieved", true);
 	}
 
 	@Override
@@ -75,8 +90,12 @@ public class JobServiceImpl implements JobService {
 		}
 
 		jobRepository.findById(id);
+		
+		JobMapper mapper = new JobMapper(jobApplicationRepository, jobRepository, userRepository);
+		JobDetailsDTO jobDetailsDTO = mapper.mapJobDetails(job, currUser.getId());
+		
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();
-		jobObject.put("job", job);
+		jobObject.put("job", jobDetailsDTO);
 		return new JobResponse(jobObject, "Job found", true);
 	}
 

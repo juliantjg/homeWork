@@ -60,3 +60,39 @@ body {
 #welcomeHomeCard:hover {
   transform: scale(1.06);
 }
+
+#welcomeHomeCardLink {
+  text-decoration: none;
+  color: black;
+}
+
+#welcomeHomeCardLink:hover {
+  text-decoration: underline;
+}
+
+#jobApplicationCard {
+  color: black;
+}
+
+#jobApplicationCard:hover {
+  border: 2px solid black;
+}
+
+#jobApplicationCardContent {
+  text-decoration: none;
+  color: black;
+}
+
+#jobApplicationCardContent:hover {
+  text-decoration: underline;
+}
+
+#jobDetailsLinkToJobCreator {
+  text-decoration: none;
+  color: black;
+}
+
+#jobDetailsLinkToJobCreator:hover {
+  text-decoration: underline;
+}
+
