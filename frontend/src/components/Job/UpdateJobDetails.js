@@ -21,6 +21,7 @@ function UpdateJobDetails(job) {
     const [location, setLocation] = useState(job.job.location);
     const [postcode, setPostcode] = useState(job.job.postcode);
     const [description, setDescription] = useState(job.job.description);
+    const [jobType, setJobType] = useState(job.job.jobType);
 
     const updateJobDetails = useSelector(state => state.updateJobDetails)
     const { error, loading, message } = updateJobDetails
@@ -55,6 +56,9 @@ function UpdateJobDetails(job) {
         else if (!description || !description.replace(/\s/g, '').length) {
             return 'Description cannot be empty';
         }
+        else if (jobType === "") {
+            return 'Please choose a job type';
+        }
         else {
             return '';
         }
@@ -77,7 +81,7 @@ function UpdateJobDetails(job) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-
+        console.log(jobType)
         if (checkErrors() === '') {
             setLoad(true)
             var jobDetails = {
@@ -85,7 +89,8 @@ function UpdateJobDetails(job) {
                 salary: salary,
                 location: location,
                 postcode: postcode,
-                description: description
+                description: description,
+                jobType: jobType
             }
             dispatch(updateJobDetailsAction(jobDetails, job.job.id))
         }
@@ -105,7 +110,7 @@ function UpdateJobDetails(job) {
                                 <ToastContainer />
                                 <Form onSubmit={submitHandler}>
                                     <div class="form-group row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <label for="updateJobTitleText"><small>Title</small></label><br />
                                             <input
                                                 type="email"
@@ -116,7 +121,9 @@ function UpdateJobDetails(job) {
                                                 value={title}>
                                             </input>
                                         </div>
-                                        <div class="col-md-4">
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
                                             <label for="updateJobTitleText"><small>Salary ($/hr)</small></label><br />
                                             <input
                                                 required
@@ -125,10 +132,28 @@ function UpdateJobDetails(job) {
                                                 min="20"
                                                 max="100"
                                                 class="form-control 
-                                                form-control-lg"
+                                                    form-control-lg"
                                                 id="updateJobTitleText"
                                                 value={salary}>
                                             </input>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="updateJobTitleText"><small>Type</small></label><br />
+                                            <Form.Control
+                                                as="select"
+                                                aria-label="Default select example"
+                                                onChange={(e) => setJobType(e.target.value)}
+                                                size="lg"
+                                                value={jobType}
+                                            >
+                                                <option value="">Choose a type</option>
+                                                <option value="PET_SITTING">Pet Sitting</option>
+                                                <option value="BABY_SITTING">Baby Sitting</option>
+                                                <option value="CLEANING">Cleaning</option>
+                                                <option value="LAWN_MOWING">Lawn Mowing</option>
+                                                <option value="TUTORING">Tutoring</option>
+                                                <option value="OTHERS">Other</option>
+                                            </Form.Control>
                                         </div>
                                     </div>
                                     <div class="form-group row">

@@ -39,7 +39,7 @@ function JobDetailsPage() {
                                 <h2>Jobs Details</h2>
                                 <hr />
                             </center>
-                            <div class="p-5">
+                            <div>
                                 <div class="col-md-6 offset-md-3">
                                     <JobDetails id={match.id} />
                                 </div>
