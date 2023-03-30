@@ -75,7 +75,8 @@ public class JobServiceImpl implements JobService {
 				jobRequest.getSalary(),
 				jobRequest.getLocation(),
 				jobRequest.getPostcode(),
-				currUser.getId()
+				currUser.getId(),
+				jobRequest.getJobType()
 		);
 
 		jobRepository.save(job);
@@ -126,6 +127,7 @@ public class JobServiceImpl implements JobService {
 		job.setSalary(jobRequest.getSalary());
 		job.setLocation(jobRequest.getLocation());
 		job.setPostcode(jobRequest.getPostcode());
+		job.setJobType(jobRequest.getJobType());
 
 		jobRepository.save(job);
 		HashMap<String, Object> jobObject = new HashMap<String, Object>();

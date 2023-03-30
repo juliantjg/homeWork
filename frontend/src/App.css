@@ -96,3 +96,8 @@ body {
   text-decoration: underline;
 }
 
+#jobCardImage {
+  height: 220px;
+  object-fit: cover;
+}
+

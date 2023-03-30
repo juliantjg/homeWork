@@ -21,6 +21,7 @@ function CreateJob(job) {
     const [location, setLocation] = useState("");
     const [postcode, setPostcode] = useState("");
     const [description, setDescription] = useState("");
+    const [jobType, setJobType] = useState("");
 
     const createJob = useSelector(state => state.createJob)
     const { error, loading } = createJob
@@ -48,6 +49,9 @@ function CreateJob(job) {
         else if (!description || !description.replace(/\s/g, '').length) {
             return 'Description cannot be empty';
         }
+        else if (jobType === "") {
+            return 'Please choose a job type';
+        }
         else {
             return '';
         }
@@ -71,7 +75,8 @@ function CreateJob(job) {
                 salary: salary,
                 location: location,
                 postcode: postcode,
-                description: description
+                description: description,
+                jobType: jobType
             }
             dispatch(createJobAction(jobDetails))
         }
@@ -87,7 +92,7 @@ function CreateJob(job) {
                 <ToastContainer />
                 <Form onSubmit={submitHandler}>
                     <div class="form-group row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <label for="updateJobTitleText"><small>Title</small></label><br />
                             <input
                                 type="email"
@@ -98,7 +103,9 @@ function CreateJob(job) {
                                 value={title}>
                             </input>
                         </div>
-                        <div class="col-md-4">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
                             <label for="updateJobTitleText"><small>Salary ($/hr)</small></label><br />
                             <input
                                 required
@@ -107,10 +114,27 @@ function CreateJob(job) {
                                 min="20"
                                 max="100"
                                 class="form-control 
-                                                form-control-lg"
+                                                    form-control-lg"
                                 id="updateJobTitleText"
                                 value={salary}>
                             </input>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="updateJobTitleText"><small>Type</small></label><br />
+                            <Form.Control
+                                as="select"
+                                aria-label="Default select example"
+                                onChange={(e) => setJobType(e.target.value)}
+                                size="lg"
+                            >
+                                <option value="">Choose a type</option>
+                                <option value="PET_SITTING">Pet Sitting</option>
+                                <option value="BABY_SITTING">Baby Sitting</option>
+                                <option value="CLEANING">Cleaning</option>
+                                <option value="LAWN_MOWING">Lawn Mowing</option>
+                                <option value="TUTORING">Tutoring</option>
+                                <option value="OTHERS">Other</option>
+                            </Form.Control>
                         </div>
                     </div>
                     <div class="form-group row">
