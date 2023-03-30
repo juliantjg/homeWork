@@ -34,6 +34,36 @@ function JobDetails(id) {
 
     const authUserId = parseInt(localStorage.getItem("userIdHomework"))
 
+    function getJobTypeFormatted() {
+        if (job.job) {
+            var jobType = job.job.jobType
+            switch (jobType) {
+                case "PET_SITTING":
+                    return "Pet Sitting"
+            }
+            switch (jobType) {
+                case "BABY_SITTING":
+                    return "Baby Sitting"
+            }
+            switch (jobType) {
+                case "CLEANING":
+                    return "Cleaning"
+            }
+            switch (jobType) {
+                case "LAWN_MOWING":
+                    return "Lawn Mowing"
+            }
+            switch (jobType) {
+                case "TUTORING":
+                    return "Tutoring"
+            }
+            switch (jobType) {
+                case "OTHERS":
+                    return "Other"
+            }
+        }
+    }
+
     function notifyError(errorMessage) {
         toast.error(errorMessage, {
             position: toast.POSITION.TOP_CENTER
@@ -135,7 +165,9 @@ function JobDetails(id) {
                                                         <div class="card-body">
                                                             <ToastContainer />
                                                             <h1>{job.job.title}</h1>
-                                                            <small>${job.job.salary}/hr</small>
+                                                            <small>
+                                                                ${job.job.salary}/hr
+                                                            </small>
                                                             <div align="right">
                                                                 {
                                                                     (authUserId === job.job.user_id) ?
@@ -159,6 +191,8 @@ function JobDetails(id) {
 
                                                             </div>
                                                             <hr />
+                                                            <b>Type:</b> {getJobTypeFormatted()}
+                                                            <br />
                                                             <b>Location:</b> {job.job.location}
                                                             <br />
                                                             <b>Postcode:</b> {job.job.postcode}

@@ -8,9 +8,22 @@ import Footer from '../Footer/Footer';
 import { Form, Row } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import { getAllJobsAction } from '../../actions/jobActions';
+import { pet_sitting_job_type_pic, baby_sitting_job_type_pic, cleaning_job_type_pic, lawn_mowing_job_type_pic, tutoring_job_type_pic, others_job_type_pic } from '../Variables/links';
 
 function HuntJobsItem(job) {
     const authUserId = parseInt(localStorage.getItem("userIdHomework"))
+
+    function getJobTypeThumbnail() {
+        if (job.job) {
+            var job_type = job.job.jobType;
+            if (job_type === "PET_SITTING") return pet_sitting_job_type_pic;
+            else if (job_type === "BABY_SITTING") return baby_sitting_job_type_pic;
+            else if (job_type === "CLEANING") return cleaning_job_type_pic;
+            else if (job_type === "LAWN_MOWING") return lawn_mowing_job_type_pic;
+            else if (job_type === "TUTORING") return tutoring_job_type_pic;
+            else return others_job_type_pic;
+        }
+    }
 
     function getJobApplicationStatusBadgeColour() {
         if (job.job) {
@@ -32,7 +45,7 @@ function HuntJobsItem(job) {
         <div class="card" id="jobCard">
             <Link to={`/job-details/${job.job.id}`} id="huntJobItemContent">
                 <div class="p-2">
-                    <img class="card-img-top" src="https://i.imgur.com/041jkF8.png" alt="Card image cap" id="jobCardImage" />
+                    <img class="card-img-top" src={getJobTypeThumbnail()} alt="Card image cap" id="jobCardImage" />
                     <div class="card-img-overlay" align="right">
                         {
                             (authUserId === job.job.user_id) ?

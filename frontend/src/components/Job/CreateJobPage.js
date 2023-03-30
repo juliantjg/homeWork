@@ -40,7 +40,7 @@ function CreateJobPage() {
                                 <h2>Create a Job</h2>
                                 <hr />
                             </center>
-                            <div class="p-5">
+                            <div>
                                 <div class="col-md-6 offset-md-3">
                                     <CreateJob />
                                 </div>
