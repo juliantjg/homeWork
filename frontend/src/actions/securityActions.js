@@ -59,7 +59,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
-export const register = (firstname, lastname, email, password) => async (dispatch) => {
+export const register = (firstname, lastname, email, password, role) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST
@@ -75,7 +75,7 @@ export const register = (firstname, lastname, email, password) => async (dispatc
         // this is the regular axios call, but we're now passing in username, password and the config above
         const { data } = await axios.post(
             backendUrl + 'api/auth/register',
-            { 'firstname': firstname, 'lastname': lastname, 'email': email, 'password': password },
+            { 'firstname': firstname, 'lastname': lastname, 'email': email, 'password': password, "role": role },
             config
         )
 
