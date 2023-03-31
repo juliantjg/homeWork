@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.homework.backend.config.service.JwtService;
 import com.homework.backend.enums.JobApplicationStatus;
+import com.homework.backend.enums.Role;
 import com.homework.backend.job.model.Job;
 import com.homework.backend.job.repository.JobRepository;
 import com.homework.backend.jobapplication.dto.GetApplicationListPerJobDTO;
@@ -56,6 +57,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 			JobApplicationRequest jobApplicationRequest
 	) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		this.checkRole(currUser, Role.JOB_SEEKER);
 		
 		Set<ConstraintViolation<JobApplicationRequest>> violations = validator.validate(jobApplicationRequest);
 		if (!violations.isEmpty()) {
@@ -96,6 +98,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 	public JobApplicationResponse updateJobApplicationStatus(HttpServletRequest request,
 			int id, UpdateJobApplicationRequest updateJobApplicationRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		this.checkRole(currUser, Role.EMPLOYER);
 		
 		Set<ConstraintViolation<UpdateJobApplicationRequest>> violations = validator.validate(updateJobApplicationRequest);
 		if (!violations.isEmpty()) {
@@ -130,6 +133,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 	@Override
 	public JobApplicationResponse getAllJobApplications(HttpServletRequest request, int jobId) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		this.checkRole(currUser, Role.EMPLOYER);
 
 		Job job = jobRepository.findById(jobId);
 
@@ -180,5 +184,17 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		final String jwt;
 		jwt = authHeader.substring(7);
 		return jwtService.extractUser(jwt);
+	}
+	
+	/**
+	 * Helper function to authorize user role
+	 * @param user
+	 * @param role
+	 * @throws Exception
+	 */
+	private void checkRole(User user, Role role) throws Exception {
+		if (user.getRole() != role) {
+			throw new Exception ("User role must be " + role + " to access this API");
+		}
 	}
 }
