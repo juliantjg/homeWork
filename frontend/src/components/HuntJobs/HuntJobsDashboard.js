@@ -17,6 +17,7 @@ function HuntJobsDashboard() {
     // userLogin is from store.js
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
+    const currUserRole = localStorage.getItem("roleHomework")
 
     useEffect(() => {
         // if userInfo exists then show the home page, this is so that logged in user can't acces /login
@@ -36,7 +37,16 @@ function HuntJobsDashboard() {
                         <div id="page-size">
                             <center>
                                 <h2>Jobs Marketplace</h2>
-                                <small>Seek out various jobs posted by employers</small>
+                                {
+                                    (currUserRole === "EMPLOYER") ?
+                                        (
+                                            <small>Explore various jobs posted by other employers</small>
+                                        )
+                                        :
+                                        (
+                                            <small>Seek out various jobs posted by employers</small>
+                                        )
+                                }
                                 <hr />
                             </center>
                             <div class="p-5">

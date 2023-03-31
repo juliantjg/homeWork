@@ -14,6 +14,7 @@ import { getAssociatedJobApplicationsAction } from '../../actions/jobApplication
 function JobApplicationListContent(id) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const currUserRole = localStorage.getItem('roleHomework')
 
     const getAssociatedJobApplications = useSelector(state => state.getAssociatedJobApplications)
     const { error, loading, jobApplications } = getAssociatedJobApplications
@@ -22,7 +23,12 @@ function JobApplicationListContent(id) {
     const { error: errorUpdateJobApplication, loading: loadingUpdateJobApplication, message: messageUpdateJobApplication } = updateJobApplication
 
     useEffect(() => {
-        dispatch(getAssociatedJobApplicationsAction("creator-id"));
+        if (currUserRole === 'EMPLOYER') {
+            dispatch(getAssociatedJobApplicationsAction("creator-id"));
+        }
+        else {
+            dispatch(getAssociatedJobApplicationsAction("applicant-id"));
+        }
     }, [messageUpdateJobApplication])
 
     return (

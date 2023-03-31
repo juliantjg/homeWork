@@ -13,6 +13,7 @@ import { DELETE_JOB_RESET } from '../../actions/types';
 function HomeContent() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const authUserRole = localStorage.getItem('roleHomework')
     const authUserFirstname = localStorage.getItem('firstnameHomework')
 
     return (
@@ -22,9 +23,24 @@ function HomeContent() {
                     <span id="welcomeHome"> Welcome, </span>
                     <span id="welcomeHomeName">{authUserFirstname}</span>
                     <br />
-                    <span id="welcomeHomeRole">This is your <b>Employer</b> Dashboard</span>
-                    <br />
-                    <Link to="/create-job">Create Job</Link>
+                    {
+                        (authUserRole === 'EMPLOYER') ?
+                            (
+                                <div>
+                                    <span id="welcomeHomeRole">This is your <b>Employer</b> Dashboard</span>
+                                    <br />
+                                    <Link to="/create-job">Create Job</Link>
+                                </div>
+                            )
+                            :
+                            (
+                                <div>
+                                    <span id="welcomeHomeRole">This is your <b>Job Seeker</b> Dashboard</span>
+                                    <br />
+                                    <Link to="/hunt-jobs">Hunt Jobs</Link>
+                                </div>
+                            )
+                    }
                 </div>
             </div>
             <br />
@@ -34,7 +50,7 @@ function HomeContent() {
                         <div class="col-4">
                             <div class="card" id="welcomeHomeCard">
                                 <div class="card-body">
-                                    <b>3</b><br /> 
+                                    <b>3</b><br />
                                     <small>pending applications</small>
                                 </div>
                                 <Link to="/application-list" id="welcomeHomeCardLink">
@@ -44,23 +60,28 @@ function HomeContent() {
                                 </Link>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="card" id="welcomeHomeCard">
-                                <div class="card-body">
-                                    <b>5</b><br /> 
-                                    <small>posted jobs</small>
-                                </div>
-                                <Link to="/posted-jobs" id="welcomeHomeCardLink">
-                                    <div class="card-footer">
-                                        <small>View all</small>
+                        {
+                            (authUserRole === "EMPLOYER") ?
+                                (
+                                    <div class="col-4">
+                                        <div class="card" id="welcomeHomeCard">
+                                            <div class="card-body">
+                                                <b>5</b><br />
+                                                <small>posted jobs</small>
+                                            </div>
+                                            <Link to="/posted-jobs" id="welcomeHomeCardLink">
+                                                <div class="card-footer">
+                                                    <small>View all</small>
+                                                </div>
+                                            </Link>
+                                        </div>
                                     </div>
-                                </Link>
-                            </div>
-                        </div>
+                                ) : null
+                        }
                         <div class="col-4">
                             <div class="card" id="welcomeHomeCard">
                                 <div class="card-body">
-                                    <b>3</b><br /> 
+                                    <b>3</b><br />
                                     <small>successful applications</small>
                                 </div>
                                 <Link to="/application-list" id="welcomeHomeCardLink">
