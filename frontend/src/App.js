@@ -14,6 +14,7 @@ import CreateJobPage from "./components/Job/CreateJobPage";
 import JobApplicationListPage from "./components/JobApplication/JobApplicationListPage";
 import PostedJobsPage from "./components/PostedJobs/PostedJobsPage";
 import JobApplicationPerJobPage from "./components/JobApplication/JobApplicationPerJobPage";
+import UserProfilePage from "./components/User/UserProfilePage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/application-list" element={<JobApplicationListPage />} />
           <Route path="/posted-jobs" element={<PostedJobsPage />} />
           <Route path="/application-list-per-job/:id" element={<JobApplicationPerJobPage />} />
+          <Route path="/user-profile/:id" element={<UserProfilePage />} />
         </Routes>
       </Router>
     </Provider>
