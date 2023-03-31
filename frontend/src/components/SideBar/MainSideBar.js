@@ -4,10 +4,14 @@ import { Row, Col, Container } from "react-bootstrap";
 
 function MainSideBar() {
     const navigate = useNavigate();
+    const currUserRole = localStorage.getItem('roleHomework');
 
     function logout() {
         localStorage.clear("emailHomework")
         localStorage.clear("tokenHomework")
+        localStorage.clear('userIdHomework')
+        localStorage.clear('firstnameHomework')
+        localStorage.clear('roleHomework')
 
         navigate('/login')
     }
@@ -32,11 +36,16 @@ function MainSideBar() {
                                 &nbsp;<i class="fas fa-briefcase"></i> &nbsp; <small>Hunt Jobs</small>&nbsp;&nbsp;
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/posted-jobs" class="nav-link px-0 align-middle" id="sideBarButtons">
-                                &nbsp;<i class="fas fa-clipboard"></i> &nbsp; <small>Posted Jobs</small>&nbsp;&nbsp;
-                            </Link>
-                        </li>
+                        {
+                            (currUserRole === 'EMPLOYER') ?
+                                (
+                                    <li>
+                                        <Link to="/posted-jobs" class="nav-link px-0 align-middle" id="sideBarButtons">
+                                            &nbsp;<i class="fas fa-clipboard"></i> &nbsp; <small>Posted Jobs</small>&nbsp;&nbsp;
+                                        </Link>
+                                    </li>
+                                ) : null
+                        }
                         <li>
                             <Link to="/application-list" class="nav-link px-0 align-middle" id="sideBarButtons">
                                 &nbsp;<i class="fas fa-envelope"></i> &nbsp; <small>Applications</small>&nbsp;&nbsp;

@@ -13,6 +13,7 @@ import JobApplicationListContent from './JobApplicationListContent';
 function JobApplicationListPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const currUserRole = localStorage.getItem('roleHomework')
 
     // userLogin is from store.js
     const userLogin = useSelector(state => state.userLogin)
@@ -36,7 +37,16 @@ function JobApplicationListPage() {
                         <div id="page-size">
                             <center>
                                 <h2>Applications</h2>
-                                <small>A list of all your associated applications</small>
+                                {
+                                    (currUserRole === 'EMPLOYER') ?
+                                        (
+                                            <small>Application requests</small>
+                                        )
+                                        :
+                                        (
+                                            <small>A list of all applications you have created</small>
+                                        )
+                                }
                                 <hr />
                             </center>
                             <div class="p-5">

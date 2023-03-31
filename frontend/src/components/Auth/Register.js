@@ -19,6 +19,7 @@ function Register() {
     const [email, setEmail] = useState({});
     const [password, setPassword] = useState({});
     const [confirmPassword, setConfirmPassword] = useState({});
+    const [role, setRole] = useState("")
 
     // userLogin is from store.js
     const userLogin = useSelector(state => state.userLogin)
@@ -72,7 +73,7 @@ function Register() {
         }
         else {
             setLoad(true);
-            dispatch(register(firstname, lastname, email, password))
+            dispatch(register(firstname, lastname, email, password, role))
         }
     }
 
@@ -80,10 +81,7 @@ function Register() {
         <div class="container-fluid px-0">
             <div id="page-size">
                 <div class="col-md-12">
-                    <div class="row pt-2">
-                        <center>
-                            homeWork
-                        </center>
+                    <div class="row">
                         <ToastContainer />
                     </div>
                     <div class="row pt-4 justify-content-center">
@@ -119,15 +117,40 @@ function Register() {
                                         <input type="password" class="form-control input-lg form-control-lg" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
                                     </div>
                                 </div>
-                                <br />
                                 {
                                     load ?
                                         (
-                                            <button type="submit" class="btn btn-secondary btn-lg btn-block" disabled><Loader /></button>
+                                            <div class="row pt-3 p-2">
+                                                <div class="col-md-6 p-1">
+                                                    <button type="submit" disabled class="btn btn-secondary btn-lg btn-block">
+                                                        <Loader colour="black" />
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-6 p-1">
+                                                    <button type="submit" disabled class="btn btn-secondary btn-lg btn-block">
+                                                        <Loader colour="black" />
+                                                    </button>
+                                                </div>
+                                            </div>
                                         )
                                         :
                                         (
-                                            <button type="submit" class="btn btn-secondary btn-lg btn-block">Register</button>
+                                            <div class="row pt-3 p-2">
+                                                <div class="col-md-6 p-1">
+                                                    <button type="submit" onClick={(e) => setRole("EMPLOYER")} class="btn btn-outline-secondary btn-lg btn-block">
+                                                        <small>Register</small>
+                                                        <br />
+                                                        <small>as</small> <b>Employer</b>
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-6 p-1">
+                                                    <button type="submit" onClick={(e) => setRole("JOB_SEEKER")} class="btn btn-outline-secondary btn-lg btn-block">
+                                                        <small>Register</small>
+                                                        <br />
+                                                        <small>as</small> <b>Job Seeker</b>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         )
                                 }
                             </Form>

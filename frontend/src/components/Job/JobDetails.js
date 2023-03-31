@@ -16,6 +16,7 @@ import { createJobApplicationAction } from '../../actions/jobApplicationActions'
 function JobDetails(id) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const currUserRole = localStorage.getItem('roleHomework')
 
     const [loadUpdateJob, setLoadUpdateJob] = useState(false);
     const [updateDetails, setUpdateDetails] = useState(false);
@@ -292,20 +293,26 @@ function JobDetails(id) {
                                                         (
                                                             <div>
                                                                 {
-                                                                    (job.job.application_status === null) ?
+                                                                    (currUserRole !== 'EMPLOYER') ?
                                                                         (
-                                                                            <button type="button" onClick={submitApplyJob} class="btn btn-block btn-secondary">
-                                                                                Apply now
-                                                                            </button>
-                                                                        )
-                                                                        :
-                                                                        (
-                                                                            <button type="button" disabled class={getJobApplicationStatusButtonColour()}>
-                                                                                {job.job.application_status}
-                                                                            </button>
-                                                                        )
+                                                                            <div>
+                                                                                {
+                                                                                    (job.job.application_status === null) ?
+                                                                                        (
+                                                                                            <button type="button" onClick={submitApplyJob} class="btn btn-block btn-secondary">
+                                                                                                Apply now
+                                                                                            </button>
+                                                                                        )
+                                                                                        :
+                                                                                        (
+                                                                                            <button type="button" disabled class={getJobApplicationStatusButtonColour()}>
+                                                                                                {job.job.application_status}
+                                                                                            </button>
+                                                                                        )
+                                                                                }
+                                                                            </div>
+                                                                        ) : null
                                                                 }
-
                                                             </div>
                                                         )
                                                 }

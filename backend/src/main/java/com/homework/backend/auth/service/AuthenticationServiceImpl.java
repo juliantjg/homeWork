@@ -57,7 +57,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 				request.getLastname(),
 				request.getEmail(),
 				passwordEncoder.encode(request.getPassword()),
-				Role.USER
+				request.getRole()
 				);
 		
 		repository.save(user);
@@ -96,6 +96,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		tokenObject.put("token", jwtToken);
 		tokenObject.put("user_id", user.getId());
 		tokenObject.put("first_name", user.getFirstname());
+		tokenObject.put("role", user.getRole());
 
 		return new AuthenticationResponse(tokenObject, "Login successful", true);
 	}

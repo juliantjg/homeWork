@@ -54,10 +54,7 @@ function Login() {
         <div class="container-fluid px-0">
             <div id="page-size">
                 <div class="col-md-12">
-                    <div class="row pt-2">
-                        <center>
-                            homeWork
-                        </center>
+                    <div class="row">
                         <ToastContainer />
                     </div>
                     <br />

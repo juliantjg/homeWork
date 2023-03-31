@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homework.backend.config.service.JwtService;
+import com.homework.backend.enums.Role;
 import com.homework.backend.job.dto.JobDetailsDTO;
 import com.homework.backend.job.mapper.JobMapper;
 import com.homework.backend.job.model.Job;
@@ -63,6 +64,7 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public JobResponse createJob(HttpServletRequest request, JobRequest jobRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		this.checkRole(currUser, Role.EMPLOYER);
 		
 		Set<ConstraintViolation<JobRequest>> violations = validator.validate(jobRequest);
 		if (!violations.isEmpty()) {
@@ -107,6 +109,7 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public JobResponse updateJob(HttpServletRequest request, int id, JobRequest jobRequest) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		this.checkRole(currUser, Role.EMPLOYER);
 		
 		Set<ConstraintViolation<JobRequest>> violations = validator.validate(jobRequest);
 		if (!violations.isEmpty()) {
@@ -138,6 +141,8 @@ public class JobServiceImpl implements JobService {
 	@Override
 	public JobResponse deleteJob(HttpServletRequest request, int id) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
+		this.checkRole(currUser, Role.EMPLOYER);
+		
 		Job job;
 
 		job = jobRepository.findById(id);
@@ -162,5 +167,17 @@ public class JobServiceImpl implements JobService {
 		final String jwt;
 		jwt = authHeader.substring(7);
 		return jwtService.extractUser(jwt);
+	}
+	
+	/**
+	 * Helper function to authorize user role
+	 * @param user
+	 * @param role
+	 * @throws Exception
+	 */
+	private void checkRole(User user, Role role) throws Exception {
+		if (user.getRole() != role) {
+			throw new Exception ("User role must be " + role + " to access this API");
+		}
 	}
 }
