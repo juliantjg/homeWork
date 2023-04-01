@@ -5,6 +5,7 @@ import { Row, Col, Container } from "react-bootstrap";
 function MainSideBar() {
     const navigate = useNavigate();
     const currUserRole = localStorage.getItem('roleHomework');
+    const currUserId = localStorage.getItem('userIdHomework')
 
     function logout() {
         localStorage.clear("emailHomework")
@@ -52,9 +53,9 @@ function MainSideBar() {
                             </Link>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle" id="sideBarButtons">
+                            <Link to={`/user-profile/${currUserId}`} class="nav-link px-0 align-middle" id="sideBarButtons">
                                 &nbsp;<i class="fas fa-user"></i> &nbsp; <small>Profile</small>&nbsp;&nbsp;
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a href="" class="nav-link px-0 align-middle" onClick={() => logout()} id="sideBarButtons">

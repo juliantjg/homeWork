@@ -1,9 +1,20 @@
 package com.homework.backend.user.service;
 
-import java.util.List;
+import com.homework.backend.user.response.UserResponse;
 
-import com.homework.backend.user.model.User;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface UserService {
-	public List<User> getAllUsers();
+	
+	/**
+	 * Get one user details
+	 * @param request
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public UserResponse read(
+			HttpServletRequest request,
+			int userId
+	) throws Exception;
 }
