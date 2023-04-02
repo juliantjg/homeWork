@@ -17,4 +17,14 @@ public interface UserService {
 			HttpServletRequest request,
 			int userId
 	) throws Exception;
+	
+	/**
+	 * Get home page values
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	public UserResponse homeData(
+			HttpServletRequest request
+	) throws Exception;
 }

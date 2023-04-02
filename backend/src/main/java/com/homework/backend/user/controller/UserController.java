@@ -33,4 +33,15 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new UserResponse(null, e.getMessage(), false));
 		}
 	}
+	
+	@GetMapping("/home-data")
+	public ResponseEntity<?> homeData(
+		HttpServletRequest request
+	) {
+		try {
+			return ResponseEntity.ok(service.homeData(request));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new UserResponse(null, e.getMessage(), false));
+		}
+	}
 }

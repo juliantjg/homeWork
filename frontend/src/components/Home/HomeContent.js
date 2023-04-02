@@ -9,12 +9,22 @@ import { Form } from 'react-bootstrap';
 import MainSideBar from '../SideBar/MainSideBar';
 import NavBar from '../SideBar/NavBar';
 import { DELETE_JOB_RESET } from '../../actions/types';
+import { getHomeValuesAction } from '../../actions/userActions';
+import Loader from '../Utils/Loader';
 
 function HomeContent() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const authUserRole = localStorage.getItem('roleHomework')
     const authUserFirstname = localStorage.getItem('firstnameHomework')
+
+    const homeValues = useSelector(state => state.homeValues)
+    const { loading, error, user } = homeValues
+
+    useEffect(() => {
+        dispatch(getHomeValuesAction());
+    }, [])
+    console.log(user)
 
     return (
         <div>
@@ -46,52 +56,83 @@ function HomeContent() {
             <br />
             <div class="row pl-5">
                 <div class="col-md-10 offset-md-1">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="card" id="welcomeHomeCard">
-                                <div class="card-body">
-                                    <b>3</b><br />
-                                    <small>pending applications</small>
-                                </div>
-                                <Link to="/application-list" id="welcomeHomeCardLink">
-                                    <div class="card-footer">
-                                        <small>View all</small>
-                                    </div>
-                                </Link>
-                            </div>
-                        </div>
-                        {
-                            (authUserRole === "EMPLOYER") ?
-                                (
-                                    <div class="col-4">
-                                        <div class="card" id="welcomeHomeCard">
-                                            <div class="card-body">
-                                                <b>5</b><br />
-                                                <small>posted jobs</small>
-                                            </div>
-                                            <Link to="/posted-jobs" id="welcomeHomeCardLink">
-                                                <div class="card-footer">
-                                                    <small>View all</small>
+                    {
+                        !loading ?
+                            (
+                                <div>
+                                    {
+                                        !error ?
+                                            (
+                                                <div>
+                                                    {
+                                                        user ?
+                                                            (
+                                                                <div class="row">
+                                                                    <div class="col-4">
+                                                                        <div class="card" id="welcomeHomeCard">
+                                                                            <div class="card-body">
+                                                                                <b>{user.numPendingApplications}</b><br />
+                                                                                <small>pending applications</small>
+                                                                            </div>
+                                                                            <Link to="/application-list" id="welcomeHomeCardLink">
+                                                                                <div class="card-footer">
+                                                                                    <small>View all</small>
+                                                                                </div>
+                                                                            </Link>
+                                                                        </div>
+                                                                    </div>
+                                                                    {
+                                                                        (authUserRole === "EMPLOYER") ?
+                                                                            (
+                                                                                <div class="col-4">
+                                                                                    <div class="card" id="welcomeHomeCard">
+                                                                                        <div class="card-body">
+                                                                                            <b>{user.numJobsPostedByCurrUser}</b><br />
+                                                                                            <small>posted jobs</small>
+                                                                                        </div>
+                                                                                        <Link to="/posted-jobs" id="welcomeHomeCardLink">
+                                                                                            <div class="card-footer">
+                                                                                                <small>View all</small>
+                                                                                            </div>
+                                                                                        </Link>
+                                                                                    </div>
+                                                                                </div>
+                                                                            ) : null
+                                                                    }
+                                                                    <div class="col-4">
+                                                                        <div class="card" id="welcomeHomeCard">
+                                                                            <div class="card-body">
+                                                                                <b>{user.numSuccessfulApplications}</b><br />
+                                                                                <small>successful applications</small>
+                                                                            </div>
+                                                                            <Link to="/application-list" id="welcomeHomeCardLink">
+                                                                                <div class="card-footer">
+                                                                                    <small>View all</small>
+                                                                                </div>
+                                                                            </Link>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            ) : null
+                                                    }
                                                 </div>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                ) : null
-                        }
-                        <div class="col-4">
-                            <div class="card" id="welcomeHomeCard">
-                                <div class="card-body">
-                                    <b>3</b><br />
-                                    <small>successful applications</small>
+                                            )
+                                            :
+                                            (
+                                                <div>
+                                                    {error}
+                                                </div>
+                                            )
+                                    }
                                 </div>
-                                <Link to="/application-list" id="welcomeHomeCardLink">
-                                    <div class="card-footer">
-                                        <small>View all</small>
-                                    </div>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
+                            )
+                            :
+                            (
+                                <div class="row">
+                                    <Loader colour="black" />
+                                </div>
+                            )
+                    }
                 </div>
             </div>
         </div>
