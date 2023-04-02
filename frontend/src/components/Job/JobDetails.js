@@ -174,7 +174,7 @@ function JobDetails(id) {
                                                                     (authUserId === job.job.user_id) ?
                                                                         (
                                                                             <small>
-                                                                                <Link to="#" id="jobDetailsLinkToJobCreator">
+                                                                                <Link to={`/user-profile/${job.job.user_id}`} id="jobDetailsLinkToJobCreator">
                                                                                     Posted by you
                                                                                 </Link>
                                                                             </small>
@@ -182,7 +182,7 @@ function JobDetails(id) {
                                                                         :
                                                                         (
                                                                             <small>
-                                                                                <Link to="#" id="jobDetailsLinkToJobCreator">
+                                                                                <Link to={`/user-profile/${job.job.user_id}`} id="jobDetailsLinkToJobCreator">
                                                                                     Posted by: {job.job.creator_firstname}
                                                                                 </Link>
                                                                             </small>

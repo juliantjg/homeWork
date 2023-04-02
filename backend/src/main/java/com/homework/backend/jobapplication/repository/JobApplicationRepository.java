@@ -1,14 +1,13 @@
 package com.homework.backend.jobapplication.repository;
 
-import com.homework.backend.job.model.Job;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.homework.backend.jobapplication.model.JobApplication;
-
-import java.util.List;
 
 @Repository
 public interface JobApplicationRepository  extends JpaRepository<JobApplication, Integer> {
@@ -29,4 +28,16 @@ public interface JobApplicationRepository  extends JpaRepository<JobApplication,
 
     @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.job_creator_id = :job_creator_id")
     List<JobApplication> filterByJobCreatorId(@Param("job_creator_id") int job_creator_id);
+    
+    @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.applicant_id = :applicant_id AND jobapplication.status = 1")
+    List<JobApplication> filterAcceptedByApplicantId(@Param("applicant_id") int applicant_id);
+    
+    @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.applicant_id = :applicant_id AND jobapplication.status = 0")
+    List<JobApplication> filterPendingByApplicantId(@Param("applicant_id") int applicant_id);
+    
+    @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.job_creator_id = :job_creator_id AND jobapplication.status = 1")
+    List<JobApplication> filterAcceptedByJobCreatorId(@Param("job_creator_id") int job_creator_id);
+    
+    @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.job_creator_id = :job_creator_id AND jobapplication.status = 0")
+    List<JobApplication> filterPendingByJobCreatorId(@Param("job_creator_id") int job_creator_id);
 }

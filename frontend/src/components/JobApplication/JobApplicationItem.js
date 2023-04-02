@@ -33,7 +33,7 @@ function JobApplicationItem(jobApplication) {
                             <b>Job:</b> {jobApplication.jobApplication.job_title}
                         </Link>
                         <br />
-                        <Link to='#' id="jobApplicationCardContent">
+                        <Link to={`/user-profile/${jobApplication.jobApplication.applicant_id}`} id="jobApplicationCardContent">
                             <b>Applicant:</b> {jobApplication.jobApplication.applicant_email}
                         </Link>
                     </div>

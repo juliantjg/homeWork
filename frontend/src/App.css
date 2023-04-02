@@ -100,3 +100,19 @@ body {
   height: 220px;
   object-fit: cover;
 }
+
+#userProfileEmail {
+  text-decoration: none;
+}
+
+#userProfileEmail:hover {
+  text-decoration: underline;
+}
+
+#profileImage {
+  transition: all .2s ease-in-out;
+}
+
+#profileImage:hover {
+  transform: scale(1.1);
+}
