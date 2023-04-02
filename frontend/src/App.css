@@ -116,3 +116,7 @@ body {
 #profileImage:hover {
   transform: scale(1.1);
 }
+
+#logoMainLogin {
+  width: 100px;
+}
