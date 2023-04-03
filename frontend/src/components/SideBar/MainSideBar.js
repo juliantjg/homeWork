@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory, Link, useNavigate } from 'react-router-dom';
 import { Row, Col, Container } from "react-bootstrap";
+import logoMain from '../../images/logoHomework.png'
 
 function MainSideBar() {
     const navigate = useNavigate();
@@ -25,7 +26,9 @@ function MainSideBar() {
                 </a>
                 <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-left align-items-left">
                     <li>
-                        <center>homeWork</center>
+                        <div align="center">
+                        <img src={logoMain} id="logoMainLogin" />
+                        </div>
                         <hr />
                         <li>
                             <Link to="/home" class="nav-link px-0 align-middle" id="sideBarButtons">
