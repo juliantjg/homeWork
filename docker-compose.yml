@@ -1,0 +1,26 @@
+version: '3'
+services:
+  db:
+    image: mysql:8
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: homework
+      MYSQL_USER: newuser
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+  server:
+    image: ghcr.io/juliantjg/homework-backend:latest
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/homework?autoReconnect=true
+
+  frontend:
+    image: ghcr.io/juliantjg/homework-frontend:latest
+    ports:
+      - 3000:3000
