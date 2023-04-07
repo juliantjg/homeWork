@@ -63,7 +63,7 @@ Wanna try out <b>homeWork</b> on your local machine? Here are the steps:
  ![image](https://user-images.githubusercontent.com/53683415/230527901-133bb8f4-25f2-462d-9d7b-89fabfa3ded9.png#gh-dark-mode-only)
  ![image](https://user-images.githubusercontent.com/53683415/230527979-822d73f7-868a-403e-96e1-3c68f3f0b28f.png#gh-light-mode-only)
 
- 1. Create a file `docker-compose.yml` with the following content (you can also find it [here](https://github.com/juliantjg/homeWork/blob/main/docker-compose.yml):
+ 1. Create a file `docker-compose.yml` with the following content (you can also find it [here](https://github.com/juliantjg/homeWork/blob/main/docker-compose.yml)):
  ```yml
 version: '3'
 services:
