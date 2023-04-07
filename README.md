@@ -13,7 +13,7 @@
 </div>
 
 ## :question: What Is homeWork?
-<b>homeWork</b> is a web application made with Spring Boot (backend api) and React.js + Redux (frontend). A house work job website, <b>homeWork</b> provides a platform for both job seeker and recruiter. The application provides a wide range of functionalities listed here.
+<b>homeWork</b> is a web application made with Spring Boot (backend api) and React.js + Redux (frontend). A house work job website, <b>homeWork</b> provides a platform for both job seeker and recruiter. The application provides a wide range of functionalities listed below.
 
 ## ⚙️ Functionalities
 Here is the complete <b>homeWork</b> functionalities rundown:
