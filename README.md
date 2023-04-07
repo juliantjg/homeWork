@@ -128,4 +128,4 @@ services:
 - [Julian Tjiong](https://juliantjg.github.io/)
 
 ## :scroll: License
-- [Standart MIT License](https://github.com/juliantjg/Ribbit/blob/main/LICENSE.md)
+- [Standart MIT License](https://github.com/juliantjg/homeWork/blob/main/LICENSE.md)
