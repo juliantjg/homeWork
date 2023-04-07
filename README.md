@@ -46,20 +46,77 @@ Here is the complete <b>homeWork</b> functionalities rundown:
 - Spring Security for back end authentication and tokenization
 - Json Web Token - Jwt Api
 - MySQL for DB management
+- Docker containerization, docker-compose
 - Error handling with React/Redux
 - Responsive UI with CSS/Bootstrap
 - Gravatar pixel profile picture
 - JPA @Query on repository data fetching/modification
 
-## :airplane: Getting Started
-Setting up <b>homeWork</b> on your local machine? Here are the instructions:
+## :whale: Getting Started With Docker
+Wanna try out <b>homeWork</b> on your local machine? Here are the steps:
+<details>
+ <summary><b>Simple setup with Docker</b></summary>
+ <br />
+ 
+ Both the frontend and backend (and MySQL database) were containerized within separate Docker containers, as provided [here](https://github.com/juliantjg?tab=packages&repo_name=homeWork):
+ ![image](https://user-images.githubusercontent.com/53683415/230527901-133bb8f4-25f2-462d-9d7b-89fabfa3ded9.png#gh-dark-mode-only)
+ ![image](https://user-images.githubusercontent.com/53683415/230527979-822d73f7-868a-403e-96e1-3c68f3f0b28f.png#gh-light-mode-only)
 
-## 🛠️ Built With <img src="https://user-images.githubusercontent.com/53683415/229395886-517660d1-0abe-4d41-86d0-1d9ffbb5b9ba.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223294710-a2ba9d4c-c680-497a-9b71-101f2186fc49.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223313723-71cdde37-3494-44e8-80cb-01edecb3311c.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/224955579-a1ed2e8c-3ab7-41e1-b129-f37466f77c05.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223313847-3cf57f1a-11fd-4963-a1df-b3895e478119.png" width="30">
+ 1. Create a file `docker-compose.yml` with the following content (you can also find it [here](https://github.com/juliantjg/homeWork/blob/main/docker-compose.yml):
+ ```yml
+version: '3'
+services:
+  db:
+    image: mysql:8
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: homework
+      MYSQL_USER: newuser
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+  server:
+    image: ghcr.io/juliantjg/homework-backend:latest
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/homework?autoReconnect=true
+
+  frontend:
+    image: ghcr.io/juliantjg/homework-frontend:latest
+    ports:
+      - 3000:3000
+ ```
+ 
+  2. Run the `docker-compose.yml` to start up the backend (server), frontend (frontend) and MySQL (db). (Please make sure your local port `:3000` and `:8080` aren't in use):
+  ```sh
+  $ docker-compose up
+  
+  =======================================================
+  Starting springdeploy_server_1         ... done
+  Starting springdeploy_frontend_1       ... done
+  Starting springdeploy_db_1             ... done
+  =======================================================
+  ```
+  
+  3. Access the application by entering `localhost:3000` on your browser:
+  <img src="https://user-images.githubusercontent.com/53683415/230529589-096b7310-4820-4e2d-a611-64e22d11f873.png" width="800">
+  
+  4. Done!
+ 
+</details>
+
+## 🛠️ Built With <img src="https://user-images.githubusercontent.com/53683415/229395886-517660d1-0abe-4d41-86d0-1d9ffbb5b9ba.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223294710-a2ba9d4c-c680-497a-9b71-101f2186fc49.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223313723-71cdde37-3494-44e8-80cb-01edecb3311c.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/224955579-a1ed2e8c-3ab7-41e1-b129-f37466f77c05.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223313847-3cf57f1a-11fd-4963-a1df-b3895e478119.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/224954200-33f50594-34e2-43b6-81e9-f3c0bb269f97.png" width="30">
 - <img src="https://user-images.githubusercontent.com/53683415/229395886-517660d1-0abe-4d41-86d0-1d9ffbb5b9ba.png" width="12"> <b><a href="https://spring.io/">Spring Framework</a> -</b> The Spring Framework is an application framework and inversion of control container for the Java platform.
 - <img src="https://user-images.githubusercontent.com/53683415/223294710-a2ba9d4c-c680-497a-9b71-101f2186fc49.png" width="12"> <b><a href="https://reactjs.org/">React</a> -</b> React is a free and open-source front-end JavaScript library for building user interfaces based on components.
 - <img src="https://user-images.githubusercontent.com/53683415/223313723-71cdde37-3494-44e8-80cb-01edecb3311c.png" width="12"> <b><a href="https://getbootstrap.com/">Bootstrap</a> -</b> Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development.
 - <img src="https://user-images.githubusercontent.com/53683415/224955579-a1ed2e8c-3ab7-41e1-b129-f37466f77c05.png" width="12"> <b><a href="https://www.mysql.com/">MySQL</a> -</b> MySQL is an open-source relational database management system.
 - <img src="https://user-images.githubusercontent.com/53683415/223313847-3cf57f1a-11fd-4963-a1df-b3895e478119.png" width="12"> <b><a href="https://redux.js.org/">Redux</a> -</b> Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
+- <img src="https://user-images.githubusercontent.com/53683415/224954200-33f50594-34e2-43b6-81e9-f3c0bb269f97.png" width="12"> <b><a href="https://www.docker.com/">Docker</a> -</b> Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
 
 
 ## ✍️ Authors
