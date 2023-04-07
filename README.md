@@ -59,6 +59,7 @@ Wanna try out <b>homeWork</b> on your local machine? Here are the steps:
  <br />
  
  Both the frontend and backend (and MySQL database) were containerized within separate Docker containers, as provided [here](https://github.com/juliantjg?tab=packages&repo_name=homeWork):
+ <br />
  ![image](https://user-images.githubusercontent.com/53683415/230527901-133bb8f4-25f2-462d-9d7b-89fabfa3ded9.png#gh-dark-mode-only)
  ![image](https://user-images.githubusercontent.com/53683415/230527979-822d73f7-868a-403e-96e1-3c68f3f0b28f.png#gh-light-mode-only)
 
@@ -104,6 +105,7 @@ services:
   ```
   
   3. Access the application by entering `localhost:3000` on your browser:
+
   <img src="https://user-images.githubusercontent.com/53683415/230530173-d507cf61-7078-4040-b1a3-2a0a3a8f594e.png" width="600">
   
   4. Done! Now you can login. The database have been seeded, thus you can find jobs on the Hunt Jobs dashboard. Here is an employer credential (you can also sign up as one):
