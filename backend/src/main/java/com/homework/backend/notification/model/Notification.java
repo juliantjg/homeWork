@@ -19,9 +19,8 @@ public class Notification {
 		super();
 	}
 
-	public Notification(int id, String description, int user_id) {
+	public Notification(String description, int user_id) {
 		super();
-		this.id = id;
 		this.description = description;
 		this.user_id = user_id;
 	}

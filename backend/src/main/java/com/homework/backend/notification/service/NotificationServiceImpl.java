@@ -1,9 +1,13 @@
 package com.homework.backend.notification.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homework.backend.config.service.JwtService;
+import com.homework.backend.notification.model.Notification;
 import com.homework.backend.notification.repository.NotificationRepository;
 import com.homework.backend.notification.response.NotificationResponse;
 import com.homework.backend.user.model.User;
@@ -27,8 +31,12 @@ public class NotificationServiceImpl implements NotificationService {
 	public NotificationResponse getCurrUserNotifications(HttpServletRequest request) throws Exception {
 		User currUser = this.extractUserFromRequest(request);
 		
-		// TODO Auto-generated method stub
-		return null;
+		List<Notification> notifications = notificationRepository.filterByUserId(currUser.getId());
+		
+		HashMap<String, Object> notificationObject = new HashMap<>();
+		notificationObject.put("notifications", notifications);
+		
+		return new NotificationResponse(notificationObject, "Notifications fetched", true);
 	}
 
 	/**
