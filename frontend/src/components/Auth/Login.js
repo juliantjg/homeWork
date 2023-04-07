@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 import { Form } from 'react-bootstrap';
 import { USER_LOGOUT } from '../../actions/types';
 import Loader from '../Utils/Loader';
+import logoMain from '../../images/logoHomework.png'
 
 function Login() {
     const navigate = useNavigate();
@@ -60,7 +61,14 @@ function Login() {
                     <br />
                     <div class="row pt-4 justify-content-center">
                         <div class="card p-4" style={{ width: "30rem" }}>
-                            <h1>Login</h1>
+                            <div class="row">
+                                <div class="col-md-6">
+                                <h1>Login</h1>
+                                </div>
+                                <div class="col-md-6" align="right">
+                                <img src={logoMain} id="logoMainLogin" />
+                                </div>
+                            </div>
                             <br />
                             <Form
                                 onSubmit={submitHandler}

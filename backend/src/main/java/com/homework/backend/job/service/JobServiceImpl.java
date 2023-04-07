@@ -154,6 +154,7 @@ public class JobServiceImpl implements JobService {
 			throw new Exception("User ID does not match");
 		}
 		jobRepository.deleteById(id);
+		jobApplicationRepository.deleteByJobId(id);
 		return new JobResponse(null, "Job deleted successfully.", true);
 	}
 

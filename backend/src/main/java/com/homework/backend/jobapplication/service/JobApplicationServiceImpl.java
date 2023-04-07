@@ -19,6 +19,8 @@ import com.homework.backend.jobapplication.repository.JobApplicationRepository;
 import com.homework.backend.jobapplication.request.JobApplicationRequest;
 import com.homework.backend.jobapplication.request.UpdateJobApplicationRequest;
 import com.homework.backend.jobapplication.response.JobApplicationResponse;
+import com.homework.backend.notification.model.Notification;
+import com.homework.backend.notification.repository.NotificationRepository;
 import com.homework.backend.user.model.User;
 import com.homework.backend.user.repository.UserRepository;
 
@@ -39,15 +41,19 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 	private JobRepository jobRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private NotificationRepository notificationRepository;
 	
 	public JobApplicationServiceImpl(JobApplicationRepository jobApplicationRepository, JwtService jwtService,
-			Validator validator, JobRepository jobRepository, UserRepository userRepository) {
+			Validator validator, JobRepository jobRepository, UserRepository userRepository, 
+			NotificationRepository notificationRepository) {
 		super();
 		this.jobApplicationRepository = jobApplicationRepository;
 		this.jwtService = jwtService;
 		this.validator = validator;
 		this.jobRepository = jobRepository;
 		this.userRepository = userRepository;
+		this.notificationRepository = notificationRepository;
 	}
 	
 	
@@ -88,6 +94,14 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 		);
 
 		jobApplicationRepository.save(jobApplication);
+		
+		String notificationDescription = "A new job application request has been made to your job titled [" + job.getTitle() + "]. Click for more details.";
+		var notification = new Notification(
+					notificationDescription,
+					job.getUser_id()
+				);
+		notificationRepository.save(notification);
+		
 		HashMap<String, Object> jobApplicationObject = new HashMap<>();
 		jobApplicationObject.put("jobApplicationObject", jobApplication);
 
@@ -123,6 +137,13 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 
 		jobApplication.setStatus(updateJobApplicationRequest.getStatus());
 		jobApplicationRepository.save(jobApplication);
+		
+		String notificationDescription = "Your application on job titled [" + job.getTitle() + "] has been updated. Click for more details.";
+		var notification = new Notification(
+					notificationDescription,
+					jobApplication.getApplicant_id()
+				);
+		notificationRepository.save(notification);
 
 		HashMap<String, Object> jobApplicationObject = new HashMap<String, Object>();
 		jobApplicationObject.put("jobApplication", jobApplication);

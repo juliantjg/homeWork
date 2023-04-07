@@ -3,9 +3,11 @@ package com.homework.backend.jobapplication.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.homework.backend.jobapplication.model.JobApplication;
 
@@ -40,4 +42,9 @@ public interface JobApplicationRepository  extends JpaRepository<JobApplication,
     
     @Query("SELECT jobapplication FROM JobApplication jobapplication WHERE jobapplication.job_creator_id = :job_creator_id AND jobapplication.status = 0")
     List<JobApplication> filterPendingByJobCreatorId(@Param("job_creator_id") int job_creator_id);
+    
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM JobApplication jobapplication WHERE jobapplication.job_id = :job_id")
+    void deleteByJobId(@Param("job_id") int job_id);
 }
