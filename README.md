@@ -39,7 +39,7 @@ Here is the complete <b>homeWork</b> functionalities rundown:
 </details>
 
 ## :hammer: Utilization
-<b>Ribbit</b> utilizes the following points:
+<b>homeWork</b> utilizes the following points:
 - React functional components
 - State management with Redux
 - Spring Framework for API development
