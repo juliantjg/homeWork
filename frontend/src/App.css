@@ -120,3 +120,12 @@ body {
 #logoMainLogin {
   width: 100px;
 }
+
+#notificationItemLink {
+  text-decoration: none;
+  color: black;
+}
+
+#notificationItemLink:hover {
+  text-decoration: underline;
+}

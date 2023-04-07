@@ -7,6 +7,10 @@ import {
     GET_HOME_VALUES_REQUEST,
     GET_HOME_VALUES_SUCCESS,
     GET_HOME_VALUES_FAIL,
+
+    GET_NOTIFICATION_REQUEST,
+    GET_NOTIFICATION_SUCCESS,
+    GET_NOTIFICATION_FAIL,
 } from "../actions/types";
 import { backendUrl } from "../securityUtils/vars";
 
@@ -103,6 +107,56 @@ export const getHomeValuesAction = () => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: GET_HOME_VALUES_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+};
+
+export const getCurrentUserNotificationsAction = () => async (dispatch, getState) => {
+    try {
+        dispatch({ type: GET_NOTIFICATION_REQUEST })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        var config = null
+        var token = null
+
+        if (typeof userInfo === 'object') {
+            token = userInfo.data.token
+        }
+        else if (typeof userInfo === 'string') {
+            token = userInfo
+        }
+
+        if (userInfo == null) {
+            config = null
+        }
+        else {
+            // we're passing header into our post request
+            config = {
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        }
+
+        const { data } = await axios.get(
+            backendUrl + `api/notification/`,
+            config
+        )
+
+        dispatch({
+            type: GET_NOTIFICATION_SUCCESS,
+            payload: data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_NOTIFICATION_FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,
