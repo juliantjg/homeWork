@@ -104,7 +104,7 @@ services:
   ```
   
   3. Access the application by entering `localhost:3000` on your browser:
-  <img src="https://user-images.githubusercontent.com/53683415/230529589-096b7310-4820-4e2d-a611-64e22d11f873.png" width="800">
+  <img src="https://user-images.githubusercontent.com/53683415/230530173-d507cf61-7078-4040-b1a3-2a0a3a8f594e.png" width="600">
   
   4. Done! Now you can login. The database have been seeded, thus you can find jobs on the Hunt Jobs dashboard. Here is an employer credential (you can also sign up as one):
   ```
