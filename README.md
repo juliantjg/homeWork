@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    <img src="https://user-images.githubusercontent.com/53683415/229388736-68c19abe-1555-4e15-b0d2-ecc622a0776e.png" width="250">
+    <img src="https://user-images.githubusercontent.com/53683415/229388736-68c19abe-1555-4e15-b0d2-ecc622a0776e.png" width="200">
     <br>
     <img src="https://img.shields.io/badge/react-v17.0-white">
     <img src="https://img.shields.io/badge/java-v17-white">
