@@ -1,13 +1,14 @@
 <div align="center">
   <h1>
-    <img src="https://user-images.githubusercontent.com/53683415/229388736-68c19abe-1555-4e15-b0d2-ecc622a0776e.png" width="135">
+    <img src="https://user-images.githubusercontent.com/53683415/229388736-68c19abe-1555-4e15-b0d2-ecc622a0776e.png" width="250">
+    <br>
+    <img src="https://img.shields.io/badge/react-v17.0-white">
+    <img src="https://img.shields.io/badge/java-v17-white">
+    <img src="https://img.shields.io/badge/redux-v7.2-white">
+    <img src="https://img.shields.io/badge/spring-v3.0-white">
   </h1>
    House Work Job/Employee Seeking App Made With React+Redux and Spring Framework
-   <br><br>
-   <img src="https://img.shields.io/badge/react-v17.0-white">
-   <img src="https://img.shields.io/badge/java-v17-white">
-   <img src="https://img.shields.io/badge/redux-v7.2-white">
-   <img src="https://img.shields.io/badge/spring-v3.0-white">
+   <br>
 </div>
 <br>
 <div align="center">
