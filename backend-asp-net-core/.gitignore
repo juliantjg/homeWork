@@ -32,3 +32,14 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+wwwroot/
+
+# .NET Core
+bin/
+obj/
+
+# Static files
+wwwroot/lib/
+
+# Exclude other specific folders if needed
+Areas/Identity/Pages
