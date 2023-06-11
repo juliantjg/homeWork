@@ -30,16 +30,15 @@ namespace backend_asp_net_core.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Job> GetById(int id)
+        public IActionResult GetById(int id)
         {
             var job = _dbContext.Jobs.Find(id);
 
             if (job == null)
             {
-                return NotFound();
+                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND);
             }
-
-            return Ok(job);
+            return _generalResponse.SendResponse("Job retrieved", job);
         }
 
         [HttpPost]
