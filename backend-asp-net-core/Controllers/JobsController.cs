@@ -23,23 +23,22 @@ namespace backend_asp_net_core.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Job>> Get()
+        public IActionResult Get()
         {
-            var jobs = _dbContext.Jobs.ToList();
-            return Ok(jobs);
+            var jobs = _dbContext.Jobs.OrderByDescending(j => j.Id).ToList();
+            return _generalResponse.SendResponse("Jobs retrieved", jobs);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Job> GetById(int id)
+        public IActionResult GetById(int id)
         {
             var job = _dbContext.Jobs.Find(id);
 
             if (job == null)
             {
-                return NotFound();
+                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND);
             }
-
-            return Ok(job);
+            return _generalResponse.SendResponse("Job retrieved", job);
         }
 
         [HttpPost]
@@ -66,21 +65,23 @@ namespace backend_asp_net_core.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, JobRequest request)
         {
+            var findJob = _dbContext.Jobs.Find(id);
+            if (findJob == null)
+            {
+                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND);
+            }
 
-            var job = new Job(
-                    request.Title,
-                    request.Description,
-                    request.Salary,
-                    request.Location,
-                    request.Postcode,
-                    request.JobType,
-                    1
-                );
+            findJob.Title = request.Title;
+            findJob.Description = request.Description;
+            findJob.Salary = request.Salary;
+            findJob.Location = request.Location;
+            findJob.Postcode = request.Postcode;
+            findJob.JobType = request.JobType;
+            findJob.User_id = 1;
 
-            _dbContext.Entry(job).State = EntityState.Modified;
             _dbContext.SaveChanges();
 
-            return NoContent();
+            return _generalResponse.SendResponse("Job updated", findJob);
         }
 
         [HttpDelete("{id}")]
@@ -90,13 +91,13 @@ namespace backend_asp_net_core.Controllers
 
             if (job == null)
             {
-                return NotFound();
+                return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND);
             }
 
             _dbContext.Jobs.Remove(job);
             _dbContext.SaveChanges();
 
-            return NoContent();
+            return _generalResponse.SendResponse("Job deleted", null);
         }
     }
 
