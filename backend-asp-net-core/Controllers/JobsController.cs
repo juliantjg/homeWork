@@ -91,13 +91,13 @@ namespace backend_asp_net_core.Controllers
 
             if (job == null)
             {
-                return NotFound();
+                return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND);
             }
 
             _dbContext.Jobs.Remove(job);
             _dbContext.SaveChanges();
 
-            return NoContent();
+            return _generalResponse.SendResponse("Job deleted", null);
         }
     }
 
