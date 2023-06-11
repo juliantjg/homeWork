@@ -1,5 +1,8 @@
 ﻿using backend_asp_net_core.Data;
+using backend_asp_net_core.Enums;
 using backend_asp_net_core.Models;
+using backend_asp_net_core.Requests;
+using backend_asp_net_core.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,10 +14,12 @@ namespace backend_asp_net_core.Controllers
     public class JobsController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly GeneralResponse _generalResponse;
 
         public JobsController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+            _generalResponse = new GeneralResponse();
         }
 
         [HttpGet]
@@ -38,21 +43,39 @@ namespace backend_asp_net_core.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Job> Create(Job job)
+        public IActionResult Create(JobRequest request)
         {
+            var job = new Job(
+                    request.Title,
+                    request.Description,
+                    request.Salary,
+                    request.Location,
+                    request.Postcode,
+                    request.JobType,
+                    1
+                );
+
             _dbContext.Jobs.Add(job);
             _dbContext.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { id = job.Id }, job);
+            var createdJob = _dbContext.Jobs.FirstOrDefault(j => j.Id == job.Id);
+
+            return _generalResponse.SendResponse("Job created", createdJob);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Job job)
+        public IActionResult Update(int id, JobRequest request)
         {
-            if (id != job.Id)
-            {
-                return BadRequest();
-            }
+
+            var job = new Job(
+                    request.Title,
+                    request.Description,
+                    request.Salary,
+                    request.Location,
+                    request.Postcode,
+                    request.JobType,
+                    1
+                );
 
             _dbContext.Entry(job).State = EntityState.Modified;
             _dbContext.SaveChanges();

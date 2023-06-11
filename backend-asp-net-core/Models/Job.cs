@@ -16,7 +16,6 @@ namespace backend_asp_net_core.Models
         [AllowNull]
         public string Description { get; set; }
         [AllowNull]
-        [Range(20, 99, ErrorMessage = "Value must be greater than or equal to 20")]
         public float Salary { get; set; }
         [AllowNull]
         public string Location { get; set; }
@@ -24,7 +23,19 @@ namespace backend_asp_net_core.Models
         public string Postcode { get; set; }
         [AllowNull]
         public JobType JobType { get; set; }
+
         [AllowNull]
         public int User_id { get; set; }
+
+        public Job(string title, string description, float salary, string location, string postcode, JobType jobType, int user_id)
+        {
+            Title = title;
+            Description = description;
+            Salary = salary;
+            Location = location;
+            Postcode = postcode;
+            JobType = jobType;
+            User_id = user_id;
+        }
     }
 }
