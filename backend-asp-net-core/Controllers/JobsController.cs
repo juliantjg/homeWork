@@ -65,21 +65,23 @@ namespace backend_asp_net_core.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, JobRequest request)
         {
+            var findJob = _dbContext.Jobs.Find(id);
+            if (findJob == null)
+            {
+                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND);
+            }
 
-            var job = new Job(
-                    request.Title,
-                    request.Description,
-                    request.Salary,
-                    request.Location,
-                    request.Postcode,
-                    request.JobType,
-                    1
-                );
+            findJob.Title = request.Title;
+            findJob.Description = request.Description;
+            findJob.Salary = request.Salary;
+            findJob.Location = request.Location;
+            findJob.Postcode = request.Postcode;
+            findJob.JobType = request.JobType;
+            findJob.User_id = 1;
 
-            _dbContext.Entry(job).State = EntityState.Modified;
             _dbContext.SaveChanges();
 
-            return NoContent();
+            return _generalResponse.SendResponse("Job updated", findJob);
         }
 
         [HttpDelete("{id}")]
