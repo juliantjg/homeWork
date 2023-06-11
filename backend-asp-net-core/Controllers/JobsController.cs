@@ -23,10 +23,10 @@ namespace backend_asp_net_core.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Job>> Get()
+        public IActionResult Get()
         {
-            var jobs = _dbContext.Jobs.ToList();
-            return Ok(jobs);
+            var jobs = _dbContext.Jobs.OrderByDescending(j => j.Id).ToList();
+            return _generalResponse.SendResponse("Jobs retrieved", jobs);
         }
 
         [HttpGet("{id}")]
