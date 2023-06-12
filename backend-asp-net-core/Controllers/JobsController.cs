@@ -38,7 +38,7 @@ namespace backend_asp_net_core.Controllers
 
             if (job == null)
             {
-                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND);
+                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND, null);
             }
             return _generalResponse.SendResponse("Job retrieved", job);
         }
@@ -70,7 +70,7 @@ namespace backend_asp_net_core.Controllers
             var findJob = _dbContext.Jobs.Find(id);
             if (findJob == null)
             {
-                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND);
+                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND, null);
             }
 
             findJob.Title = request.Title;
@@ -93,7 +93,7 @@ namespace backend_asp_net_core.Controllers
 
             if (job == null)
             {
-                return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND);
+                return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND, null);
             }
 
             _dbContext.Jobs.Remove(job);
