@@ -3,6 +3,7 @@ using backend_asp_net_core.Enums;
 using backend_asp_net_core.Models;
 using backend_asp_net_core.Requests;
 using backend_asp_net_core.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +11,7 @@ using System;
 namespace backend_asp_net_core.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class JobsController : ControllerBase
     {

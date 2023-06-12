@@ -1,4 +1,5 @@
 using backend_asp_net_core.Data;
+using backend_asp_net_core.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
+
+app.UseMiddleware<CustomAuthorizationMiddleware>();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
