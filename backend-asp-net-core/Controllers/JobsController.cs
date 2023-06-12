@@ -3,21 +3,27 @@ using backend_asp_net_core.Enums;
 using backend_asp_net_core.Models;
 using backend_asp_net_core.Requests;
 using backend_asp_net_core.Responses;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Security.Claims;
 
 namespace backend_asp_net_core.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class JobsController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly GeneralResponse _generalResponse;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public JobsController(ApplicationDbContext dbContext)
+        public JobsController(UserManager<IdentityUser> userManager, ApplicationDbContext dbContext)
         {
+            _userManager = userManager;
             _dbContext = dbContext;
             _generalResponse = new GeneralResponse();
         }
@@ -25,6 +31,10 @@ namespace backend_asp_net_core.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
             var jobs = _dbContext.Jobs.OrderByDescending(j => j.Id).ToList();
             return _generalResponse.SendResponse("Jobs retrieved", jobs);
         }
@@ -36,7 +46,7 @@ namespace backend_asp_net_core.Controllers
 
             if (job == null)
             {
-                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND);
+                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND, null);
             }
             return _generalResponse.SendResponse("Job retrieved", job);
         }
@@ -44,6 +54,10 @@ namespace backend_asp_net_core.Controllers
         [HttpPost]
         public IActionResult Create(JobRequest request)
         {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
             var job = new Job(
                     request.Title,
                     request.Description,
@@ -51,7 +65,7 @@ namespace backend_asp_net_core.Controllers
                     request.Location,
                     request.Postcode,
                     request.JobType,
-                    1
+                    user.Id
                 );
 
             _dbContext.Jobs.Add(job);
@@ -59,16 +73,20 @@ namespace backend_asp_net_core.Controllers
 
             var createdJob = _dbContext.Jobs.FirstOrDefault(j => j.Id == job.Id);
 
-            return _generalResponse.SendResponse("Job created", createdJob);
+            return _generalResponse.SendResponse("Job created successfully", createdJob);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, JobRequest request)
         {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
             var findJob = _dbContext.Jobs.Find(id);
             if (findJob == null)
             {
-                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND);
+                return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND, null);
             }
 
             findJob.Title = request.Title;
@@ -77,7 +95,6 @@ namespace backend_asp_net_core.Controllers
             findJob.Location = request.Location;
             findJob.Postcode = request.Postcode;
             findJob.JobType = request.JobType;
-            findJob.User_id = 1;
 
             _dbContext.SaveChanges();
 
@@ -91,7 +108,7 @@ namespace backend_asp_net_core.Controllers
 
             if (job == null)
             {
-                return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND);
+                return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND, null);
             }
 
             _dbContext.Jobs.Remove(job);
