@@ -42,6 +42,10 @@ namespace backend_asp_net_core.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
             var job = _dbContext.Jobs.Find(id);
 
             if (job == null)
@@ -89,6 +93,11 @@ namespace backend_asp_net_core.Controllers
                 return _generalResponse.SendError("Job not found", ResponseStatus.NOT_FOUND, null);
             }
 
+            if (findJob.User_id != user.Id)
+            {
+                return _generalResponse.SendError("Can only update a job you created", ResponseStatus.UNAUTHORIZED, null);
+            }
+
             findJob.Title = request.Title;
             findJob.Description = request.Description;
             findJob.Salary = request.Salary;
@@ -104,11 +113,20 @@ namespace backend_asp_net_core.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
             var job = _dbContext.Jobs.Find(id);
 
             if (job == null)
             {
                 return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND, null);
+            }
+
+            if (job.User_id != user.Id)
+            {
+                return _generalResponse.SendError("Can only update a job you created", ResponseStatus.UNAUTHORIZED, null);
             }
 
             _dbContext.Jobs.Remove(job);
