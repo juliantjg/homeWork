@@ -17,12 +17,13 @@ namespace backend_asp_net_core.Responses
             return Ok(response);
         }
 
-        public IActionResult SendError(string message, ResponseStatus status)
+        public IActionResult SendError(string message, ResponseStatus status, object? data)
         {
             var response = new
             {
                 success = false,
                 message = (message == null) ? "Error" : message,
+                data = (data == null) ? null : data
             };
 
             return StatusCode((int)status, response);

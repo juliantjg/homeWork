@@ -24,6 +24,7 @@ namespace backend_asp_net_core.Middleware
             var endpoint = context.GetEndpoint();
             var allowAnonymous = endpoint?.Metadata?.GetMetadata<IAllowAnonymous>() != null;
 
+            // If API allows anonymous then don't check
             if (!allowAnonymous)
             {
                 // Check if the user is authenticated
@@ -36,9 +37,7 @@ namespace backend_asp_net_core.Middleware
                     await context.Response.WriteAsync(errorResponse);
                     return;
                 }
-
                 // User is authenticated, proceed to the next middleware
-                await _next.Invoke(context);
             }
             await _next.Invoke(context);
         }
