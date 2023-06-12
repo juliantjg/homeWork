@@ -25,9 +25,9 @@ namespace backend_asp_net_core.Models
         public JobType JobType { get; set; }
 
         [AllowNull]
-        public int User_id { get; set; }
+        public string User_id { get; set; }
 
-        public Job(string title, string description, float salary, string location, string postcode, JobType jobType, int user_id)
+        public Job(string title, string description, float salary, string location, string postcode, JobType jobType, string user_id)
         {
             Title = title;
             Description = description;

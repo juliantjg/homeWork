@@ -38,17 +38,17 @@ namespace backend_asp_net_core.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                return _generalResponse.SendError("Email not found", Enums.ResponseStatus.UNAUTHORIZED, null);
+                return _generalResponse.SendError("Invalid credentials", Enums.ResponseStatus.UNAUTHORIZED, null);
             }
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
             if (!result.Succeeded)
             {
-                return Unauthorized();
+                return _generalResponse.SendError("Invalid credentials", Enums.ResponseStatus.UNAUTHORIZED, null);
             }
 
             var token = GenerateJwtToken(user);
-            return Ok(new { token });
+            return _generalResponse.SendResponse("Login successful", token);
         }
 
         [HttpPost("register")]

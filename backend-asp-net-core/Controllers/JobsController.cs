@@ -31,6 +31,7 @@ namespace backend_asp_net_core.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            /** Fetch user from request */
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
 
@@ -53,6 +54,10 @@ namespace backend_asp_net_core.Controllers
         [HttpPost]
         public IActionResult Create(JobRequest request)
         {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
             var job = new Job(
                     request.Title,
                     request.Description,
@@ -60,7 +65,7 @@ namespace backend_asp_net_core.Controllers
                     request.Location,
                     request.Postcode,
                     request.JobType,
-                    1
+                    user.Id
                 );
 
             _dbContext.Jobs.Add(job);
@@ -68,12 +73,16 @@ namespace backend_asp_net_core.Controllers
 
             var createdJob = _dbContext.Jobs.FirstOrDefault(j => j.Id == job.Id);
 
-            return _generalResponse.SendResponse("Job created", createdJob);
+            return _generalResponse.SendResponse("Job created successfully", createdJob);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, JobRequest request)
         {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
             var findJob = _dbContext.Jobs.Find(id);
             if (findJob == null)
             {
@@ -86,7 +95,6 @@ namespace backend_asp_net_core.Controllers
             findJob.Location = request.Location;
             findJob.Postcode = request.Postcode;
             findJob.JobType = request.JobType;
-            findJob.User_id = 1;
 
             _dbContext.SaveChanges();
 
