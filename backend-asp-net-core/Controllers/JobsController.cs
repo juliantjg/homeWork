@@ -4,9 +4,11 @@ using backend_asp_net_core.Models;
 using backend_asp_net_core.Requests;
 using backend_asp_net_core.Responses;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Security.Claims;
 
 namespace backend_asp_net_core.Controllers
 {
@@ -17,9 +19,11 @@ namespace backend_asp_net_core.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly GeneralResponse _generalResponse;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public JobsController(ApplicationDbContext dbContext)
+        public JobsController(UserManager<IdentityUser> userManager, ApplicationDbContext dbContext)
         {
+            _userManager = userManager;
             _dbContext = dbContext;
             _generalResponse = new GeneralResponse();
         }
@@ -27,6 +31,9 @@ namespace backend_asp_net_core.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
             var jobs = _dbContext.Jobs.OrderByDescending(j => j.Id).ToList();
             return _generalResponse.SendResponse("Jobs retrieved", jobs);
         }

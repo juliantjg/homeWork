@@ -42,8 +42,6 @@ namespace backend_asp_net_core.Controllers
             }
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
-            _logger.LogInformation("Invalid password for user: {Email}", model.Email);
-            _logger.LogInformation("Invalid password for user: {Password}", model.Password);
             if (!result.Succeeded)
             {
                 return Unauthorized();
