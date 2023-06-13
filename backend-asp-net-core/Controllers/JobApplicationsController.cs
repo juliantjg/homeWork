@@ -1,8 +1,12 @@
 ﻿using backend_asp_net_core.Data;
+using backend_asp_net_core.Enums;
+using backend_asp_net_core.Models;
+using backend_asp_net_core.Requests;
 using backend_asp_net_core.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace backend_asp_net_core.Controllers
 {
@@ -13,13 +17,39 @@ namespace backend_asp_net_core.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly GeneralResponse _generalResponse;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
+        private readonly ILogger<AuthController> _logger;
 
-        public JobApplicationsController(UserManager<IdentityUser> userManager, ApplicationDbContext dbContext)
+        public JobApplicationsController(UserManager<User> userManager, ApplicationDbContext dbContext, ILogger<AuthController> logger)
         {
             _userManager = userManager;
             _dbContext = dbContext;
             _generalResponse = new GeneralResponse();
+            _logger = logger;
+        }
+
+        [HttpPost]
+        public IActionResult CreateJobApplication(JobApplicationRequest request)
+        {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
+            var job = _dbContext.Jobs.Find(request.Job_id);
+            if (job == null)
+            {
+                return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND, null);
+            }
+
+            //var applicant = _userManager.FindByIdAsync(request.Applicant_id);
+            var applicant = _dbContext.Users.Find(request.Applicant_id);
+            if (applicant == null)
+            {
+                return _generalResponse.SendError("Applicant ID not found", ResponseStatus.NOT_FOUND, null);
+            }
+            //_logger.LogInformation(applicant);
+
+            return _generalResponse.SendResponse("Success", null);
         }
     }
 }
