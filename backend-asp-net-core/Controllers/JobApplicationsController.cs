@@ -29,7 +29,7 @@ namespace backend_asp_net_core.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateJobApplication(JobApplicationRequest request)
+        public async Task<IActionResult> CreateJobApplication(JobApplicationRequest request)
         {
             /** Fetch user from request */
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -41,8 +41,8 @@ namespace backend_asp_net_core.Controllers
                 return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND, null);
             }
 
-            //var applicant = _userManager.FindByIdAsync(request.Applicant_id);
-            var applicant = _dbContext.Users.Find(request.Applicant_id);
+            var applicant = await _userManager.FindByIdAsync(request.Applicant_id);
+            //var applicant = _dbContext.Users.Find(request.Applicant_id);
             if (applicant == null)
             {
                 return _generalResponse.SendError("Applicant ID not found", ResponseStatus.NOT_FOUND, null);
