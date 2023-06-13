@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend_asp_net_core.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
