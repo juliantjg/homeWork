@@ -4,6 +4,7 @@ using backend_asp_net_core.Models;
 using backend_asp_net_core.Requests;
 using backend_asp_net_core.Responses;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -57,7 +58,10 @@ namespace backend_asp_net_core.Controllers
             {
                 return _generalResponse.SendError("You have already applied! Job application status is: " + findJobApplications.FirstOrDefault().Status, ResponseStatus.BAD_REQUEST, null);
             }
-
+            if (userId == job.User_id)
+            {
+                return _generalResponse.SendError("Cannot apply top self created jobs", ResponseStatus.BAD_REQUEST, null);
+            }
             var newJobApplication = new JobApplication(
                     applicant.Id,
                     job.Id,
@@ -70,6 +74,34 @@ namespace backend_asp_net_core.Controllers
             //_logger.LogInformation(applicant);
 
             return _generalResponse.SendResponse("Success", newJobApplication);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateJobApplicationStatus(int id, UpdateJobApplicationRequest request)
+        {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
+            var findJobApplication = _dbContext.JobApplications.Find(id);
+            if (findJobApplication == null)
+            {
+                return _generalResponse.SendError("Job application not found", ResponseStatus.NOT_FOUND, null);
+            }
+            var job = _dbContext.Jobs.Find(findJobApplication.Job_id);
+            if (userId != job.User_id)
+            {
+                return _generalResponse.SendError("Access denied. Not job owner", ResponseStatus.UNAUTHORIZED, null);
+            }
+            if (findJobApplication.Status == JobApplicationStatus.ACCEPTED || findJobApplication.Status == JobApplicationStatus.REJECTED)
+            {
+                return _generalResponse.SendError("Cannot update application status. Application is " + findJobApplication.Status, ResponseStatus.BAD_REQUEST, null);
+            }
+
+            findJobApplication.Status = request.Status;
+            _dbContext.SaveChanges();
+
+            return _generalResponse.SendResponse("Job application status updated successfuly", findJobApplication);
         }
     }
 }
