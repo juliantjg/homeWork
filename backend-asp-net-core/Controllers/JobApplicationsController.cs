@@ -40,16 +40,36 @@ namespace backend_asp_net_core.Controllers
             {
                 return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND, null);
             }
-
             var applicant = await _userManager.FindByIdAsync(request.Applicant_id);
-            //var applicant = _dbContext.Users.Find(request.Applicant_id);
             if (applicant == null)
             {
                 return _generalResponse.SendError("Applicant ID not found", ResponseStatus.NOT_FOUND, null);
             }
+            if (applicant.Id != userId)
+            {
+                return _generalResponse.SendError("User does not match", ResponseStatus.UNAUTHORIZED, null);
+            }
+
+            var findJobApplications = _dbContext.JobApplications
+                .Where(jobApplication => jobApplication.Applicant_id == applicant.Id && jobApplication.Job_id == job.Id).ToList();
+
+            if (findJobApplications.Count > 0)
+            {
+                return _generalResponse.SendError("You have already applied! Job application status is: " + findJobApplications.FirstOrDefault().Status, ResponseStatus.BAD_REQUEST, null);
+            }
+
+            var newJobApplication = new JobApplication(
+                    applicant.Id,
+                    job.Id,
+                    job.User_id,
+                    JobApplicationStatus.PENDING
+                );
+
+            _dbContext.JobApplications.Add(newJobApplication);
+            _dbContext.SaveChanges();
             //_logger.LogInformation(applicant);
 
-            return _generalResponse.SendResponse("Success", null);
+            return _generalResponse.SendResponse("Success", newJobApplication);
         }
     }
 }
