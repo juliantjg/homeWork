@@ -103,5 +103,28 @@ namespace backend_asp_net_core.Controllers
 
             return _generalResponse.SendResponse("Job application status updated successfuly", findJobApplication);
         }
+
+        [HttpGet("all/{job_id}")]
+        public async Task<IActionResult> GetAllJobApplications(int job_id)
+        {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
+            var job = _dbContext.Jobs.Find(job_id);
+            if (job == null)
+            {
+                return _generalResponse.SendError("Job ID not found", ResponseStatus.NOT_FOUND, null);
+            }
+            if (userId != job.User_id)
+            {
+                return _generalResponse.SendError("You do not have permission", ResponseStatus.UNAUTHORIZED, null);
+            }
+
+            var findJobApplications = _dbContext.JobApplications
+                .Where(jobApplication => jobApplication.Job_id == job_id).ToList();
+
+            return _generalResponse.SendResponse("Job applications for selected job retrieved", findJobApplications);
+        }
     }
 }
