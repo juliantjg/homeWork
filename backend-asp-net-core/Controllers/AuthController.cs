@@ -1,4 +1,6 @@
-﻿using backend_asp_net_core.Requests;
+﻿using backend_asp_net_core.Data;
+using backend_asp_net_core.Models;
+using backend_asp_net_core.Requests;
 using backend_asp_net_core.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,20 +18,22 @@ namespace backend_asp_net_core.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly GeneralResponse _generalResponse;
         private readonly ILogger<AuthController> _logger;
+        private readonly ApplicationDbContext _dbContext;
 
-        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration
-            , ILogger<AuthController> logger)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration
+            , ILogger<AuthController> logger, ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _generalResponse = new GeneralResponse();
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         [HttpPost("login")]
@@ -48,13 +52,20 @@ namespace backend_asp_net_core.Controllers
             }
 
             var token = GenerateJwtToken(user);
-            return _generalResponse.SendResponse("Login successful", token);
+
+            var loginBundle = new
+            {
+                token = token,
+                user_id = user.Id,
+            };
+
+            return _generalResponse.SendResponse("Login successful", loginBundle);
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] LoginRequest model)
         {
-            var user = new IdentityUser
+            var user = new User
             {
                 UserName = model.Email,
                 Email = model.Email

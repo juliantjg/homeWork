@@ -14,15 +14,14 @@ namespace backend_asp_net_core.Models
         [AllowNull]
         public string Applicant_id { get; set; }
         [AllowNull]
-        public string Job_id { get; set; }
+        public int Job_id { get; set; }
         [AllowNull]
         public string Job_creator_id { get; set; }
         [AllowNull]
         public JobApplicationStatus Status { get; set; }
 
-        public JobApplication(int id, string applicant_id, string job_id, string job_creator_id, JobApplicationStatus status)
+        public JobApplication(string applicant_id, int job_id, string job_creator_id, JobApplicationStatus status)
         {
-            Id = id;
             Applicant_id = applicant_id;
             Job_id = job_id;
             Job_creator_id = job_creator_id;
