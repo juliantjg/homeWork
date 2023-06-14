@@ -126,5 +126,23 @@ namespace backend_asp_net_core.Controllers
 
             return _generalResponse.SendResponse("Job applications for selected job retrieved", findJobApplications);
         }
+
+        [HttpGet("my-all/{type}")]
+        public async Task<IActionResult> GetAssociatedJobApplications(string type)
+        {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
+            var jobApplications = _dbContext.JobApplications
+                .Where(jobApplication => jobApplication.Applicant_id == userId).ToList();
+            if (type == "creator-id")
+            {
+                jobApplications = _dbContext.JobApplications
+                    .Where(jobApplication => jobApplication.Job_creator_id == userId).ToList();
+            }
+
+            return _generalResponse.SendResponse("Associated job applications fetched", jobApplications);
+        }
     }
 }
