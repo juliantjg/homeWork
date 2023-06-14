@@ -19,9 +19,9 @@ namespace backend_asp_net_core.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly GeneralResponse _generalResponse;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public JobsController(UserManager<IdentityUser> userManager, ApplicationDbContext dbContext)
+        public JobsController(UserManager<User> userManager, ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _dbContext = dbContext;

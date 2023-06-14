@@ -1,17 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Identity;
 
 namespace backend_asp_net_core.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [AllowNull]
-        public string Email { get; set; }
-        [AllowNull]
-        public string Password { get; set; }
     }
 }
