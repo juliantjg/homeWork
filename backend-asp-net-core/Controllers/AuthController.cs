@@ -63,12 +63,15 @@ namespace backend_asp_net_core.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] LoginRequest model)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest model)
         {
             var user = new User
             {
                 UserName = model.Email,
-                Email = model.Email
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Role = model.Role
             };
             user.EmailConfirmed = true;
 
