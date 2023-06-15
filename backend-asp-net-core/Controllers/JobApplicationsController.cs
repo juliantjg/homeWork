@@ -73,6 +73,9 @@ namespace backend_asp_net_core.Controllers
             _dbContext.SaveChanges();
             //_logger.LogInformation(applicant);
 
+            string notifMessage = "A new job application request has been made to your job titled [" + job.Title + "]. Click for more details.";
+            SendNotification(notifMessage, job.User_id);
+
             return _generalResponse.SendResponse("Success", newJobApplication);
         }
 
@@ -143,6 +146,17 @@ namespace backend_asp_net_core.Controllers
             }
 
             return _generalResponse.SendResponse("Associated job applications fetched", jobApplications);
+        }
+
+        private void SendNotification(string message, string userId)
+        {
+            var notification = new Notification(
+                    message,
+                    userId
+                );
+
+            _dbContext.Notifications.Add(notification);
+            _dbContext.SaveChanges();
         }
     }
 }
