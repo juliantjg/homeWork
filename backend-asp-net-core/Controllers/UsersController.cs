@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static Humanizer.In;
 
 namespace backend_asp_net_core.Controllers
 {
@@ -41,14 +42,62 @@ namespace backend_asp_net_core.Controllers
             return _generalResponse.SendResponse("User retrieved", findUser);
         }
 
-        [HttpGet("/home-data")]
-        public async Task<IActionResult> HomeData(string id)
+        [HttpGet]
+        public async Task<IActionResult> HomeData()
         {
             /** Fetch user from request */
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
 
-            return _generalResponse.SendResponse("Success", null);
+            if (user.Role == Role.EMPLOYER)
+            {
+                int numJobsPostedByCurrUser = _dbContext.Jobs
+                    .Where(
+                            job => job.User_id == userId
+                     ).ToList().Count();
+                int numSuccessfulApplications = _dbContext.JobApplications
+                    .Where(
+                            jobApplication => jobApplication.Job_creator_id == userId
+                            &&
+                            jobApplication.Status == JobApplicationStatus.ACCEPTED
+                     ).ToList().Count();
+                int numPendingApplications = _dbContext.JobApplications
+                    .Where(
+                            jobApplication => jobApplication.Job_creator_id == userId
+                            &&
+                            jobApplication.Status == JobApplicationStatus.PENDING
+                     ).ToList().Count();
+
+                var homeData = new
+                {
+                    numJobsPostedByCurrUser = numJobsPostedByCurrUser,
+                    numSuccessfulApplications = numSuccessfulApplications,
+                    numPendingApplications = numPendingApplications
+                };
+                return _generalResponse.SendResponse("Home data retrieved for employer", homeData);
+            }
+            else
+            {
+                int numSuccessfulApplications = _dbContext.JobApplications
+                    .Where(
+                            jobApplication => jobApplication.Applicant_id == userId
+                            &&
+                            jobApplication.Status == JobApplicationStatus.ACCEPTED
+                     ).ToList().Count();
+                int numPendingApplications = _dbContext.JobApplications
+                    .Where(
+                            jobApplication => jobApplication.Applicant_id == userId
+                            &&
+                            jobApplication.Status == JobApplicationStatus.PENDING
+                     ).ToList().Count();
+
+                var homeData = new
+                {
+                    numSuccessfulApplications = numSuccessfulApplications,
+                    numPendingApplications = numPendingApplications
+                };
+                return _generalResponse.SendResponse("Home data retrieved for job seeker", homeData);
+            } 
         }
     }
 }
