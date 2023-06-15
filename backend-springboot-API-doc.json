@@ -1,0 +1,550 @@
+{
+	"info": {
+		"_postman_id": "a2048914-cea0-4cfe-8bd9-49364b201fd1",
+		"name": "backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22660351",
+		"_collection_link": "https://ribbitappproject.postman.co/workspace/homeWork~d51a0650-2177-49b5-9d3d-6a4c0995336c/collection/22660351-a2048914-cea0-4cfe-8bd9-49364b201fd1?action=share&creator=22660351&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get user details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBlbWFpbC5jb20iLCJpYXQiOjE2ODAzMzg0NTAsImV4cCI6MTY4MTE2Nzg5MH0.RuCWkT_Yp0Ktme0Nj9Yd6AfYlx0jzhjWhTq6hzmjlLI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get home page values",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBlbWFpbC5jb20iLCJpYXQiOjE2ODAzOTgyMzksImV4cCI6MTY4MTIyNzY3OX0.g62om7DqeQOUPv79gFHnv9iHuVxXqvoPg_yFN0gAgTY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/home-data",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"home-data"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "JOB_SEEKER Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"test\",\n    \"lastname\": \"test\",\n    \"email\": \"asda2@email.com\",\n    \"password\": \"password\",\n    \"role\": \"JOB_SEEKER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EMPLOYER Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"test\",\r\n    \"lastname\": \"test\",\r\n    \"email\": \"employer@email.com\",\r\n    \"password\": \"password\",\r\n    \"role\": \"EMPLOYER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"employer@email.com\",\n    \"password\" : \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Job",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RhQGVtYWlsLmNvbSIsImlhdCI6MTY3NzI4ODMwNSwiZXhwIjoxNjc3Mjg5NzQ1fQ.A1yd1yoWKs85JGyaPdICpUURppxDreewbKhEZQUcDCg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/job/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RhQHRlc3QuY29tIiwiaWF0IjoxNjc5MjY5MDY5LCJleHAiOjE2NzkyNzA1MDl9.0xYxF7cciTDiRwLRddwj_HHyHq4b3ZJuK5A1JIBpt3c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RhQHRlc3QuY29tIiwiaWF0IjoxNjc5MjY5MDY5LCJleHAiOjE2NzkyNzA1MDl9.0xYxF7cciTDiRwLRddwj_HHyHq4b3ZJuK5A1JIBpt3c",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/job/read/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"read",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RhQGVtYWlsLmNvbSIsImlhdCI6MTY3OTEzNTcxNiwiZXhwIjoxNjc5MTM3MTU2fQ.4U-FO1qgRiODh6xJrLseVC74yFEaBLuCy69ylFCN_k4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Looking for an employee\",\r\n    \"description\": \"Quick before offer runs out\",\r\n    \"location\": \"Melbourne\",\r\n    \"salary\": 21,\r\n    \"postcode\": \"3000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/job/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTIzQGVtYWlsLmNvbSIsImlhdCI6MTY3NzMyNzU2NiwiZXhwIjoxNjc3MzI5MDA2fQ.nmnT3uTr2zZH6qphsmLb1N66nlv3RqwzOhg_5WvVu64",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/job/delete/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RhQHRlc3QuY29tIiwiaWF0IjoxNjc5NTMyMjI1LCJleHAiOjE2Nzk1MzM2NjV9.JX6fQaUcvdPvXffUMM44PLHpBPQOGEF_6qBqkFOsw48",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Looking for an employee\",\n    \"description\": \"Quick before offer runs out\",\n    \"location\": \"Melbourne\",\n    \"salary\": 21,\n    \"postcode\": \"3000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/job/update/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job",
+								"update",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JobApplication",
+			"item": [
+				{
+					"name": "ApplyJob",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RhQGVtYWlsLmNvbSIsImlhdCI6MTY3OTcyNDIwOSwiZXhwIjoxNjgwMDEyMjA5fQ.pJeLy2g06vaO-rDEPEpanGGZoVvw9KHoh_Uh3uRk4yg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"applicant_id\": 11,\r\n    \"job_id\": 17\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/jobapplication/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"jobapplication",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RhQHRlc3QuY29tIiwiaWF0IjoxNjc5OTYwODI5LCJleHAiOjE2ODAyNDg4Mjl9.tPibtC9XB-lPrPqhSl-blQ-RPT-ok6fSHe-d1wk7-C4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"ACCEPTED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/jobapplication/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"jobapplication",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByJobID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RhQGVtYWlsLmNvbSIsImlhdCI6MTY3OTcyNDIwOSwiZXhwIjoxNjgwMDEyMjA5fQ.pJeLy2g06vaO-rDEPEpanGGZoVvw9KHoh_Uh3uRk4yg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/jobapplication/all/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"jobapplication",
+								"all",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Associated",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RhQGVtYWlsLmNvbSIsImlhdCI6MTY4MDA4NDIzMCwiZXhwIjoxNjgwOTEzNjcwfQ.GpvoGd8dLch4MiY9V0MYwTSNozwn7smZdv7hUOvTwK4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/jobapplication/my-all/a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"jobapplication",
+								"my-all",
+								"a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzZWVrZXJAZW1haWwuY29tIiwiaWF0IjoxNjgwODI2NzI1LCJleHAiOjE2ODE2NTYxNjV9.Llidz1jTNv2_asYNqd6n5uLO3pnXoRLUQvyX-ujsUIU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/notification/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"notification",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

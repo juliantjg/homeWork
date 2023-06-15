@@ -1,0 +1,561 @@
+{
+	"info": {
+		"_postman_id": "7c171156-1e33-47db-8cdb-c259b91e6095",
+		"name": "backend-asp-net-core",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22660351",
+		"_collection_link": "https://ribbitappproject.postman.co/workspace/homeWork~d51a0650-2177-49b5-9d3d-6a4c0995336c/collection/22660351-7c171156-1e33-47db-8cdb-c259b91e6095?action=share&creator=22660351&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Job",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImNlMGFkYjgwLTk3MWYtNDQ4Zi05ZjM4LTUwYTkyZDI5YjQ2MiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFzZGEyMjRAZW1haWwuY29tIiwiZXhwIjoxNjg2NTUxNDkzLCJpc3MiOiJob21lV29yayIsImF1ZCI6ImhvbWVXb3JrRnJvbnRlbmQifQ.epQE7AdM_13as3q-KIwrwxRMAe7jCgwk6atsfZQhhcQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7006/api/jobs",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY1MmZhOTVlLWU1MjYtNGY4YS04NDY0LTRlOTZjZmM0Nzk0ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bDJAZW1haWwuY29tIiwiZXhwIjoxNjg2ODExMDk3LCJpc3MiOiJob21lV29yayIsImF1ZCI6ImhvbWVXb3JrRnJvbnRlbmQifQ.HFUoWCsHWJaVpnmntUCQsW7BG791A0zSn5MPnG45RYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\": \"Looking for employee\",\r\n    \"Description\": \"Sign up quick before offer runs out\",\r\n    \"Location\": \"Melbourne\",\r\n    \"Salary\": 21,\r\n    \"Postcode\": \"3000\",\r\n    \"JobType\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7006/api/jobs",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE5NTc0ZWEwLWRmOWMtNDI2ZC05MjQzLTBmNzFjZDc0MDNkNCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFzZGE0QGVtYWlsLmNvbSIsImV4cCI6MTY4NjU0OTA3NCwiaXNzIjoiaG9tZVdvcmsiLCJhdWQiOiJob21lV29ya0Zyb250ZW5kIn0.HzWVnQ6QlhFHtT5TjouMO5dwhVPKA8k-ihg3jpd8cAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7006/api/jobs/21",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"jobs",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjQzODk2M2QxLTBjNjEtNDI2Zi1hMzE4LTI2Nzg5NjQ0YmYzMiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bEBlbWFpbC5jb20iLCJleHAiOjE2ODY1NzUzOTQsImlzcyI6ImhvbWVXb3JrIiwiYXVkIjoiaG9tZVdvcmtGcm9udGVuZCJ9.NV2j4vJhWjPtcUMC_-MJL4jqYLHXsg9KVAi_r88bafs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\": \"Looking for employee\",\r\n    \"Description\": \"Sign up quick before offer runs out\",\r\n    \"Location\": \"Melbourne\",\r\n    \"Salary\": 21,\r\n    \"Postcode\": \"3000\",\r\n    \"JobType\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7006/api/jobs/26",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"jobs",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjQzODk2M2QxLTBjNjEtNDI2Zi1hMzE4LTI2Nzg5NjQ0YmYzMiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bEBlbWFpbC5jb20iLCJleHAiOjE2ODY1NzUzOTQsImlzcyI6ImhvbWVXb3JrIiwiYXVkIjoiaG9tZVdvcmtGcm9udGVuZCJ9.NV2j4vJhWjPtcUMC_-MJL4jqYLHXsg9KVAi_r88bafs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7006/api/jobs/26",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"jobs",
+								"26"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "JOB_SEEKER Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\": \"jobseeker@email.com\",\r\n    \"Password\": \"Password123*\",\r\n    \"FirstName\": \"Job\",\r\n    \"LastName\": \"Seeker\",\r\n    \"Role\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7006/api/auth/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EMPLOYER Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\": \"andy@email.com\",\r\n    \"Password\": \"Password123*\",\r\n    \"FirstName\": \"Andy\",\r\n    \"LastName\": \"Boy\",\r\n    \"Role\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7006/api/auth/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\": \"andy@email.com\",\r\n    \"Password\": \"Password123*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7006/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\": \"andy@email.com\",\r\n    \"Password\": \"Password123*\",\r\n    \"FirstName\": \"Andy\",\r\n    \"LastName\": \"Boy\",\r\n    \"Role\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7006/api/auth/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JobApplication",
+			"item": [
+				{
+					"name": "Create Job Application",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY1MmZhOTVlLWU1MjYtNGY4YS04NDY0LTRlOTZjZmM0Nzk0ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bDJAZW1haWwuY29tIiwiZXhwIjoxNjg2ODA4NzQ1LCJpc3MiOiJob21lV29yayIsImF1ZCI6ImhvbWVXb3JrRnJvbnRlbmQifQ.v3NSO3_FQVSZB802Canr4qJNVOAUbH0kWQF-Y4yrLG4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Applicant_id\": \"652fa95e-e526-4f8a-8464-4e96cfc4794e\",\r\n    \"Job_id\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7006/api/jobApplications",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"jobApplications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job Application Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjRlNGIwNDE1LWYzZWYtNDY2Zi05M2YzLThlN2M0ZWE5ZTEzOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bDFAZW1haWwuY29tIiwiZXhwIjoxNjg2ODA5MDc0LCJpc3MiOiJob21lV29yayIsImF1ZCI6ImhvbWVXb3JrRnJvbnRlbmQifQ.c6rH_vkhP07RrjDiDDHddEuxa0rPJdrgYURmaL50OHc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Status\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7006/api/jobApplications/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"jobApplications",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All By Job ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3Zjg3MjQ2LWYyNDYtNGE4ZC1hNTI4LTBiZjNkMTgxNGJhMyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bDJAZW1haWwuY29tIiwiZXhwIjoxNjg2NzI5NDU1LCJpc3MiOiJob21lV29yayIsImF1ZCI6ImhvbWVXb3JrRnJvbnRlbmQifQ.-iBsa-QnBd2WOAHZxZj27IdZQbBrSb0ORs4xUCDW-Dw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7006/api/jobApplications/all/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"jobApplications",
+								"all",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Associated",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3Zjg3MjQ2LWYyNDYtNGE4ZC1hNTI4LTBiZjNkMTgxNGJhMyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bDJAZW1haWwuY29tIiwiZXhwIjoxNjg2NzI5NDU1LCJpc3MiOiJob21lV29yayIsImF1ZCI6ImhvbWVXb3JrRnJvbnRlbmQifQ.-iBsa-QnBd2WOAHZxZj27IdZQbBrSb0ORs4xUCDW-Dw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7006/api/jobApplications/my-all/creator-id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"jobApplications",
+								"my-all",
+								"creator-id"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY1MmZhOTVlLWU1MjYtNGY4YS04NDY0LTRlOTZjZmM0Nzk0ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bDJAZW1haWwuY29tIiwiZXhwIjoxNjg2ODEwOTk3LCJpc3MiOiJob21lV29yayIsImF1ZCI6ImhvbWVXb3JrRnJvbnRlbmQifQ.PH1YwQfyfDRkhBY2oCwQToGdcir4TsXR_4jt9Cy3mDU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7006/api/users/652fa95e-e526-4f8a-8464-4e96cfc4794e",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"users",
+								"652fa95e-e526-4f8a-8464-4e96cfc4794e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page Home Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjRlNGIwNDE1LWYzZWYtNDY2Zi05M2YzLThlN2M0ZWE5ZTEzOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bDFAZW1haWwuY29tIiwiZXhwIjoxNjg2Nzk3MDI5LCJpc3MiOiJob21lV29yayIsImF1ZCI6ImhvbWVXb3JrRnJvbnRlbmQifQ.ZTeU0q9hcCT7A6CzunvyCT5cCn4oUnItVVtBDuqhpoM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7006/api/users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY1MmZhOTVlLWU1MjYtNGY4YS04NDY0LTRlOTZjZmM0Nzk0ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imp1bDJAZW1haWwuY29tIiwiZXhwIjoxNjg2ODA5MTA4LCJpc3MiOiJob21lV29yayIsImF1ZCI6ImhvbWVXb3JrRnJvbnRlbmQifQ.so1huVpcPCUosN7ufIHVHjthsIN7QEhWNm8mbUkAAPY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7006/api/notifications",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7006",
+							"path": [
+								"api",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
