@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Security.Claims;
 
 namespace backend_asp_net_core.Controllers
@@ -35,6 +36,8 @@ namespace backend_asp_net_core.Controllers
             /** Fetch user from request */
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
+
+            if (user.Role != Role.JOB_SEEKER) return _generalResponse.SendError("You do not have access (Invalid role)", ResponseStatus.UNAUTHORIZED, null);
 
             var job = _dbContext.Jobs.Find(request.Job_id);
             if (job == null)
@@ -86,6 +89,8 @@ namespace backend_asp_net_core.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
 
+            if (user.Role != Role.EMPLOYER) return _generalResponse.SendError("You do not have access (Invalid role)", ResponseStatus.UNAUTHORIZED, null);
+
             var findJobApplication = _dbContext.JobApplications.Find(id);
             if (findJobApplication == null)
             {
@@ -116,6 +121,8 @@ namespace backend_asp_net_core.Controllers
             /** Fetch user from request */
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
+
+            if (user.Role != Role.EMPLOYER) return _generalResponse.SendError("You do not have access (Invalid role)", ResponseStatus.UNAUTHORIZED, null);
 
             var job = _dbContext.Jobs.Find(job_id);
             if (job == null)
