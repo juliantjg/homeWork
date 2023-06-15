@@ -104,6 +104,9 @@ namespace backend_asp_net_core.Controllers
             findJobApplication.Status = request.Status;
             _dbContext.SaveChanges();
 
+            string notifMessage = "Your application on job titled [" + job.Title + "] has been updated. Click for more details.";
+            SendNotification(notifMessage, findJobApplication.Applicant_id);
+
             return _generalResponse.SendResponse("Job application status updated successfuly", findJobApplication);
         }
 
