@@ -13,5 +13,6 @@ namespace backend_asp_net_core.Data
 
         public DbSet<Job> Jobs { get; set; }
         public DbSet<JobApplication> JobApplications { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
     }
 }
