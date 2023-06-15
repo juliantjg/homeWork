@@ -13,5 +13,11 @@ namespace backend_asp_net_core.Models
         public string Description { get; set; }
         [AllowNull]
         public string User_id { get; set; }
+
+        public Notification(string description, string user_id)
+        {
+            Description = description;
+            User_id = user_id;
+        }
     }
 }
