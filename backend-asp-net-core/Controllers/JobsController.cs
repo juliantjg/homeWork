@@ -62,6 +62,8 @@ namespace backend_asp_net_core.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
 
+            if (user.Role != Role.EMPLOYER) return _generalResponse.SendError("You do not have access (Invalid role)", ResponseStatus.UNAUTHORIZED, null);
+
             var job = new Job(
                     request.Title,
                     request.Description,
@@ -86,6 +88,8 @@ namespace backend_asp_net_core.Controllers
             /** Fetch user from request */
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
+
+            if (user.Role != Role.EMPLOYER) return _generalResponse.SendError("You do not have access (Invalid role)", ResponseStatus.UNAUTHORIZED, null);
 
             var findJob = _dbContext.Jobs.Find(id);
             if (findJob == null)
@@ -116,6 +120,8 @@ namespace backend_asp_net_core.Controllers
             /** Fetch user from request */
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
+
+            if (user.Role != Role.EMPLOYER) return _generalResponse.SendError("You do not have access (Invalid role)", ResponseStatus.UNAUTHORIZED, null);
 
             var job = _dbContext.Jobs.Find(id);
 
