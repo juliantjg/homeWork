@@ -1,4 +1,5 @@
 ﻿using backend_asp_net_core.Data;
+using backend_asp_net_core.Enums;
 using backend_asp_net_core.Models;
 using backend_asp_net_core.Responses;
 using Microsoft.AspNetCore.Authorization;
@@ -25,12 +26,28 @@ namespace backend_asp_net_core.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(string id)
         {
             /** Fetch user from request */
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
 
+            var findUser = await _userManager.FindByIdAsync(id);
+            if (findUser == null)
+            {
+                return _generalResponse.SendError("User ID not found", ResponseStatus.NOT_FOUND, null);
+            }
+
+            return _generalResponse.SendResponse("User retrieved", findUser);
         }
-    }
+
+        [HttpGet("/home-data")]
+        public async Task<IActionResult> HomeData(string id)
+        {
+            /** Fetch user from request */
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+
+
+        }
 }
