@@ -6,8 +6,9 @@
     <img src="https://img.shields.io/badge/java-v17-white">
     <img src="https://img.shields.io/badge/redux-v7.2-white">
     <img src="https://img.shields.io/badge/spring-v3.0-white">
+    <img src="https://img.shields.io/badge/asp.net core-v6.0-white">
   </h1>
-   House Work Job/Employee Seeking App Made With React+Redux and Spring Framework
+   House Work Job/Employee Seeking App Made With React+Redux and Spring Framework/ASP.NET Core
    <br>
 </div>
 <br>
@@ -19,7 +20,7 @@
 </div>
 
 ## :question: What Is homeWork?
-<b>homeWork</b> is a web application made with Spring Boot (backend api) and React.js + Redux (frontend). A house work job website, <b>homeWork</b> provides a platform for both job seeker and recruiter. The application provides a wide range of functionalities listed below.
+<b>homeWork</b> is a web application made with Spring Boot (backend api) and React.js + Redux (frontend), with a ASP.NET Core (backend api) version. A house work job website, <b>homeWork</b> provides a platform for both job seeker and recruiter. The application provides a wide range of functionalities listed below.
 
 ## ⚙️ Functionalities
 Here is the complete <b>homeWork</b> functionalities rundown:
@@ -50,6 +51,8 @@ Here is the complete <b>homeWork</b> functionalities rundown:
 - State management with Redux
 - Spring Framework for API development
 - Spring Security for back end authentication and tokenization
+- ASP.NET Core MVC
+- ASP.NET Core JWT authentication + IdentityUser + auth middleware
 - Json Web Token - Jwt Api
 - MySQL for DB management
 - Docker containerization, docker-compose
@@ -122,14 +125,14 @@ services:
  
 </details>
 
-## 🛠️ Built With <img src="https://user-images.githubusercontent.com/53683415/229395886-517660d1-0abe-4d41-86d0-1d9ffbb5b9ba.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223294710-a2ba9d4c-c680-497a-9b71-101f2186fc49.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223313723-71cdde37-3494-44e8-80cb-01edecb3311c.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/224955579-a1ed2e8c-3ab7-41e1-b129-f37466f77c05.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223313847-3cf57f1a-11fd-4963-a1df-b3895e478119.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/224954200-33f50594-34e2-43b6-81e9-f3c0bb269f97.png" width="30">
+## 🛠️ Built With <img src="https://user-images.githubusercontent.com/53683415/229395886-517660d1-0abe-4d41-86d0-1d9ffbb5b9ba.png" width="30"> <img src="https://github.com/juliantjg/homeWork/assets/53683415/4dbe007d-daa5-4a79-9f1f-3842f1e739a6" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223294710-a2ba9d4c-c680-497a-9b71-101f2186fc49.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223313723-71cdde37-3494-44e8-80cb-01edecb3311c.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/224955579-a1ed2e8c-3ab7-41e1-b129-f37466f77c05.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/223313847-3cf57f1a-11fd-4963-a1df-b3895e478119.png" width="30"> <img src="https://user-images.githubusercontent.com/53683415/224954200-33f50594-34e2-43b6-81e9-f3c0bb269f97.png" width="30">
 - <img src="https://user-images.githubusercontent.com/53683415/229395886-517660d1-0abe-4d41-86d0-1d9ffbb5b9ba.png" width="12"> <b><a href="https://spring.io/">Spring Framework</a> -</b> The Spring Framework is an application framework and inversion of control container for the Java platform.
+- <img src="https://github.com/juliantjg/homeWork/assets/53683415/4dbe007d-daa5-4a79-9f1f-3842f1e739a6" width="12"> <b><a href="https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0">ASP.NET Core</a> -</b> ASP.NET Core is a free and open-source web framework and successor to ASP.NET, developed by Microsoft.
 - <img src="https://user-images.githubusercontent.com/53683415/223294710-a2ba9d4c-c680-497a-9b71-101f2186fc49.png" width="12"> <b><a href="https://reactjs.org/">React</a> -</b> React is a free and open-source front-end JavaScript library for building user interfaces based on components.
 - <img src="https://user-images.githubusercontent.com/53683415/223313723-71cdde37-3494-44e8-80cb-01edecb3311c.png" width="12"> <b><a href="https://getbootstrap.com/">Bootstrap</a> -</b> Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development.
 - <img src="https://user-images.githubusercontent.com/53683415/224955579-a1ed2e8c-3ab7-41e1-b129-f37466f77c05.png" width="12"> <b><a href="https://www.mysql.com/">MySQL</a> -</b> MySQL is an open-source relational database management system.
 - <img src="https://user-images.githubusercontent.com/53683415/223313847-3cf57f1a-11fd-4963-a1df-b3895e478119.png" width="12"> <b><a href="https://redux.js.org/">Redux</a> -</b> Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces.
 - <img src="https://user-images.githubusercontent.com/53683415/224954200-33f50594-34e2-43b6-81e9-f3c0bb269f97.png" width="12"> <b><a href="https://www.docker.com/">Docker</a> -</b> Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
-
 
 ## ✍️ Authors
 - [Muhammad Umer Tariq](https://www.linkedin.com/in/muhammad-umer-tariq-bbaa91182/)
