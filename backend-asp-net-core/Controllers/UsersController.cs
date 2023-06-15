@@ -48,6 +48,7 @@ namespace backend_asp_net_core.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _userManager.FindByIdAsync(userId).Result;
 
-
+            return _generalResponse.SendResponse("Success", null);
         }
+    }
 }
