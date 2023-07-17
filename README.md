@@ -13,10 +13,22 @@
 </div>
 <br>
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/53683415/229389740-3ae0e967-763e-4785-90c7-14b03830400e.png" width="380">
-  <img src="https://user-images.githubusercontent.com/53683415/229389849-4aedd2a5-0136-465b-bae0-9ee431a734f5.png" width="380">
-  <img src="https://user-images.githubusercontent.com/53683415/229390115-018b94bf-06cf-425a-842d-7492d5e66ed5.png" width="380">
+  <img src="https://github.com/juliantjg/homeWork/blob/main/readme-assets/all.gif" width="600">
+</div>
+
+<div align="center">
+<details>
+  
+ <summary><b>Show screenshots</b></summary>
+<div align="center">
   <br>
+  <img src="https://user-images.githubusercontent.com/53683415/229389740-3ae0e967-763e-4785-90c7-14b03830400e.png" width="300">
+  <img src="https://user-images.githubusercontent.com/53683415/229389849-4aedd2a5-0136-465b-bae0-9ee431a734f5.png" width="300">
+  <img src="https://user-images.githubusercontent.com/53683415/229390115-018b94bf-06cf-425a-842d-7492d5e66ed5.png" width="300">
+  <br>
+</div>
+  
+</details>
 </div>
 
 ## :question: What Is homeWork?
