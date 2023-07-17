@@ -33,6 +33,9 @@
 
 ## :question: What Is homeWork?
 <b>homeWork</b> is a web application made with Spring Boot (backend api) and React.js + Redux (frontend), with a ASP.NET Core (backend api) version. A house work job website, <b>homeWork</b> provides a platform for both job seeker and recruiter. The application provides a wide range of functionalities listed below.
+- [Main functionality preview](https://youtu.be/PoEHn59womA)
+- [Job Seeker preview](https://youtu.be/jqqa_wIk9Ow)
+- [Employer preview](https://youtu.be/3dFc_x0IZWA)
 
 ## ⚙️ Functionalities
 Here is the complete <b>homeWork</b> functionalities rundown:
